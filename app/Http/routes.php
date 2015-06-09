@@ -46,6 +46,8 @@ Route::get('/supplier/{supplier}', 'SupplierController@show');
 Route::post('/supplier/update', 'SupplierController@update');
 
 Route::get('/supplier/delete/{supplier}', 'SupplierController@delete');
+
+Route::get('/supplier/destroy/{id}', 'SupplierController@destroy');
     
 Route::controllers([
 	'auth' => 'Auth\AuthController',

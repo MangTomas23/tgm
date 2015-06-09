@@ -4,10 +4,11 @@
 
 <div class="container">
     <div class="page-header">
-        <h1>
-            {{ $supplier->name }}
+        <h1 style="word-wrap: break-word">
+            Update Supplier
             <a href="{{ action('SupplierController@delete', $supplier->id) }}" class="btn btn-danger pull-right" title="Delete"><span class="glyphicon glyphicon-trash"></span></a>
         </h1>
+        <span class="clearfix"></span>
     </div>
     
     {!! Form::open(['url'=>'/supplier/update', 'class'=>'form col-sm-8 col-sm-offset-2']) !!}
@@ -26,7 +27,7 @@
         </div>
         <div class="form-group col-sm-12 text-right">
             <a href="{{ action('SupplierController@index') }}" class="btn btn-default">Cancel</a>
-            {!! Form::submit('Save Changes', ['class'=>'btn btn-success']) !!}
+            {!! Form::submit('Update', ['class'=>'btn btn-success']) !!}
         </div>
     {!! Form::close() !!}
 </div>
