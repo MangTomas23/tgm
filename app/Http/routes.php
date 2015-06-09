@@ -13,7 +13,13 @@
 
 Route::get('/', 'AppController@index');
 
-Route::get('home', 'HomeController@index');
+Route::get('/home', 'HomeController@index');
+
+Route::get('/products', 'ProductController@index');
+
+Route::get('/product/add', 'ProductController@create');
+
+Route::post('/product/create', 'ProductController@store');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

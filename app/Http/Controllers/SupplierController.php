@@ -4,11 +4,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\Product;
-use Redirect;
-use Input;
 
-class ProductController extends Controller {
+class SupplierController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -17,9 +14,7 @@ class ProductController extends Controller {
 	 */
 	public function index()
 	{
-        $products = Product::all();
-        
-		return view('product.home', compact('products'));
+		//
 	}
 
 	/**
@@ -29,7 +24,7 @@ class ProductController extends Controller {
 	 */
 	public function create()
 	{
-		return view('product.create');
+		//
 	}
 
 	/**
@@ -39,14 +34,7 @@ class ProductController extends Controller {
 	 */
 	public function store()
 	{
-        $input = Input::all();
-        $product = new Product;
-        $product->name = $input['name'];
-        $product->price_1 = $input['price_1'];
-        $product->price_2 = $input['price_2'];
-        $product->save();
-        
-		return Redirect::action('ProductController@index');
+		//
 	}
 
 	/**
