@@ -4,6 +4,10 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use App\Employee;
+use Redirect;
+use Input;
+use Validator;
 
 class EmployeeController extends Controller {
 
@@ -14,7 +18,8 @@ class EmployeeController extends Controller {
 	 */
 	public function index()
 	{
-		//
+        $employees = Employee::all();
+		return view('employee.home', compact('employees'));
 	}
 
 	/**
@@ -24,7 +29,7 @@ class EmployeeController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		return view('employee.create');
 	}
 
 	/**

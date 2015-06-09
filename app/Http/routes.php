@@ -49,6 +49,12 @@ Route::get('/supplier/delete/{supplier}', 'SupplierController@delete');
 
 Route::get('/supplier/destroy/{id}', 'SupplierController@destroy');
     
+
+
+Route::get('/employees', 'EmployeeController@index');
+
+Route::get('/employee/add', 'EmployeeController@create');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
