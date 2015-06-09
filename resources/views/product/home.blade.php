@@ -28,7 +28,7 @@
             @else
                 @foreach($products as $product)
                     <tr>
-                        <td>{{ $product->name }}</td>
+                        <td><a href="{{ action('ProductController@show', $product->id ) }}">{{ $product->name }}</a></td>
                         <td>{{ $product->price_1 }}</td>
                         <td>{{ $product->price_2 }}</td>
                     </tr>

@@ -55,9 +55,9 @@ class ProductController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show(Product $product)
 	{
-		//
+		return view('product.show', compact('product'));
 	}
 
 	/**
@@ -82,6 +82,9 @@ class ProductController extends Controller {
 		//
 	}
 
+    public function delete(Product $product){
+        return view('product.delete', compact('product'));
+    }
 	/**
 	 * Remove the specified resource from storage.
 	 *
@@ -90,7 +93,9 @@ class ProductController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+        $product = Product::findOrFail($id);
+        $product->delete();
+		return Redirect::action('ProductController@index');
 	}
 
 }

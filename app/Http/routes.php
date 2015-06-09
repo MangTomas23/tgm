@@ -11,6 +11,10 @@
 |
 */
 
+Use App\Product;
+
+Route::model('product', 'App\Product');
+
 Route::get('/', 'AppController@index');
 
 Route::get('/home', 'HomeController@index');
@@ -20,6 +24,12 @@ Route::get('/products', 'ProductController@index');
 Route::get('/product/add', 'ProductController@create');
 
 Route::post('/product/create', 'ProductController@store');
+
+Route::get('/product/{product}', 'ProductController@show');
+
+Route::get('/product/delete/{product}', 'ProductController@delete');
+
+Route::get('/product/destroy/{id}', 'ProductController@destroy');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
