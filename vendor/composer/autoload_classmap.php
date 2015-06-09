@@ -6,12 +6,11 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'AddForeign' => $baseDir . '/database/migrations/2015_06_09_151025_add_foreign.php',
-    'CreateDesignationsTable' => $baseDir . '/database/migrations/2015_06_09_172055_create_designations_table.php',
+    'AddForeignKey' => $baseDir . '/database/migrations/2015_06_09_174653_add_foreign_key.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
-    'CreateProductstable' => $baseDir . '/database/migrations/2015_06_09_143910_create_products_table.php',
-    'CreateTableEmployees' => $baseDir . '/database/migrations/2015_06_09_171351_create_table_employees.php',
-    'CreateTableSuppliers' => $baseDir . '/database/migrations/2015_06_09_143538_create_table_suppliers.php',
+    'CreateProductsTable' => $baseDir . '/database/migrations/2015_06_09_174025_create_products_table.php',
+    'CreateSuppliersTable' => $baseDir . '/database/migrations/2015_06_09_173758_create_suppliers_table.php',
+    'CreateTableEmployees' => $baseDir . '/database/migrations/2015_06_09_175222_create_table_employees.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
