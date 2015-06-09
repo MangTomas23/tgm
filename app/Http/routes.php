@@ -15,6 +15,7 @@ Use App\Product;
 
 Route::model('product', 'App\Product');
 Route::model('supplier', 'App\Supplier');
+Route::model('employee', 'App\Employee');
 
 Route::get('/', 'AppController@index');
 
@@ -54,6 +55,10 @@ Route::get('/supplier/destroy/{id}', 'SupplierController@destroy');
 Route::get('/employees', 'EmployeeController@index');
 
 Route::get('/employee/add', 'EmployeeController@create');
+
+Route::post('/employee/create', 'EmployeeController@store');
+
+Route::get('/employee/{employee}', 'EmployeeController@show');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

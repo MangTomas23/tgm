@@ -9,7 +9,7 @@
             <a href="{{ action('EmployeeController@create') }}" class="btn btn-info pull-right">Add</a>
         </h1>
     </div>
-    <table class="table table-striped">
+    <table class="table table-striped table-hover">
         <thead>
             <tr>
                 <th>Employee Name</th>
@@ -24,9 +24,11 @@
                 </tr>
             @else
                 @foreach($employees as $employee)
-                    <tr>{{ $employee->firstname . ' ' . $employee->lastname }}</tr>
-                    <tr>{{ $employee->contact }}</tr>
-                    <tr>{{ $employee->address }}</tr>
+                    <tr>
+                        <td><a href="{{ action('EmployeeController@show', $employee->id) }}">{{ $employee->firstname . ' ' . $employee->lastname }}</a></td>
+                        <td>{{ $employee->contact }}</td>
+                        <td>{{ $employee->address }}</td>
+                    </tr>
                 @endforeach
             @endif
         </tbody>

@@ -39,7 +39,27 @@ class EmployeeController extends Controller {
 	 */
 	public function store()
 	{
-		//
+		$input = Input::all();
+        $employee = new Employee;
+        
+        $rules = array(
+            'firstname'=>'required',
+            'lastname'=>'required'
+        );
+        
+        $validator = Validator::make($input, $rules);
+        
+        if($validator->passes()){
+            $employee->firstname = $input['firstname'];
+            $employee->lastname = $input['lastname'];
+            $employee->contact = $input['contact'];
+            $employee->address = $input['address'];
+            $employee->save();
+            
+            return Redirect::action('EmployeeController@index');
+        }
+        
+        return 'failed';
 	}
 
 	/**
@@ -48,9 +68,9 @@ class EmployeeController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show(Employee $employee)
 	{
-		//
+        return view('employee.show', compact('employee'));
 	}
 
 	/**

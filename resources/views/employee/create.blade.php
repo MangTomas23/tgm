@@ -8,6 +8,30 @@
             Add Employee
         </h1>
     </div>
+    
+    {!! Form::open(['url'=>'/employee/create', 'class'=>'form col-sm-8 col-sm-offset-2']) !!}
+        <div class="form-group col-sm-6">
+            {!! Form::label('firstname', 'First Name') !!}
+            {!! Form::text('firstname', null, ['class'=>'form-control']) !!}
+        </div>
+        <div class="form-group col-sm-6">
+            {!! Form::label('lastname', 'Last Name') !!}
+            {!! Form::text('lastname', null, ['class'=>'form-control']) !!}
+        </div>
+        <div class="form-group col-sm-8">
+            {!! Form::label('address', 'Address') !!}
+            {!! Form::text('address', null, ['class'=>'form-control']) !!}
+        </div>
+        <div class="form-group col-sm-4">
+            {!! Form::label('contact', 'Contact') !!}
+            {!! Form::text('contact', null, ['class'=>'form-control']) !!}
+        </div>
+        <div class="form-group col-sm-12 text-right">
+            <a href="{{ action('EmployeeController@index') }}" class="btn btn-default">Cancel</a>
+            {!! Form::submit('Save', ['class'=>'btn btn-success']) !!}
+        </div>
+    {!! Form::close() !!}
+    
 </div>
 
 @endsection
