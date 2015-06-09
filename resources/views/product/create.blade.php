@@ -7,7 +7,7 @@
         <h1>Add Product</h1>
     </div>
     
-    {!! Form::open(['url'=>'/product/create', 'class'=>'form col-sm-6']) !!}
+    {!! Form::open(['url'=>'/product/create', 'class'=>'form col-sm-8 col-sm-offset-2']) !!}
         <div class="form-group col-sm-12">
             {!! Form::label('name', 'Product Name') !!}
             {!! Form::text('name','', ['class'=>'form-control']) !!}

@@ -31,6 +31,15 @@ Route::get('/product/delete/{product}', 'ProductController@delete');
 
 Route::get('/product/destroy/{id}', 'ProductController@destroy');
 
+
+
+
+Route::get('/suppliers', 'SupplierController@index');
+
+Route::get('/supplier/add', 'SupplierController@create');
+
+Route::post('/supplier/create', 'SupplierController@store');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

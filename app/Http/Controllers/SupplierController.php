@@ -4,6 +4,10 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use App\Supplier;
+use Redirect;
+use Input;
+use Validator;
 
 class SupplierController extends Controller {
 
@@ -14,7 +18,8 @@ class SupplierController extends Controller {
 	 */
 	public function index()
 	{
-		//
+        $suppliers = Supplier::all();
+		return view('supplier.home', compact('suppliers'));
 	}
 
 	/**
@@ -24,7 +29,7 @@ class SupplierController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		return view('supplier.create');
 	}
 
 	/**
@@ -34,7 +39,25 @@ class SupplierController extends Controller {
 	 */
 	public function store()
 	{
-		//
+        $input = Input::all();
+        $supplier = new Supplier;
+        
+        $rules = array(
+            'name'=>'required'
+        );
+        
+        $validator = Validator::make($input,$rules);
+        
+        if($validator->passes()){
+            $supplier->name = $input['name'];
+            $supplier->contact = $input['contact'];
+            $supplier->address = $input['address'];
+            $supplier->save();
+            
+            return Redirect::action('SupplierController@index');
+        }
+        
+        return Redirect::Action('SupplierController@create');
 	}
 
 	/**

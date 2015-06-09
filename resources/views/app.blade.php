@@ -35,6 +35,7 @@
 				<ul class="nav navbar-nav">
 					<li><a href="{{ url('/') }}">Home</a></li>
 					<li><a href="{{ action('ProductController@index') }}">Products</a></li>
+                    <li><a href="{{ action('SupplierController@index') }}">Suppliers</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
