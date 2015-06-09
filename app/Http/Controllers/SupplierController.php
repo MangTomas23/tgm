@@ -66,9 +66,9 @@ class SupplierController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show(Supplier $supplier)
 	{
-		//
+		return view('supplier.show', compact('supplier'));
 	}
 
 	/**
@@ -88,10 +88,20 @@ class SupplierController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		//
+        $input = Input::all();
+		$supplier = Supplier::findOrFail($input['id']);
+        $supplier->name = $input['name'];
+        $supplier->contact = $input['contact'];
+        $supplier->address = $input['address'];
+        $supplier->save();
+        return Redirect::action('SupplierController@index');
 	}
+    
+    public function delete(Supplier $supplier){
+        return view('supplier.delete', compact('supplier'));
+    }
 
 	/**
 	 * Remove the specified resource from storage.

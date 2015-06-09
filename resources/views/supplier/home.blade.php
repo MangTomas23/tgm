@@ -24,7 +24,7 @@
             @else
                 @foreach($suppliers as $supplier)
                     <tr>
-                        <td>{{ $supplier->name }}</td>
+                        <td><a href="{{ action('SupplierController@show', $supplier->id) }}">{{ $supplier->name }}</a></td>
                         <td>{{ $supplier->contact }}</td>
                         <td>{{ $supplier->address }}</td>
                     </tr>

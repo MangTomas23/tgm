@@ -14,6 +14,7 @@
 Use App\Product;
 
 Route::model('product', 'App\Product');
+Route::model('supplier', 'App\Supplier');
 
 Route::get('/', 'AppController@index');
 
@@ -40,6 +41,12 @@ Route::get('/supplier/add', 'SupplierController@create');
 
 Route::post('/supplier/create', 'SupplierController@store');
 
+Route::get('/supplier/{supplier}', 'SupplierController@show');
+
+Route::post('/supplier/update', 'SupplierController@update');
+
+Route::get('/supplier/delete/{supplier}', 'SupplierController@delete');
+    
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
