@@ -19,7 +19,6 @@ class ProductController extends Controller {
 	public function index()
 	{
         $products = Product::all();
-        
 		return view('product.home', compact('products'));
 	}
 
@@ -44,9 +43,12 @@ class ProductController extends Controller {
 	{
         $input = Input::all();
         $product = new Product;
+        
         $product->name = $input['name'];
+        $product->supplier_id = $input['supplier'];
         $product->price_1 = $input['price_1'];
         $product->price_2 = $input['price_2'];
+        
         $product->save();
         
 		return Redirect::action('ProductController@index');

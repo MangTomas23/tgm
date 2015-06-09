@@ -12,6 +12,14 @@
             {!! Form::label('name', 'Product Name') !!}
             {!! Form::text('name','', ['class'=>'form-control']) !!}
         </div>
+        <div class="form-group col-sm-12">
+            {!! Form::label('supplier', 'Supplier') !!}
+            <select name="supplier" class="form-control">
+                @foreach($suppliers as $supplier)
+                    <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                @endforeach
+            </select>
+        </div>
         <div class="form-group col-sm-6">
             {!! Form::label('price_1', 'Price 1') !!}
             {!! Form::text('price_1', null, ['class'=>'form-control']) !!}
