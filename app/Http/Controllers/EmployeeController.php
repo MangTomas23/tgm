@@ -90,11 +90,37 @@ class EmployeeController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		//
+        $input = Input::all();
+        $employee = Employee::find($input['id']);
+        
+        $rules = array(
+            'firstname'=>'required',
+            'lastname'=>'required'
+        );
+        
+        $validator = Validator::make($input, $rules);
+        
+        if($validator->passes()){
+            $employee->firstname = $input['firstname'];
+            $employee->lastname = $input['lastname'];
+            $employee->contact = $input['contact'];
+            $employee->address = $input['address'];
+            $employee->save();
+            
+            return Redirect::action('EmployeeController@index');
+
+        }
+        
+        
+        return Redirect::action('EmployeeController@show', $employee->id);
 	}
 
+    public function delete(Employee $employee){
+        return view('employee.delete', compact('employee'));
+    }
+    
 	/**
 	 * Remove the specified resource from storage.
 	 *
@@ -103,7 +129,9 @@ class EmployeeController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		$employee = Employee::findOrFail($id);
+        $employee->delete();
+        return Redirect::action('EmployeeController@index');
 	}
 
 }

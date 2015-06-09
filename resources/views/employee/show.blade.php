@@ -6,11 +6,12 @@
     <div class="page-header">
         <h1>
             Update Employee
-            <a class="btn btn-danger pull-right"><span class="glyphicon glyphicon-trash"></span></a>
+            <a href="{{ action('EmployeeController@delete', $employee->id) }}" class="btn btn-danger pull-right"><span class="glyphicon glyphicon-trash"></span></a>
         </h1>
     </div>
     
-    {!! Form::open(['url'=>'/employee/create', 'class'=>'form col-sm-8 col-sm-offset-2']) !!}
+    {!! Form::open(['url'=>'/employee/update', 'class'=>'form col-sm-8 col-sm-offset-2']) !!}
+        {!! Form::hidden('id', $employee->id) !!}
         <div class="form-group col-sm-6">
             {!! Form::label('firstname', 'First Name') !!}
             {!! Form::text('firstname', $employee->firstname, ['class'=>'form-control']) !!}
@@ -29,6 +30,7 @@
         </div>
         <div class="Form-group col-sm-12 text-right">
             <a href="{{ action('EmployeeController@index') }}" class="btn btn-default">Cancel</a>
+            {!! Form::submit('Update', ['class'=>'btn btn-success']) !!}
         </div>
         
     

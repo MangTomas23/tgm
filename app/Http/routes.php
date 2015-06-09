@@ -60,6 +60,12 @@ Route::post('/employee/create', 'EmployeeController@store');
 
 Route::get('/employee/{employee}', 'EmployeeController@show');
 
+Route::post('/employee/update', 'EmployeeController@update');
+
+Route::get('/employee/delete/{employee}', 'EmployeeController@delete');
+
+Route::get('/employee/destroy/{id}', 'EmployeeController@destroy');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Supplier;
 use Redirect;
 use Input;
 
@@ -29,7 +30,9 @@ class ProductController extends Controller {
 	 */
 	public function create()
 	{
-		return view('product.create');
+        $suppliers = Supplier::all();
+        
+		return view('product.create', compact('suppliers'));
 	}
 
 	/**

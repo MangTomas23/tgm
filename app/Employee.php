@@ -4,6 +4,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Employee extends Model {
 
-	//
+    public function products(){
+        return $this->hasMany('App\Product');   
+    }
 
 }
