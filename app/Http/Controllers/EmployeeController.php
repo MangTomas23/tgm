@@ -8,6 +8,7 @@ use App\Employee;
 use Redirect;
 use Input;
 use Validator;
+use App\Designation;
 
 class EmployeeController extends Controller {
 
@@ -29,7 +30,8 @@ class EmployeeController extends Controller {
 	 */
 	public function create()
 	{
-		return view('employee.create');
+        $designations = Designation::all();
+		return view('employee.create', compact('designations'));
 	}
 
 	/**

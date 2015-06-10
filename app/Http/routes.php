@@ -66,6 +66,12 @@ Route::get('/employee/delete/{employee}', 'EmployeeController@delete');
 
 Route::get('/employee/destroy/{id}', 'EmployeeController@destroy');
 
+
+
+Route::get('/emp/designations', 'DesignationController@index');
+
+Route::post('/emp/designation/create', 'DesignationController@store');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

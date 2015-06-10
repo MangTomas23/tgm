@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'AddForeignKey' => $baseDir . '/database/migrations/2015_06_09_174653_add_foreign_key.php',
+    'CreateDesignationsTable' => $baseDir . '/database/migrations/2015_06_09_181419_create_designations_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateProductsTable' => $baseDir . '/database/migrations/2015_06_09_174025_create_products_table.php',
     'CreateSuppliersTable' => $baseDir . '/database/migrations/2015_06_09_173758_create_suppliers_table.php',
