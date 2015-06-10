@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('title') TGM - Remove Designation @endsection
+
 @section('content')
 
 <div class="container">

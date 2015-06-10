@@ -72,9 +72,9 @@ class DesignationController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit(Designation $designation)
 	{
-		//
+		return view('designation.update', compact('designation'));
 	}
 
 	/**
@@ -83,9 +83,24 @@ class DesignationController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		//
+        $input = Input::all();
+        $designation = Designation::find($input['id']);
+        
+        $rules = array(
+            'name' => 'required'
+        );
+        
+        $validator = Validator::make($input, $rules);
+        
+        if($validator->passes()){
+            $designation->name = $input['name'];
+            $designation->save();
+            return Redirect::action('DesignationController@index');
+        }
+        
+        return Redirect::action('DesignationController@edit', $input['id']);
 	}
     
     public function delete(Designation $designation){

@@ -80,6 +80,9 @@ Route::get('/emp/designation/delete/{designation}', 'DesignationController@delet
 
 Route::get('/emp/designation/destroy/{id}', 'DesignationController@destroy');
 
+Route::get('/emp/designation/{designation}', 'DesignationController@edit');
+
+Route::post('/emp/designation/update', 'DesignationController@update');
 
 
 Route::get('/product_categories', 'ProductCategoryController@index');

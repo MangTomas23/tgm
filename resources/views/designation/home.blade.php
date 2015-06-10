@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('title') TGM - Designations @endsection
+
 @section('content')
 
 <div class="container">
@@ -22,9 +24,9 @@
                 @foreach($designations as $designation)
                     <tr>
                         <td>{{ $designation->name }}</td>
-                        <td>
-                            <a href="{{ action('DesignationController@delete', $designation->id) }}" class="btn btn-danger btn-sm pull-right">Delete</a>
-                            <a class="btn btn-info btn-sm pull-right">Edit</a>
+                        <td class="text-right">
+                            <a href="{{ action('DesignationController@edit', $designation->id) }}" class="btn btn-info btn-sm">Edit</a>
+                            <a href="{{ action('DesignationController@delete', $designation->id) }}" class="btn btn-danger btn-sm">Delete</a>
                         </td>
                     </tr>
                 @endforeach

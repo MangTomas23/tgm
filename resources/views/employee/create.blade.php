@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('title') TGM - Add Employee @endsection
+
 @section('content')
 
 <div class="container">
