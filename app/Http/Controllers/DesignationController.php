@@ -87,6 +87,10 @@ class DesignationController extends Controller {
 	{
 		//
 	}
+    
+    public function delete(Designation $designation){
+        return view('designation.delete', compact('designation'));   
+    }
 
 	/**
 	 * Remove the specified resource from storage.
@@ -96,7 +100,8 @@ class DesignationController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+        Designation::find($id)->delete();
+        return Redirect::action('DesignationController@index');
 	}
 
 }

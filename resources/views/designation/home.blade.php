@@ -23,7 +23,7 @@
                     <tr>
                         <td>{{ $designation->name }}</td>
                         <td>
-                            <a class="btn btn-danger btn-sm pull-right">Delete</a>
+                            <a href="{{ action('DesignationController@delete', $designation->id) }}" class="btn btn-danger btn-sm pull-right">Delete</a>
                             <a class="btn btn-info btn-sm pull-right">Edit</a>
                         </td>
                     </tr>

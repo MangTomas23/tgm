@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddDesignationId' => $baseDir . '/database/migrations/2015_06_10_124759_add_designation_id.php',
     'AddForeignKey' => $baseDir . '/database/migrations/2015_06_09_174653_add_foreign_key.php',
     'CreateDesignationsTable' => $baseDir . '/database/migrations/2015_06_09_181419_create_designations_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',

@@ -16,6 +16,7 @@ Use App\Product;
 Route::model('product', 'App\Product');
 Route::model('supplier', 'App\Supplier');
 Route::model('employee', 'App\Employee');
+Route::model('designation', 'App\Designation');
 
 Route::get('/', 'AppController@index');
 
@@ -71,6 +72,10 @@ Route::get('/employee/destroy/{id}', 'EmployeeController@destroy');
 Route::get('/emp/designations', 'DesignationController@index');
 
 Route::post('/emp/designation/create', 'DesignationController@store');
+
+Route::get('/emp/designation/delete/{designation}', 'DesignationController@delete');
+
+Route::get('/emp/designation/destroy/{id}', 'DesignationController@destroy');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
