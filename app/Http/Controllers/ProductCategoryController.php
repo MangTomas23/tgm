@@ -40,8 +40,18 @@ class ProductCategoryController extends Controller {
 	public function store()
 	{
         $product_category = new ProductCategory;
-        $product_category->name = Input::get('name');
-        $product_category->save();
+        $input = Input::all();
+        
+        $rules = array(
+            'name'=>'required'
+        );
+        
+        $validator = Validator::make($input, $rules);
+            
+        if($validator->passes()){
+            $product_category->name = Input::get('name');
+            $product_category->save();
+        }
         
         return Redirect::action('ProductCategoryController@index');
 	}
@@ -63,9 +73,9 @@ class ProductCategoryController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit(ProductCategory $product_category)
 	{
-		//
+		return view('productcategory.edit', compact('product_category'));
 	}
 
 	/**
@@ -74,9 +84,26 @@ class ProductCategoryController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		//
+        $input = Input::all();
+        $id = $input['id'];
+        $product_category = ProductCategory::findOrFail($id);
+        
+        $rules = array(
+            'name'=>'required'
+        );
+        
+        $validator = Validator::make($input, $rules);
+        
+        if($validator->passes()){
+            $product_category->name = $input['name'];
+            $product_category->save();
+            
+            return Redirect::action('ProductCategoryController@index');
+        }
+        
+        return Redirect::action('ProductCategoryController@edit', $id);
 	}
     
     public function delete(ProductCategory $product_category){
@@ -91,7 +118,9 @@ class ProductCategoryController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+        ProductCategory::findOrFail($id)->delete();
+        
+        return Redirect::action('ProductCategoryController@index');
 	}
 
 }

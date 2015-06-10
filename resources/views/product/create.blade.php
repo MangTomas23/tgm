@@ -13,7 +13,7 @@
             {!! Form::text('name','', ['class'=>'form-control']) !!}
         </div>
         <div class="form-group col-sm-12">
-            <label for="category">
+            <label for="product_category">
                 Category
                 <a href="{{ action('ProductCategoryController@index') }}" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-cog"></span></a>
             </label>

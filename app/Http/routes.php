@@ -86,6 +86,13 @@ Route::post('/product_categories/create', 'ProductCategoryController@store');
 
 Route::get('/product_categories/delete/{product_categories}', 'ProductCategoryController@delete');
 
+Route::get('/product_categories/destroy/{id}', 'ProductCategoryController@destroy');
+    
+Route::get('/product_categories/edit/{product_categories}', 'ProductCategoryController@edit');
+
+Route::post('/product_categories/update/', 'ProductCategoryController@update');
+    
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

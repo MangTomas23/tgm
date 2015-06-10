@@ -14,6 +14,7 @@
         <thead>
             <tr>
                 <th>Product Name</th>
+                <th>Category</th>
                 <th>Supplier</th>
                 <th>Price 1</th>
                 <th>Price 2</th>
@@ -28,6 +29,7 @@
                 @foreach($products as $product)
                     <tr>
                         <td><a href="{{ action('ProductController@show', $product->id ) }}">{{ $product->name }}</a></td>
+                        <td>{{ $product->product_category->name or null }}</td>
                         <td>{{ $product->supplier->name }}</td>
                         <td>{{ $product->price_1 }}</td>
                         <td>{{ $product->price_2 }}</td>

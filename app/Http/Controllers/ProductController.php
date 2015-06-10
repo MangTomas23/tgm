@@ -50,6 +50,7 @@ class ProductController extends Controller {
         $product->supplier_id = $input['supplier'];
         $product->price_1 = $input['price_1'];
         $product->price_2 = $input['price_2'];
+        $product->product_category_id = $input['product_category'];
         
         $product->save();
         
