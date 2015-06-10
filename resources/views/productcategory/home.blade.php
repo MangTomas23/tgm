@@ -19,6 +19,10 @@
                 @foreach($product_categories as $product_category)
                     <tr>
                         <td>{{ $product_category->name }}</td>
+                        <td class="text-right">
+                            <a href="" class="btn btn-info btn-sm" title="Edit"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a href="{{ action('ProductCategoryController@delete', $product_category->id) }}" class="btn btn-danger btn-sm" title="Delete"><span class="glyphicon glyphicon-trash"></span></a>
+                        </td>
                     </tr>
                 @endforeach
             @endif

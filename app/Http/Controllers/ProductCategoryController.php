@@ -78,6 +78,10 @@ class ProductCategoryController extends Controller {
 	{
 		//
 	}
+    
+    public function delete(ProductCategory $product_category){
+        return view('productcategory.delete', compact('product_category'));
+    }
 
 	/**
 	 * Remove the specified resource from storage.

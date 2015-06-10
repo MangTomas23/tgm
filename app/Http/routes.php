@@ -17,6 +17,7 @@ Route::model('product', 'App\Product');
 Route::model('supplier', 'App\Supplier');
 Route::model('employee', 'App\Employee');
 Route::model('designation', 'App\Designation');
+Route::model('product_categories', 'App\ProductCategory');
 
 Route::get('/', 'AppController@index');
 
@@ -82,6 +83,8 @@ Route::get('/emp/designation/destroy/{id}', 'DesignationController@destroy');
 Route::get('/product_categories', 'ProductCategoryController@index');
 
 Route::post('/product_categories/create', 'ProductCategoryController@store');
+
+Route::get('/product_categories/delete/{product_categories}', 'ProductCategoryController@delete');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
