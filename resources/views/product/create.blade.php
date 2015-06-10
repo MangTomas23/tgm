@@ -8,6 +8,9 @@
     </div>
     
     {!! Form::open(['url'=>'/product/create', 'class'=>'form col-sm-8 col-sm-offset-2']) !!}
+        <div class="page-header">
+            <h4>Product Info</h4>
+        </div>
         <div class="form-group col-sm-12">
             {!! Form::label('name', 'Product Name') !!}
             {!! Form::text('name','', ['class'=>'form-control']) !!}
