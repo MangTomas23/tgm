@@ -32,5 +32,5 @@ class CreateUsersTable extends Migration {
 	{
 		Schema::drop('users');
 	}
-
+//
 }
