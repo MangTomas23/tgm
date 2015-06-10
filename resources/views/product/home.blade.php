@@ -1,5 +1,6 @@
 @extends('app')
 
+@section('title') TGM - Products @endsection
 
 @section('content')
 <div class="container">
