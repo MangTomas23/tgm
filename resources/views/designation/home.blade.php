@@ -43,7 +43,7 @@
         </div>
     
         <div class="form-group text-right">
-            <a href="#" class="btn btn-default">Cancel</a>
+            <a href="{{ action('EmployeeController@create') }}" class="btn btn-default">Cancel</a>
             {!! Form::submit('Save', ['class'=>'btn btn-success']) !!}
         </div>
     {!! Form::close() !!}

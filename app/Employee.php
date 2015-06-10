@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model {
 
     public function designation(){
-        return $this->hasOne('App\Designation');   
+        return $this->belongsTo('App\Designation');   
     }
 
 }

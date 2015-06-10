@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddDesignationId extends Migration {
+class AddDesignationIdOnEmployees extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -16,8 +16,8 @@ class AddDesignationId extends Migration {
         
 		Schema::table('employees', function(Blueprint $table)
 		{
-            $table->integer('designation_id')->unsigned();
-            $table->foreign('designation_id')->references('id')->on('designations');
+            $table->integer('designation_id')->unsigned()->nullable();
+            $table->foreign('designation_id')->references('id')->on('designations')->onDelete('set null');
 		});
 	}
 
@@ -30,7 +30,7 @@ class AddDesignationId extends Migration {
 	{
 		Schema::table('employees', function(Blueprint $table)
 		{
-            $table->dropForeign('employees_designation_id_foreign');
+			$table->dropForeign('employees_designation_id_foreign');
             $table->dropColumn('designation_id');
 		});
 	}

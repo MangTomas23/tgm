@@ -20,6 +20,15 @@
             {!! Form::label('lastname', 'Last Name') !!}
             {!! Form::text('lastname', $employee->lastname, ['class'=>'form-control']) !!}
         </div>
+        <div class="form-group col-sm-12">
+            {!! Form::label('designation', 'Designation') !!}
+            <select name="designation" class="form-control">
+                @foreach($designations as $designation)
+                    <option value="{{ $designation->id }}">{{ $designation->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        
         <div class="form-group col-sm-8">
             {!! Form::label('address', 'Address') !!}
             {!! Form::text('address', $employee->address, ['class'=>'form-control']) !!}

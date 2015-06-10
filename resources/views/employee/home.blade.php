@@ -13,6 +13,7 @@
         <thead>
             <tr>
                 <th>Employee Name</th>
+                <th>Designation</th>
                 <th>Contact</th>
                 <th>Address</th>
             </tr>
@@ -20,12 +21,13 @@
         <tbody>
             @if($employees->isEmpty())
                 <tr>
-                    <td colspan="3">No Records.</td>
+                    <td colspan="4">No Records.</td>
                 </tr>
             @else
                 @foreach($employees as $employee)
                     <tr>
                         <td><a href="{{ action('EmployeeController@show', $employee->id) }}">{{ $employee->firstname . ' ' . $employee->lastname }}</a></td>
+                        <td>{{ $employee->designation->name or 'null' }}</td>
                         <td>{{ $employee->contact }}</td>
                         <td>{{ $employee->address }}</td>
                     </tr>

@@ -46,7 +46,8 @@ class EmployeeController extends Controller {
         
         $rules = array(
             'firstname'=>'required',
-            'lastname'=>'required'
+            'lastname'=>'required',
+            'designation'=>'required'
         );
         
         $validator = Validator::make($input, $rules);
@@ -56,12 +57,13 @@ class EmployeeController extends Controller {
             $employee->lastname = $input['lastname'];
             $employee->contact = $input['contact'];
             $employee->address = $input['address'];
+            $employee->designation_id = $input['designation'];
             $employee->save();
             
             return Redirect::action('EmployeeController@index');
         }
         
-        return 'failed';
+        return Redirect::action('EmployeeController@create');
 	}
 
 	/**
@@ -72,7 +74,8 @@ class EmployeeController extends Controller {
 	 */
 	public function show(Employee $employee)
 	{
-        return view('employee.show', compact('employee'));
+        $designations = Designation::all();
+        return view('employee.show', compact('employee'))->with('designations', $designations);
 	}
 
 	/**
@@ -99,7 +102,8 @@ class EmployeeController extends Controller {
         
         $rules = array(
             'firstname'=>'required',
-            'lastname'=>'required'
+            'lastname'=>'required',
+            'designation'=>'required'
         );
         
         $validator = Validator::make($input, $rules);
@@ -109,6 +113,7 @@ class EmployeeController extends Controller {
             $employee->lastname = $input['lastname'];
             $employee->contact = $input['contact'];
             $employee->address = $input['address'];
+            $employee->designation_id = $input['designation'];
             $employee->save();
             
             return Redirect::action('EmployeeController@index');

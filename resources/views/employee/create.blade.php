@@ -24,11 +24,15 @@
                 <a href="{{ action('DesignationController@index') }}" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-cog"></span></a>
             </label>
             
-            <select name="designation" class="form-control">
-                @foreach($designations as $designation)
-                    <option value="{{ $designation->id }}">{{ $designation->name }}</option>
-                @endforeach
-            </select>
+            @if($designations->isEmpty())
+            <p class="form-control-static">Please Add Designations First</p>
+            @else
+                <select name="designation" class="form-control">
+                    @foreach($designations as $designation)
+                        <option value="{{ $designation->id }}">{{ $designation->name }}</option>
+                    @endforeach
+                </select>
+            @endif
         </div>
         
         <div class="form-group col-sm-8">
