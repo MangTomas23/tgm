@@ -17,11 +17,15 @@
                 Category
                 <a href="{{ action('ProductCategoryController@index') }}" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-cog"></span></a>
             </label>
-            <select name="product_category" class="form-control">
-                @foreach($product_categories as $product_category)
-                    <option value="{{ $product_category->id }}">{{ $product_category->name }}</option>
-                @endforeach
-            </select>
+            @if($product_categories->isEmpty())
+                <p class="form-control-static">Please add category first.</p>
+            @else
+                <select name="product_category" class="form-control">
+                    @foreach($product_categories as $product_category)
+                        <option value="{{ $product_category->id }}">{{ $product_category->name }}</option>
+                    @endforeach
+                </select>
+            @endif
         </div>
         <div class="form-group col-sm-12">
             {!! Form::label('supplier', 'Supplier') !!}

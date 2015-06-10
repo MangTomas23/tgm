@@ -11,9 +11,43 @@
         </h1>
     </div>
     {!! Form::open(['url'=>'/product/update']) !!}
+        {!! Form::hidden('id', $product->id) !!}
         <div class="form-group col-sm-12">
             {!! Form::label('name', 'Name') !!}
             {!! Form::text('name', $product->name, ['class'=>'form-control']) !!}
+        </div>
+        <div class="form-group col-sm-12">
+            {!! Form::label('product_category', 'Category') !!}
+            
+            @if($product_categories->isEmpty())
+                <p class="form-control-static">Please add category first.</p>
+            @else
+                <select name="product_category" class="form-control">
+                    @foreach($product_categories as $product_category)
+                        <option value="{{ $product_category->id }}" 
+                                @if($product->product_category_id == $product_category->id)
+                                    selected
+                                @endif
+                                >{{ $product_category->name }}</option>
+                    @endforeach
+                </select>
+            @endif
+        </div>
+        <div class="form-group col-sm-12">
+            <label>Supplier</label>
+            @if($suppliers->isEmpty())
+                <p class="form-control-static">Please add suppliers first.</p>
+            @else
+                <select name="supplier" class="form-control">
+                    @foreach($suppliers as $supplier)
+                        <option value="{{ $supplier->id }}" 
+                                @if($supplier->id == $product->supplier_id)
+                                    selected
+                                @endif
+                                >{{ $supplier->name }}</option>
+                    @endforeach
+                </select>
+            @endif
         </div>
         <div class="form-group col-sm-6">
             {!! Form::label('price_1', 'Price 1') !!}

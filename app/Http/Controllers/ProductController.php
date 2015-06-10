@@ -9,6 +9,7 @@ use App\Supplier;
 use App\ProductCategory;
 use Redirect;
 use Input;
+use Validator;
 
 class ProductController extends Controller {
 
@@ -65,7 +66,11 @@ class ProductController extends Controller {
 	 */
 	public function show(Product $product)
 	{
-		return view('product.show', compact('product'));
+        $product_categories = ProductCategory::all();
+        $suppliers = Supplier::all();
+		return view('product.show', compact('product'))
+            ->with('product_categories', $product_categories)
+            ->with('suppliers', $suppliers);
 	}
 
 	/**
@@ -85,9 +90,31 @@ class ProductController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		//
+        $input = Input::all();
+        $product = Product::find($input['id']);
+        
+        $rules = array(
+            'name' => 'required',
+            'product_category' => 'required',
+            'supplier' => 'required'
+        );
+        
+        $validator = Validator::make($input, $rules);
+        
+        if($validator->passes()){
+            $product->name = $input['name'];
+            $product->product_category_id = $input['product_category'];
+            $product->supplier_id = $input['supplier'];
+            $product->price_1 = $input['price_1'];
+            $product->price_2 = $input['price_2'];
+            $product->save();
+            
+            return Redirect::action('ProductController@index');
+        }
+        
+        return Redirect::action('ProductController@show', $input['id']);
 	}
 
     public function delete(Product $product){
