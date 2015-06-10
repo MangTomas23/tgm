@@ -13,6 +13,17 @@
             {!! Form::text('name','', ['class'=>'form-control']) !!}
         </div>
         <div class="form-group col-sm-12">
+            <label for="category">
+                Category
+                <a href="{{ action('ProductCategoryController@index') }}" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-cog"></span></a>
+            </label>
+            <select name="product_category" class="form-control">
+                @foreach($product_categories as $product_category)
+                    <option value="{{ $product_category->id }}">{{ $product_category->name }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group col-sm-12">
             {!! Form::label('supplier', 'Supplier') !!}
             <select name="supplier" class="form-control">
                 @foreach($suppliers as $supplier)

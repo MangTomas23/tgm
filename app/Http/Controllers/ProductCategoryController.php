@@ -4,13 +4,12 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
-use App\Product;
-use App\Supplier;
 use App\ProductCategory;
 use Redirect;
+use Validator;
 use Input;
 
-class ProductController extends Controller {
+class ProductCategoryController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -19,8 +18,8 @@ class ProductController extends Controller {
 	 */
 	public function index()
 	{
-        $products = Product::all();
-		return view('product.home', compact('products'));
+        $product_categories = ProductCategory::all();
+		return view('productcategory.home', compact('product_categories'));
 	}
 
 	/**
@@ -30,10 +29,7 @@ class ProductController extends Controller {
 	 */
 	public function create()
 	{
-        $suppliers = Supplier::all();
-        $product_categories = ProductCategory::all();
-        
-		return view('product.create', compact('suppliers'))->with('product_categories', $product_categories);
+		//
 	}
 
 	/**
@@ -43,17 +39,11 @@ class ProductController extends Controller {
 	 */
 	public function store()
 	{
-        $input = Input::all();
-        $product = new Product;
+        $product_category = new ProductCategory;
+        $product_category->name = Input::get('name');
+        $product_category->save();
         
-        $product->name = $input['name'];
-        $product->supplier_id = $input['supplier'];
-        $product->price_1 = $input['price_1'];
-        $product->price_2 = $input['price_2'];
-        
-        $product->save();
-        
-		return Redirect::action('ProductController@index');
+        return Redirect::action('ProductCategoryController@index');
 	}
 
 	/**
@@ -62,9 +52,9 @@ class ProductController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show(Product $product)
+	public function show($id)
 	{
-		return view('product.show', compact('product'));
+		//
 	}
 
 	/**
@@ -89,9 +79,6 @@ class ProductController extends Controller {
 		//
 	}
 
-    public function delete(Product $product){
-        return view('product.delete', compact('product'));
-    }
 	/**
 	 * Remove the specified resource from storage.
 	 *
@@ -100,9 +87,7 @@ class ProductController extends Controller {
 	 */
 	public function destroy($id)
 	{
-        $product = Product::findOrFail($id);
-        $product->delete();
-		return Redirect::action('ProductController@index');
+		//
 	}
 
 }

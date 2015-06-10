@@ -14,8 +14,8 @@ class AddForeignKey extends Migration {
 	{
 		Schema::table('products', function(Blueprint $table)
 		{
-			$table->integer('supplier_id')->unsigned();
-            $table->foreign('supplier_id')->references('id')->on('suppliers');
+			$table->integer('supplier_id')->unsigned()->nullable();
+            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('set null');
 		});
 	}
 

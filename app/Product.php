@@ -8,4 +8,7 @@ class Product extends Model {
         return $this->belongsTo('App\Supplier');   
     }
 
+    public function productCategory(){
+        return $this->belongsTo('App\ProductCategory');   
+    }
 }

@@ -77,6 +77,12 @@ Route::get('/emp/designation/delete/{designation}', 'DesignationController@delet
 
 Route::get('/emp/designation/destroy/{id}', 'DesignationController@destroy');
 
+
+
+Route::get('/product_categories', 'ProductCategoryController@index');
+
+Route::post('/product_categories/create', 'ProductCategoryController@store');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
