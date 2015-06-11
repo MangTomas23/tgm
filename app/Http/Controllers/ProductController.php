@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\Supplier;
 use App\ProductCategory;
+use App\Box;
 use Redirect;
 use Input;
 use Validator;
+
 
 class ProductController extends Controller {
 
@@ -63,6 +65,15 @@ class ProductController extends Controller {
             $product->product_category_id = $input['product_category'];
 
             $product->save();
+            
+//            foreach($input['size'] as $i=>$v){
+//                $box = new Box;
+//                $box->product_id = $input[$product->id()];
+//                $box->size = $v;
+//                $box->no_of_packs = $input[$i];
+//                $box->save();
+//            }
+            
             
             return Redirect::action('ProductController@index');
         }

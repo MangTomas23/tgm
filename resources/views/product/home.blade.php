@@ -11,6 +11,15 @@
         </h1>
     </div>
     
+    {!! Form::open(['url'=>'/products/search', 'class'=>'form form-horizontal col-md-4 col-md-offset-8 col-xs-10 col-xs-offset-2 col-sm-6 col-sm-offset-6']) !!}
+    <div class="form-group col-md-10 col-xs-11">
+        {!! Form::text('search', null, ['class'=>'form-control', 'placeholder'=>'Search..']) !!}
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+    </div>
+    {!! Form::close() !!}
+    
     <table class="table table-striped">
         <thead>
             <tr>
