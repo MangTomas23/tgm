@@ -10,6 +10,10 @@
             <a href="{{ action('ProductController@delete', $product->id) }}" class="btn btn-danger pull-right" title="Delete"><span class="glyphicon glyphicon-trash"></span></a>
         </h1>
     </div>
+    
+    <div class="page-header">
+        <h4>Product Info</h4>
+    </div>
     {!! Form::open(['url'=>'/product/update']) !!}
         {!! Form::hidden('id', $product->id) !!}
         <div class="form-group col-sm-12">
@@ -57,6 +61,33 @@
             {!! Form::label('price_2', 'Price 2') !!}
             {!! Form::text('price_2', $product->price_2, ['class'=>'form-control']) !!}
         </div>
+    
+<!--------------------------------------Product Boxes-------------------------------------------->
+        <div class="page-header">
+            <h4>Product Boxes</h4>
+        </div>
+    
+        <div class="form-group col-xs-6">
+            <label>Size</label>
+        </div>
+        <div class="form-group col-xs-6">
+            <label>No. of Packs</label>
+        </div>
+    
+        <div id="box-container">
+            @foreach($product->boxes as $box)
+                <div class="form-group col-xs-6">
+                    <input type="text" class="form-control" value="{{ $box->size }}">
+                </div>
+                <div class="form-group col-xs-6">
+                    <input type="number" class="form-control" value="{{ $box->no_of_packs }}" min="0">
+                </div>
+            
+            @endforeach
+        </div>
+    
+<!----------------------------------------Save Product_________________________________________-->    
+    
         <div class="form-group col-sm-12 text-right">
             <a href="{{ action('ProductController@index') }}" class="btn btn-default">Cancel</a>
             {!! Form::submit('Update', ['class'=>'btn btn-success']) !!}
