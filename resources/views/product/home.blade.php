@@ -2,6 +2,8 @@
 
 @section('title') TGM - Products @endsection
 
+@section('products') active @endsection
+
 @section('content')
 <div class="container">
     <div class="page-header">

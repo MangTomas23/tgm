@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('suppliers') active @endsection
+
 @section('title') TGM - Suppliers @endsection
 
 @section('content')
