@@ -64,15 +64,17 @@ class ProductController extends Controller {
             $product->price_2 = $input['price_2'];
             $product->product_category_id = $input['product_category'];
 
-            $product->save();
+            if($product->save()){
+                $product_id = $product->id;
+            }
             
-//            foreach($input['size'] as $i=>$v){
-//                $box = new Box;
-//                $box->product_id = $input[$product->id()];
-//                $box->size = $v;
-//                $box->no_of_packs = $input[$i];
-//                $box->save();
-//            }
+            foreach($input['size'] as $i=>$v){
+                $box = new Box;
+                $box->product_id = $product_id;
+                $box->size = $v;
+                $box->no_of_packs = $input['packs'][$i];
+                $box->save();
+            }
             
             
             return Redirect::action('ProductController@index');
