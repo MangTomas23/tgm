@@ -56,10 +56,11 @@
 		</div>
 	</nav>
 
-	@yield('content')
 
 	<!-- Scripts -->
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    {!! HTML::script('js/chart.js') !!}
 	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+	@yield('content')
 </body>
 </html>
