@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('products') active @endsection
+
 @section('content')
 
 <div class="container">
