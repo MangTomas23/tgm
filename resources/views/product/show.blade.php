@@ -76,11 +76,12 @@
     
         <div id="box-container">
             @foreach($product->boxes as $box)
+                {!! Form::hidden('box[]', $box->id) !!}
                 <div class="form-group col-xs-6">
-                    <input type="text" class="form-control" value="{{ $box->size }}">
+                    <input name="size[]" type="text" class="form-control" value="{{ $box->size }}">
                 </div>
                 <div class="form-group col-xs-6">
-                    <input type="number" class="form-control" value="{{ $box->no_of_packs }}" min="0">
+                    <input name="packs[]" type="number" class="form-control" value="{{ $box->no_of_packs }}" min="0">
                 </div>
             
             @endforeach

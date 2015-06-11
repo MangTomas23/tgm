@@ -136,6 +136,13 @@ class ProductController extends Controller {
             $product->price_2 = $input['price_2'];
             $product->save();
             
+            foreach($input['box'] as $i=>$v){
+                $box = Box::find($v);
+                $box->size = $input['size'][$i];
+                $box->no_of_packs = $input['packs'][$i];
+                $box->save();
+            }
+            
             return Redirect::action('ProductController@index');
         }
         
