@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('products') active @endsection
+
 @section('title') TGM - Products @endsection
 
 @section('products') active @endsection
