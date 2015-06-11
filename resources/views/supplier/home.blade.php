@@ -35,9 +35,10 @@
         </tbody>
     </table>
     
-    <div class="page-header">
-        
-    </div>
+    <div class="page-header"></div>
+    <p class="text-right">
+        <strong>No. of Suppliers: </strong> <span class="badge">{{ count($suppliers) }}</span>
+    </p>
 </div>
 
 @endsection

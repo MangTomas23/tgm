@@ -39,5 +39,11 @@
             @endif
         </tbody>
     </table>
+    
+    <div class="page-header"></div>
+    <p class="text-right">
+        <strong>No. of Products: </strong> <span class="badge">{{ count($products) }}</span> 
+    </p>
+    
 </div>
 @endsection
