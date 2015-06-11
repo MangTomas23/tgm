@@ -60,13 +60,13 @@
         </div>
     
         <div class="form-group col-xs-6">
-            {!! Form::text('size[]', null, ['class'=>'form-control']) !!}
+            {!! Form::text('size[]', null, ['class'=>'form-control','placeholder'=>'e.g. 2x3']) !!}
         </div>
         <div class="form-group col-xs-6">
-            {!! Form::input('number','packs[]', null, ['class'=>'form-control']) !!}
+            {!! Form::input('number','packs[]', null, ['class'=>'form-control', 'min'=>'0']) !!}
         </div>
     
-        <div class="box-container">
+        <div id="box-container">
     
         </div>
     
@@ -89,7 +89,14 @@
 <script>
     $(document).ready(function(){
         $('#btnAddMore').click(function(){
-            alert()   
+            $('#box-container').append(
+                '<div class="form-group col-xs-6">' +
+                    '<input name="size[]" type="text" class="form-control">' +
+                '</div>' +
+                '<div class="form-group col-xs-6">' +
+                    '<input name="packs[]" type="number" min="0" class="form-control">' + 
+                '</div>'
+            )
         })
         
     });
