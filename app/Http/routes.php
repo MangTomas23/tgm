@@ -37,6 +37,8 @@ Route::get('/product/destroy/{id}', 'ProductController@destroy');
 
 Route::post('/product/update', 'ProductController@update');
 
+Route::post('/products/search', 'ProductController@search');
+
 
 
 

@@ -155,5 +155,9 @@ class ProductController extends Controller {
         $product->delete();
 		return Redirect::action('ProductController@index');
 	}
+    
+    public function search(){
+        return view('product.search');
+    }
 
 }
