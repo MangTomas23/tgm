@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('employees') active @endsection
+
 @section('title') TGM - Employees @endsection
 
 @section('content')
