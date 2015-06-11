@@ -47,6 +47,8 @@
             {!! Form::text('price_2', null, ['class'=>'form-control']) !!}
         </div>
     
+<!-----------------------------------------Product Boxes---------------------------------->    
+    
         <div class="page-header">
             <h4>Product Boxes</h4>
         </div>
@@ -56,13 +58,23 @@
         <div class="form-group col-xs-6">
             <label>Number of Packs</label>
         </div>
+    
         <div class="form-group col-xs-6">
-            {!! Form::text('size', null, ['class'=>'form-control']) !!}
+            {!! Form::text('size[]', null, ['class'=>'form-control']) !!}
         </div>
         <div class="form-group col-xs-6">
-            {!! Form::input('number','packs', null, ['class'=>'form-control']) !!}
+            {!! Form::input('number','packs[]', null, ['class'=>'form-control']) !!}
+        </div>
+    
+        <div class="box-container">
+    
+        </div>
+    
+        <div class="col-sm-12">
+            <a id="btnAddMore" class="btn btn-default btn-xs">Add More</a>
         </div>
         
+<!---------------------------------------Save Product-------------------------------------->    
     
         <div class="page-header"></div>
     
@@ -73,5 +85,14 @@
     
     {!! Form::close() !!}
 </div>
+
+<script>
+    $(document).ready(function(){
+        $('#btnAddMore').click(function(){
+            alert()   
+        })
+        
+    });
+</script>
 
 @endsection

@@ -31,7 +31,7 @@
                     <tr>
                         <td><a href="{{ action('ProductController@show', $product->id ) }}">{{ $product->name }}</a></td>
                         <td>{{ $product->product_category->name or null }}</td>
-                        <td>{{ $product->supplier->name }}</td>
+                        <td>{{ $product->supplier->name or null }}</td>
                         <td>{{ $product->price_1 }}</td>
                         <td>{{ $product->price_2 }}</td>
                     </tr>
