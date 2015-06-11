@@ -11,7 +11,7 @@
             <a href="{{ action('EmployeeController@create') }}" class="btn btn-info pull-right">Add</a>
         </h1>
     </div>
-    <table class="table table-striped table-hover">
+    <table class="table table-default table-hover">
         <thead>
             <tr>
                 <th>Employee Name</th>
