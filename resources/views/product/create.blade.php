@@ -47,7 +47,26 @@
             {!! Form::text('price_2', null, ['class'=>'form-control']) !!}
         </div>
     
-        <div class="form-group col-sm-12 text-right">
+        <div class="page-header">
+            <h4>Product Boxes</h4>
+        </div>
+        <div class="form-group col-xs-6">
+            <label>Size</label>
+        </div>
+        <div class="form-group col-xs-6">
+            <label>Number of Packs</label>
+        </div>
+        <div class="form-group col-xs-6">
+            {!! Form::text('size', null, ['class'=>'form-control']) !!}
+        </div>
+        <div class="form-group col-xs-6">
+            {!! Form::input('number','packs', null, ['class'=>'form-control']) !!}
+        </div>
+        
+    
+        <div class="page-header"></div>
+    
+        <div class="col-sm-12 text-right">
             <a href="{{ action('ProductController@index') }}" class="btn btn-default">Cancel</a>
             {!! Form::submit('Save', ['class'=>'btn btn-success']) !!}
         </div>
