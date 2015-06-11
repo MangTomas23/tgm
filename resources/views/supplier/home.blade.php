@@ -63,7 +63,7 @@
                 datasets: [
                     {
                         label: "My First dataset",
-                        fillColor: "rgba(220,220,220,0.5)",
+                        fillColor: "rgba(75, 94, 172, 0.5)",
                         strokeColor: "rgba(220,220,220,0.8)",
                         highlightFill: "rgba(220,220,220,0.75)",
                         highlightStroke: "rgba(220,220,220,1)",
