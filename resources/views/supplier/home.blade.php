@@ -34,6 +34,10 @@
             @endif
         </tbody>
     </table>
+    
+    <div class="page-header">
+        
+    </div>
 </div>
 
 @endsection
