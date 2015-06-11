@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('home') active @endsection
+
 @section('title') TGM - Home @endsection
 
 @section('content')
