@@ -172,7 +172,14 @@ class ProductController extends Controller {
     }
     
     public function searchResults($query){
-        $products = Product::where('name','like','%'.$query.'%')->get();
+        $products = Product::select('products.*','products.name as product_name')->join('suppliers','products.supplier_id','=','suppliers.id')
+                    ->join('product_categories','products.product_category_id','=','product_categories.id')
+                    ->whereRaw('
+                        products.name like "%'.$query.'%" or
+                        suppliers.name like "%'.$query.'%" or 
+                        product_categories.name like "%'.$query.'%"
+                    ')
+                    ->get();
         
         return view('product.search', compact(['products','query']));
     }
