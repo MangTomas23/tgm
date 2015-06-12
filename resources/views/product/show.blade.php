@@ -1,5 +1,7 @@
 @extends('app')
 
+@section('title') TGM - Update Supplier @endsection
+
 @section('products') active @endsection
 
 @section('content');
@@ -8,7 +10,7 @@
 
     <div class="page-header">
         <h1>
-            {{ $product->name }}
+            Update Product
             <a href="{{ action('ProductController@delete', $product->id) }}" class="btn btn-danger pull-right" title="Delete"><span class="glyphicon glyphicon-trash"></span></a>
         </h1>
     </div>
@@ -20,7 +22,7 @@
         {!! Form::hidden('id', $product->id) !!}
         <div class="form-group col-sm-12">
             {!! Form::label('name', 'Name') !!}
-            {!! Form::text('name', $product->name, ['class'=>'form-control']) !!}
+            {!! Form::text('name', $product->name, ['class'=>'form-control', 'required'=>'true']) !!}
         </div>
         <div class="form-group col-sm-12">
             {!! Form::label('product_category', 'Category') !!}
@@ -57,7 +59,7 @@
         </div>
         <div class="form-group col-sm-6">
             {!! Form::label('price_1', 'Price 1') !!}
-            {!! Form::text('price_1', $product->price_1, ['class'=>'form-control']) !!}
+            {!! Form::text('price_1', $product->price_1, ['class'=>'form-control', 'required'=>'true']) !!}
         </div>
         <div class="form-group col-sm-6">
             {!! Form::label('price_2', 'Price 2') !!}
