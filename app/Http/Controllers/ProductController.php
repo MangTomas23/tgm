@@ -170,5 +170,9 @@ class ProductController extends Controller {
     public function search(){
         return view('product.search');
     }
+    
+    public function searchResults(){
+        return view('product.search');
+    }
 
 }
