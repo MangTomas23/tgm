@@ -2,6 +2,8 @@
 
 @section('suppliers') active @endsection
 
+@section('title') TGM - Add Supplier @endsection
+
 @section('content')
 
 <div class="container">
@@ -12,7 +14,7 @@
     {!! Form::open(['url'=>'/supplier/create', 'class'=>'col-sm-8 col-sm-offset-2']) !!}
         <div class="form-group col-sm-8">
             {!! Form::label('name', 'Name') !!}
-            {!! Form::text('name', null, ['class'=>'form-control']) !!}
+            {!! Form::text('name', null, ['class'=>'form-control', 'required'=>'true']) !!}
         </div>
     
         <div class="form-group col-sm-4">
