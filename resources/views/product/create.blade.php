@@ -15,7 +15,7 @@
         </div>
         <div class="form-group col-sm-12">
             {!! Form::label('name', 'Product Name') !!}
-            {!! Form::text('name','', ['class'=>'form-control']) !!}
+            {!! Form::text('name','', ['class'=>'form-control', 'required'=>'true']) !!}
         </div>
         <div class="form-group col-sm-12">
             <label for="product_category">
@@ -42,11 +42,11 @@
         </div>
         <div class="form-group col-sm-6">
             {!! Form::label('price_1', 'Price 1') !!}
-            {!! Form::text('price_1', null, ['class'=>'form-control']) !!}
+            {!! Form::input('number','price_1', null, ['class'=>'form-control','min'=>'0.01','step'=>'0.01', 'required'=>'true']) !!}
         </div>
         <div class="form-group col-sm-6">
             {!! Form::label('price_2', 'Price 2') !!}
-            {!! Form::text('price_2', null, ['class'=>'form-control']) !!}
+            {!! Form::input('number','price_2', null, ['class'=>'form-control','min'=>'0.01','step'=>'0.01']) !!}
         </div>
     
 <!-----------------------------------------Product Boxes---------------------------------->    
