@@ -168,11 +168,13 @@ class ProductController extends Controller {
 	}
     
     public function search(){
-        return view('product.search');
+        return Redirect::action('ProductController@searchResults', Input::get('query'));
     }
     
-    public function searchResults(){
-        return view('product.search');
+    public function searchResults($query){
+        $products = Product::where('name','like','%'.$query.'%')->get();
+        
+        return view('product.search', compact(['products','query']));
     }
 
 }
