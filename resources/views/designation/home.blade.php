@@ -11,7 +11,7 @@
         <h1>Designations</h1>
     </div>
     
-    <table class="table table-striped table-hover">
+    <table class="table table-default table-hover">
         <thead>
             <tr>
                 <th>Designation</th>
