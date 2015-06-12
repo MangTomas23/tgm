@@ -28,7 +28,8 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#">Tradeal General Merchandise</a>
+				<a class="navbar-brand hidden-xs" href="#">Tradeal General Merchandise</a>
+				<a class="navbar-brand visible-xs-block" style="font-size: 1.1em" href="#">Tradeal General Merchandise</a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -63,7 +64,7 @@
     <script src="{{ asset('/js/Chart.js') }}"></script>
     <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
     
-	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<!--	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>-->
 	@yield('content')
 </body>
 </html>

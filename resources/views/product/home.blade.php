@@ -24,7 +24,7 @@
     </div>
     {!! Form::close() !!}
     
-    <table class="table table-striped">
+    <table class="table table-striped" style="margin-top: 20px">
         <thead>
             <tr>
                 <th>Product Name</th>
