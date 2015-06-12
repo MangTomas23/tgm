@@ -52,7 +52,9 @@ class ProductController extends Controller {
         $rules = array(
             'name'=>'required',
             'supplier'=>'required',
-            'product_category'=>'required'
+            'product_category'=>'required',
+            'size'=>'required',
+            'packs'=>'required'
         );
         
         $validator = Validator::make($input, $rules);
