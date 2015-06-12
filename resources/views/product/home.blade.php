@@ -15,12 +15,14 @@
         </h1>
     </div>
     
+    {!! Form::open(['url'=>'/products/search', 'class'=>'form']) !!}
     <div class="input-group col-md-3 col-md-offset-9">
         <input name="query" type="text" class="form-control" placeholder="Search">
         <span class="input-group-btn">
             <button class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
         </span>
     </div>
+    {!! Form::close() !!}
     
     <table class="table table-striped">
         <thead>
