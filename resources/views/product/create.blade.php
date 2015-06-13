@@ -9,13 +9,19 @@
         <h1>Add Product</h1>
     </div>
     
+    @if(isset($saveSuccessful))
+        <div class="alert alert-success">
+            <strong>Success!</strong> Product Added. Back to <a href="{{ action('ProductController@index') }}" class="alert-link">Product List</a>.
+        </div>
+    @endif
+    
     {!! Form::open(['url'=>'/product/create', 'class'=>'form col-sm-8 col-sm-offset-2']) !!}
         <div class="page-header">
             <h4>Product Info</h4>
         </div>
         <div class="form-group col-sm-12">
             {!! Form::label('name', 'Product Name') !!}
-            {!! Form::text('name','', ['class'=>'form-control', 'required'=>'true']) !!}
+            {!! Form::text('name','', ['class'=>'form-control', 'required'=>'true', 'autofocus'=>'true']) !!}
         </div>
         <div class="form-group col-sm-12">
             <label for="product_category">
@@ -42,11 +48,11 @@
         </div>
         <div class="form-group col-sm-6">
             {!! Form::label('price_1', 'Price 1') !!}
-            {!! Form::input('number','price_1', null, ['class'=>'form-control','min'=>'0.01','step'=>'0.01', 'required'=>'true']) !!}
+            {!! Form::input('number','price_1', '0.00', ['class'=>'form-control','min'=>'0','step'=>'0.01', 'required'=>'true']) !!}
         </div>
         <div class="form-group col-sm-6">
             {!! Form::label('price_2', 'Price 2') !!}
-            {!! Form::input('number','price_2', null, ['class'=>'form-control','min'=>'0.01','step'=>'0.01']) !!}
+            {!! Form::input('number','price_2', '0.00', ['class'=>'form-control','min'=>'0.00','step'=>'0.01']) !!}
         </div>
     
 <!-----------------------------------------Product Boxes---------------------------------->    
