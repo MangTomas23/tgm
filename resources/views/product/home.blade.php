@@ -17,7 +17,7 @@
     
     {!! Form::open(['url'=>'/products/search', 'class'=>'form']) !!}
     <div class="input-group col-md-3 col-md-offset-9">
-        <input name="query" type="text" class="form-control" placeholder="Search">
+        <input name="query" type="text" class="form-control" placeholder="Search" required>
         <span class="input-group-btn">
             <button class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
         </span>
