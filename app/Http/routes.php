@@ -100,6 +100,10 @@ Route::get('/product_categories/destroy/{id}', 'ProductCategoryController@destro
 Route::get('/product_categories/edit/{product_categories}', 'ProductCategoryController@edit');
 
 Route::post('/product_categories/update/', 'ProductCategoryController@update');
+
+
+
+Route::get('/stocks', 'StockController@index');
     
 
 Route::controllers([
