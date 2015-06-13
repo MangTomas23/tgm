@@ -10,8 +10,8 @@
     </div>
     
     @if(isset($saveSuccessful))
-        <div class="alert alert-success">
-            <strong>Success!</strong> Product Added. Back to <a href="{{ action('ProductController@index') }}" class="alert-link">Product List</a>.
+        <div class="alert alert-success col-sm-8 col-sm-offset-2">
+            <strong>Success!</strong> {{ $input['name'] }} Added. Back to <a href="{{ action('ProductController@index') }}" class="alert-link">Product List</a>.
         </div>
     @endif
     
@@ -66,13 +66,24 @@
         <div class="form-group col-xs-6">
             <label>Number of Packs</label>
         </div>
-    
-        <div class="form-group col-xs-6">
-            {!! Form::text('size[]', null, ['class'=>'form-control','placeholder'=>'e.g. 2x3']) !!}
-        </div>
-        <div class="form-group col-xs-6">
-            {!! Form::input('number','packs[]', null, ['class'=>'form-control', 'min'=>'0']) !!}
-        </div>
+        
+        @if(!isset($input))
+            <div class="form-group col-xs-6">
+                <input name="size[]" type="text" class="form-control" placeholder="e.g. 2 x 3" value="">
+            </div>
+            <div class="form-group col-xs-6">
+                {!! Form::input('number','packs[]', '0', ['class'=>'form-control', 'min'=>'0']) !!}
+            </div>
+        @else
+            @foreach($input['size'] as $i=>$v)
+                <div class="form-group col-xs-6">
+                    <input type="text" name="size[]" class="form-control" placeholder="e.g. 2 x 3" value="{{ $v }}">
+                </div>
+                <div class="form-group col-xs-6">
+                    <input type="number" name="packs[]" class="form-control" value="{{ $input['packs'][$i] }}">
+                </div>
+            @endforeach
+        @endif
     
         <div id="box-container">
     
