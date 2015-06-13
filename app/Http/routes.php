@@ -104,6 +104,11 @@ Route::post('/product_categories/update/', 'ProductCategoryController@update');
 
 
 Route::get('/stocks', 'StockController@index');
+
+Route::post('/stocks/in', 'StockController@stockIn');
+
+Route::get('/stocks/in/date/{date}/supplier/{supplier_id}', 'StockInController@index');
+
     
 
 Route::controllers([

@@ -17,11 +17,11 @@
     {!! Form::open(['url'=>'/stocks/in']) !!}
         <div class="form-group">
             <label>Date</label>
-            <input type="date" class="form-control">
+            <input name="date" type="date" class="form-control" required>
         </div>    
         <div class="form-group">
             <label>Supplier</label>
-            <select class="form-control">
+            <select name="supplier" class="form-control">
                 @foreach($suppliers as $supplier)
                     <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
                 @endforeach

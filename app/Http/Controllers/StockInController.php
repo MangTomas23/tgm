@@ -12,9 +12,9 @@ class StockInController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index($date, $supplier_id)
 	{
-		//
+//		return view();
 	}
 
 	/**
