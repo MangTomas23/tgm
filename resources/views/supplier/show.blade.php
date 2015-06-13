@@ -2,6 +2,8 @@
 
 @section('suppliers') active @endsection
 
+@section('title') TGM - Update Supplier  @endsection
+
 @section('content')
 
 <div class="container">
@@ -17,7 +19,7 @@
         {!! Form::hidden('id', $supplier->id) !!}
         <div class="form-group col-sm-8">
             {!! Form::label('name', 'Supplier Name') !!}
-            {!! Form::text('name', $supplier->name, ['class'=>'form-control']) !!}
+            {!! Form::text('name', $supplier->name, ['class'=>'form-control','required'=>'true']) !!}
         </div>
         <div class="form-group col-sm-4">
             {!! Form::label('contact', 'Contact') !!}
