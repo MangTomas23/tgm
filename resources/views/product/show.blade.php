@@ -59,11 +59,11 @@
         </div>
         <div class="form-group col-sm-6">
             {!! Form::label('price_1', 'Price 1') !!}
-            {!! Form::text('price_1', $product->price_1, ['class'=>'form-control', 'required'=>'true']) !!}
+            {!! Form::text('price_1', $product->price_1, ['class'=>'form-control', 'required'=>'true', 'min'=>'0', 'step'=>'0.01']) !!}
         </div>
         <div class="form-group col-sm-6">
             {!! Form::label('price_2', 'Price 2') !!}
-            {!! Form::text('price_2', $product->price_2, ['class'=>'form-control']) !!}
+            {!! Form::text('price_2', $product->price_2, ['class'=>'form-control', 'min'=>'0', 'step'=>'0.01']) !!}
         </div>
     
 <!--------------------------------------Product Boxes-------------------------------------------->
