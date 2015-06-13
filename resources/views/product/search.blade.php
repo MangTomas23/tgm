@@ -15,6 +15,15 @@
             @else
                 Search Results: "{{ $query }}"
             @endif
+            <span class="visible-xs-block" style="padding:20px"></span>
+            {!! Form::open(['url'=>'/products/search', 'class'=>'form col-md-4 pull-right']) !!}
+            <div class="input-group">
+                <input type="text" name="query" class="form-control">
+                <span class="input-group-btn">
+                    <button class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+            </div>
+            {!! Form::close()  !!}
         </h1>
     </div>
     
