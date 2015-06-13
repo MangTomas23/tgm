@@ -14,7 +14,7 @@ use Validator;
 
 
 class ProductController extends Controller {
-
+    
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -48,6 +48,7 @@ class ProductController extends Controller {
 	{
         $input = Input::all();
         $product = new Product;
+        $status = array();
         
         $rules = array(
             'name'=>'required',
@@ -78,11 +79,13 @@ class ProductController extends Controller {
                 $box->save();
             }
             
-            
-            return Redirect::action('ProductController@index');
+            $saveSuccessful = true;
+            $suppliers = Supplier::all();
+            $product_categories = ProductCategory::all();
+            return view('product.create', compact(['input','saveSuccessful','suppliers','product_categories']));
         }
         
-        return Redirect::action('ProductController@create');
+        return Redirect::action('ProductController@create', compact('saveSuccessful'));
 	}
 
 	/**
