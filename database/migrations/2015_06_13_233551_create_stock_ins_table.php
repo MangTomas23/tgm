@@ -16,6 +16,12 @@ class CreateStockInsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->timestamps();
+            $table->integer('product_id')->unsigned()->nullable();
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('set null');
+            $table->integer('box_id')->unsigned()->nullable();
+            $table->foreign('box_id')->references('id')->on('boxes')->onDelete('set null');
+            $table->integer('quantity');
+            $table->decimal('amount',11,2);
 		});
 	}
 
