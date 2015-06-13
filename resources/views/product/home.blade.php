@@ -37,7 +37,7 @@
         <tbody>
             @if($products->isEmpty())
                 <tr>
-                    <td colspan="4">No records found.</td>
+                    <td colspan="5">No records found.</td>
                 </tr>
             @else
                 @foreach($products as $product)
