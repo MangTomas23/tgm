@@ -60,19 +60,26 @@
         <div class="page-header">
             <h4>Product Boxes</h4>
         </div>
-        <div class="form-group col-xs-6">
+        <div class="form-group col-xs-5">
             <label>Size</label>
         </div>
-        <div class="form-group col-xs-6">
+        <div class="form-group col-xs-5">
             <label>Number of Packs</label>
         </div>
+        <div class="form-group col-xs-2 text-right">
+            <label>Remove</label>
+        </div>
+             
         
         @if(!isset($input))
-            <div class="form-group col-xs-6">
+            <div class="form-group col-xs-5">
                 <input name="size[]" type="text" class="form-control" placeholder="e.g. 2 x 3" value="">
             </div>
-            <div class="form-group col-xs-6">
+            <div class="form-group col-xs-5">
                 {!! Form::input('number','packs[]', '0', ['class'=>'form-control', 'min'=>'0']) !!}
+            </div>
+            <div class="form-group col-xs-2 text-right">
+                <a class="btn btn-default disabled"><span class="glyphicon glyphicon-minus-sign"></span></a>
             </div>
         @else
             @foreach($input['size'] as $i=>$v)
@@ -88,7 +95,7 @@
         <div id="box-container">
     
         </div>
-    
+        <span class="clearfix"></span>
         <div class="col-sm-12">
             <a id="btnAddMore" class="btn btn-default btn-xs">Add More</a>
         </div>
@@ -103,21 +110,30 @@
         </div>
     
     {!! Form::close() !!}
+    <span class="clearfix"></span>
 </div>
 
 <script>
     $(document).ready(function(){
         $('#btnAddMore').click(function(){
             $('#box-container').append(
-                '<div class="form-group col-xs-6">' +
-                    '<input name="size[]" type="text" class="form-control">' +
-                '</div>' +
-                '<div class="form-group col-xs-6">' +
-                    '<input name="packs[]" type="number" min="0" class="form-control">' + 
+                '<div>'+
+                    '<div class="form-group col-xs-5">' +
+                        '<input name="size[]" type="text" class="form-control" placeholder="e.g. 2 x 3">' +
+                    '</div>' +
+                    '<div class="form-group col-xs-5">' +
+                        '<input name="packs[]" type="number" min="0" class="form-control" value="0">' + 
+                    '</div>' +
+                    '<div class="form-group col-xs-2 text-right">' +
+                        '<a class="btn btn-default btn-remove"><span class="glyphicon glyphicon-minus-sign"></span></a>' +
+                    '</div>' +
                 '</div>'
             )
         })
         
+        $(this).on('click','.btn-remove', function(){
+            $(this).parent().parent().remove()
+        })
     });
 </script>
 
