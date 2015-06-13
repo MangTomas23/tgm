@@ -11,7 +11,7 @@
         <h2>Mission</h2>
     </div>
     <blockquote>
-        We are committed in the pursuit of producing innovative and quality products with range and affordability in mind for the consumers as well as building strong and trusted business foundation for the benefit of te stakeholders.
+        We are committed in the pursuit of producing innovative and quality products with range and affordability in mind for the consumers as well as building strong and trusted business foundation for the benefit of the stakeholders.
     </blockquote>
     
     <div class="page-header">
