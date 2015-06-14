@@ -36,6 +36,29 @@
     <div class="page-header">
         <h3>Out</h3>
     </div>
+    
+    {!! Form::open(['url'=>'/stocks/out']) !!}
+        <div class="form-group">
+            {!! Form::label('date', 'Date') !!}
+            <input name="date" type="date" class="form-control" required>
+        </div>
+        <div class="form-group">
+            {!! Form::label('delivered_by', 'Delivered by') !!}
+            <select name="employee" class="form-control"> 
+                @foreach($employees as $employee)
+                    <option value="{{ $employee->id }}">{{ $employee->firstname . ' ' . $employee->lastname }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            {!! Form::label('delivered_to','Delivered to') !!}
+            {!! Form::text('delivered_to', null, ['class'=>'form-control']) !!}
+        </div>
+        <div class="text-right">
+            {!! Form::submit('Next', ['class'=>'btn btn-info']) !!}
+        </div>
+    {!! Form::close() !!}
+    
 </div>
 
 @endsection

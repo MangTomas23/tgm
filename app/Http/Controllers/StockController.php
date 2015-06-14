@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Supplier;
+use App\Employee;
 use Input;
 use Redirect;
 
@@ -14,7 +15,8 @@ class StockController extends Controller {
 	public function index()
 	{
         $suppliers = Supplier::orderBy('name')->get();
-		return view('stock.home', compact('suppliers'));
+        $employees = Employee::orderBy('firstname')->get();
+		return view('stock.home', compact(['suppliers','employees']));
 	}
 
     public function stockIn(){
