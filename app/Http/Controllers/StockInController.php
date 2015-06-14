@@ -2,6 +2,8 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Supplier;
+use App\Product;
 
 use Illuminate\Http\Request;
 
@@ -14,7 +16,9 @@ class StockInController extends Controller {
 	 */
 	public function index($date, $supplier_id)
 	{
-//		return view();
+        $supplier = Supplier::find($supplier_id);
+        $products = Product::where('supplier_id','=',$supplier_id)->get();
+		return view('stockin.home', compact(['date','supplier','products']));
 	}
 
 	/**
