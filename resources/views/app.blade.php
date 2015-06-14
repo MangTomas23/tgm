@@ -35,7 +35,7 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li class="@yield('home')"><a href="{{ url('/') }}">Home</a></li>
-                    <li class="@yield('stocks')"><a href="{{ action('StockController@index') }}">Stocks</a></li>
+                    <li class="@yield('inventory')"><a href="{{ action('InventoryController@index') }}">Inventory</a></li>
 					<li class="@yield('products')"><a href="{{ action('ProductController@index') }}">Products</a></li>
                     <li class="@yield('suppliers')"><a href="{{ action('SupplierController@index') }}">Suppliers</a></li>
                     <li class="@yield('employees')"><a href="{{ action('EmployeeController@index') }}">Employees</a></li>

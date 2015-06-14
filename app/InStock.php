@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class StockIn extends Model {
+class InStock extends Model {
 
 	//
 

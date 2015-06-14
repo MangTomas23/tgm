@@ -3,23 +3,30 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Supplier;
-use App\Product;
+use App\Employee;
 
+use Redirect;
+use Input;
 use Illuminate\Http\Request;
 
-class StockInController extends Controller {
+class InventoryController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
-	public function index($date, $supplier_id)
+	public function index()
 	{
-        $supplier = Supplier::find($supplier_id);
-        $products = Product::where('supplier_id','=',$supplier_id)->get();
-		return view('stockin.home', compact(['date','supplier','products']));
+        $suppliers = Supplier::orderBy('name')->get();
+        $employees = Employee::orderBy('firstname')->get();
+		return view('inventory.home', compact(['suppliers','employees']));
 	}
+    
+    public function inStocks(){
+        $input = Input::all();
+        return Redirect::action('InStockController@create', [$input['date'],$input['supplier']]);
+    }
 
 	/**
 	 * Show the form for creating a new resource.

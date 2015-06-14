@@ -103,12 +103,11 @@ Route::post('/product_categories/update/', 'ProductCategoryController@update');
 
 
 
-Route::get('/stocks', 'StockController@index');
+Route::get('/inventory', 'InventoryController@index');
 
-Route::post('/stocks/in', 'StockController@stockIn');
+Route::post('/inventory/stocks/in', 'InventoryController@inStocks');
 
-Route::get('/stocks/in/date/{date}/supplier/{supplier_id}', 'StockInController@index');
-
+Route::get('/inventory/stocks/in/{date}/{supplier}', 'InStockController@create');
     
 
 Route::controllers([
