@@ -8,6 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'AddDesignationIdOnEmployees' => $baseDir . '/database/migrations/2015_06_10_142914_add_designation_id_on_employees.php',
     'AddForeignKey' => $baseDir . '/database/migrations/2015_06_09_174653_add_foreign_key.php',
+    'AddPricesToBox' => $baseDir . '/database/migrations/2015_06_14_173143_add_prices_to_box.php',
     'AddProductCategoryId' => $baseDir . '/database/migrations/2015_06_10_175343_add_product_category_id.php',
     'AddProductIdOnBoxes' => $baseDir . '/database/migrations/2015_06_11_002703_add_product_id_on_boxes.php',
     'CreateBoxesTable' => $baseDir . '/database/migrations/2015_06_11_002216_create_boxes_table.php',
@@ -21,6 +22,7 @@ return array(
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
     'DesignationTableSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
+    'DropColumnsPrices' => $baseDir . '/database/migrations/2015_06_14_150040_drop_columns_prices.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',
     'File_Iterator_Factory' => $vendorDir . '/phpunit/php-file-iterator/src/Factory.php',

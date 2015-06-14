@@ -33,8 +33,8 @@ class ProductController extends Controller {
 	 */
 	public function create()
 	{
-        $suppliers = Supplier::all();
-        $product_categories = ProductCategory::all();
+        $suppliers = Supplier::orderBy('name')->get();
+        $product_categories = ProductCategory::orderBy('name')->get();
         
 		return view('product.create', compact('suppliers'))->with('product_categories', $product_categories);
 	}
@@ -63,8 +63,6 @@ class ProductController extends Controller {
         if($validator->passes()){
             $product->name = $input['name'];
             $product->supplier_id = $input['supplier'];
-            $product->price_1 = $input['price_1'];
-            $product->price_2 = $input['price_2'];
             $product->product_category_id = $input['product_category'];
 
             if($product->save()){
@@ -76,12 +74,14 @@ class ProductController extends Controller {
                 $box->product_id = $product_id;
                 $box->size = $v;
                 $box->no_of_packs = $input['packs'][$i];
+                $box->purchase_price = $input['purchase_price'][$i];
+                $box->selling_price = $input['purchase_price'][$i];
                 $box->save();
             }
             
             $saveSuccessful = true;
-            $suppliers = Supplier::all();
-            $product_categories = ProductCategory::all();
+            $suppliers = Supplier::orderBy('name')->get();
+            $product_categories = ProductCategory::orderBy('name')->get();
             return view('product.create', compact(['input','saveSuccessful','suppliers','product_categories']));
         }
         
@@ -137,17 +137,32 @@ class ProductController extends Controller {
             $product->name = $input['name'];
             $product->product_category_id = $input['product_category'];
             $product->supplier_id = $input['supplier'];
-            $product->price_1 = $input['price_1'];
-            $product->price_2 = $input['price_2'];
             $product->save();
             
             foreach($input['box'] as $i=>$v){
                 $box = Box::find($v);
                 $box->size = $input['size'][$i];
                 $box->no_of_packs = $input['packs'][$i];
+                $box->purchase_price = $input['purchase_price'][$i];
+                $box->selling_price = $input['selling_price'][$i];
                 $box->save();
             }
             
+            if(isset($input['asize'])){
+                foreach($input['asize'] as $i=>$v){
+                    $box = new Box;
+                    $box->product_id = $input['id'];
+                    $box->size = $v;
+                    $box->no_of_packs = $input['apacks'][$i];
+                    $box->purchase_price = $input['apurchase_price'][$i];
+                    $box->selling_price = $input['aselling_price'][$i];
+                    $box->save();
+                }
+            }
+            
+            if(isset($input['trash'])){
+                Box::destroy($input['trash']);
+            }
             return Redirect::action('ProductController@index');
         }
         

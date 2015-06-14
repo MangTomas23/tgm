@@ -2,6 +2,8 @@
 
 @section('products') active @endsection
 
+@section('title') TGM - Add Products @endsection
+
 @section('content')
 
 <div class="container">
@@ -33,7 +35,13 @@
             @else
                 <select name="product_category" class="form-control">
                     @foreach($product_categories as $product_category)
-                        <option value="{{ $product_category->id }}">{{ $product_category->name }}</option>
+                        <option value="{{ $product_category->id }}"
+                        @if(isset($input))        
+                            @if($product_category->id == $input['product_category'])
+                                selected
+                            @endif
+                        @endif
+                        >{{ $product_category->name }}</option>
                     @endforeach
                 </select>
             @endif
@@ -42,17 +50,15 @@
             {!! Form::label('supplier', 'Supplier') !!}
             <select name="supplier" class="form-control">
                 @foreach($suppliers as $supplier)
-                    <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                    <option value="{{ $supplier->id }}"
+                        @if(isset($input))        
+                            @if($supplier->id == $input['supplier'])
+                                selected
+                            @endif
+                        @endif
+                    >{{ $supplier->name }}</option>
                 @endforeach
             </select>
-        </div>
-        <div class="form-group col-sm-6">
-            {!! Form::label('price_1', 'Price 1') !!}
-            {!! Form::input('number','price_1', '0.00', ['class'=>'form-control','min'=>'0','step'=>'0.01', 'required'=>'true']) !!}
-        </div>
-        <div class="form-group col-sm-6">
-            {!! Form::label('price_2', 'Price 2') !!}
-            {!! Form::input('number','price_2', '0.00', ['class'=>'form-control','min'=>'0.00','step'=>'0.01']) !!}
         </div>
     
 <!-----------------------------------------Product Boxes---------------------------------->    
@@ -60,34 +66,56 @@
         <div class="page-header">
             <h4>Product Boxes</h4>
         </div>
-        <div class="form-group col-xs-5">
+        <div class="form-group col-sm-3">
             <label>Size</label>
         </div>
-        <div class="form-group col-xs-5">
+        <div class="form-group col-sm-2">
             <label>Number of Packs</label>
         </div>
-        <div class="form-group col-xs-2 text-right">
+        <div class="form-group col-sm-3">
+            <label>Purchase Price</label>
+        </div>
+        <div class="form-group col-sm-3">
+            <label>Selling Price</label>
+        </div>
+        <div class="form-group col-sm-1">
             <label>Remove</label>
         </div>
-             
+        
+        <span class="clearfix"></span>
         
         @if(!isset($input))
-            <div class="form-group col-xs-5">
+            <div class="form-group col-sm-3">
                 <input name="size[]" type="text" class="form-control" placeholder="e.g. 2 x 3" value="">
             </div>
-            <div class="form-group col-xs-5">
-                {!! Form::input('number','packs[]', '0', ['class'=>'form-control', 'min'=>'0']) !!}
+            <div class="form-group col-sm-2">
+                <input name="packs[]" type="number" min="0" value="0" class="form-control">
             </div>
-            <div class="form-group col-xs-2 text-right">
+            <div class="form-group col-sm-3">
+                <input name="purchase_price[]" type="number" min="0.00" value="0.00" step="0.01" class="form-control">
+            </div>
+            <div class="form-group col-sm-3">
+                <input name="selling_price[]" type="number" min="0.00" value="0.00" step="0.01" class="form-control">
+            </div>
+            <div class="form-group col-sm-1 text-right">
                 <a class="btn btn-default disabled"><span class="glyphicon glyphicon-minus-sign"></span></a>
             </div>
         @else
             @foreach($input['size'] as $i=>$v)
-                <div class="form-group col-xs-6">
-                    <input type="text" name="size[]" class="form-control" placeholder="e.g. 2 x 3" value="{{ $v }}">
+                <div class="form-group col-sm-3">
+                    <input name="size[]" type="text" class="form-control" placeholder="e.g. 2 x 3" value="{{ $v }}">
                 </div>
-                <div class="form-group col-xs-6">
-                    <input type="number" name="packs[]" class="form-control" value="{{ $input['packs'][$i] }}">
+                <div class="form-group col-sm-2">
+                    <input name="packs[]" type="number" min="0" value="{{ $input['packs'][$i] }}" class="form-control">
+                </div>
+                <div class="form-group col-sm-3">
+                    <input name="purchase_price[]" type="number" min="0.00" value="{{ $input['purchase_price'][$i] }}" step="0.01" class="form-control">
+                </div>
+                <div class="form-group col-sm-3">
+                    <input name="selling_price[]" type="number" min="0.00" value="{{ $input['selling_price'][$i] }}" step="0.01" class="form-control">
+                </div>
+                <div class="form-group col-sm-1 text-right">
+                    <a class="btn btn-default disabled"><span class="glyphicon glyphicon-minus-sign"></span></a>
                 </div>
             @endforeach
         @endif
@@ -118,13 +146,19 @@
         $('#btnAddMore').click(function(){
             $('#box-container').append(
                 '<div>'+
-                    '<div class="form-group col-xs-5">' +
-                        '<input name="size[]" type="text" class="form-control" placeholder="e.g. 2 x 3">' +
+                    '<div class="form-group col-sm-3">' +
+                        '<input name="size[]" type="text" class="form-control" placeholder="e.g. 2 x 3" value="">' +
                     '</div>' +
-                    '<div class="form-group col-xs-5">' +
-                        '<input name="packs[]" type="number" min="0" class="form-control" value="0">' + 
+                    '<div class="form-group col-sm-2">' +
+                        '<input name="packs[]" type="number" min="0" value="0" class="form-control">' +
                     '</div>' +
-                    '<div class="form-group col-xs-2 text-right">' +
+                    '<div class="form-group col-sm-3">' +
+                        '<input name="purchase_price[]" type="number" min="0.00" value="0.00" step="0.01" class="form-control">' +
+                    '</div>' +
+                    '<div class="form-group col-sm-3">' +
+                        '<input name="selling_price[]" type="number" min="0.00" value="0.00" step="0.01" class="form-control">'+
+                    '</div>' +
+                    '<div class="form-group col-sm-1 text-right">' +
                         '<a class="btn btn-default btn-remove"><span class="glyphicon glyphicon-minus-sign"></span></a>' +
                     '</div>' +
                 '</div>'
