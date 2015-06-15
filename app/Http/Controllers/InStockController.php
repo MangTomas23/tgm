@@ -30,7 +30,7 @@ class InStockController extends Controller {
         
         $suppliers = Supplier::all();
         $products = Product::where('supplier_id','=',$supplier->id)->orderBy('name')->get();
-		return view('instock.create', compact(['suppliers','products']));
+		return view('instock.create', compact(['suppliers','products','date']));
 	}
 
 	/**
