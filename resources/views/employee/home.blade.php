@@ -34,6 +34,7 @@
                         <td>{{ $employee->designation->name or 'null' }}</td>
                         <td>{{ $employee->contact }}</td>
                         <td>{{ $employee->address }}</td>
+                        <td><a href="{{ action('EmployeeController@show', $employee->id) }}" class="btn btn-info btn-xs" title="Edit"><span class="glyphicon glyphicon-edit"></span></a></td>
                     </tr>
                 @endforeach
             @endif
