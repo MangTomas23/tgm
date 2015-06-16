@@ -8,8 +8,10 @@ use App\Product;
 use App\Supplier;
 use App\ProductCategory;
 use App\Box;
+use App\InStock;
 use Redirect;
 use Input;
+use DB;
 use Validator;
 
 
@@ -22,7 +24,18 @@ class ProductController extends Controller {
 	 */
 	public function index()
 	{
-        $products = Product::orderBy('name')->get();
+//        $products = InStock::select(DB::raw('products.*, sum(in_stocks.quantity) as stock'))
+//                    ->rightJoin('boxes','in_stocks.box_id','=','boxes.id')
+//                    ->join('products','boxes.product_id','=','products.id')
+//                    ->groupBy('products.id')
+//                    ->get();
+        
+        $products = Product::join('boxes','products.id','=','boxes.product_id')
+                    ->leftJoin('in_stocks', 'boxes.id','=','in_stocks.box_id')
+                    ->select(DB::raw('products.*, sum(in_stocks.quantity) as stock'))
+                    ->groupBy('products.id')
+                    ->orderBy('name')
+                    ->get();
 		return view('product.home', compact('products'));
 	}
 
@@ -193,8 +206,12 @@ class ProductController extends Controller {
     }
     
     public function searchResults($query){
-        $products = Product::select('products.*','products.name as product_name')->join('suppliers','products.supplier_id','=','suppliers.id')
+        $products = Product::join('suppliers','products.supplier_id','=','suppliers.id')
                     ->join('product_categories','products.product_category_id','=','product_categories.id')
+                    ->join('boxes','products.id','=','boxes.product_id')
+                    ->leftJoin('in_stocks', 'boxes.id','=','in_stocks.box_id')
+                    ->select(DB::raw('products.*,products.name as pname, sum(in_stocks.quantity) as stock, suppliers.name'))
+                    ->groupBy('products.id')
                     ->whereRaw('
                         products.name like "%'.$query.'%" or
                         suppliers.name like "%'.$query.'%" or 
@@ -205,4 +222,13 @@ class ProductController extends Controller {
         return view('product.search', compact(['products','query']));
     }
 
+    public function test(){
+        $products = InStock::select(DB::raw('products.*, sum(in_stocks.quantity) as stock'))
+                    ->rightJoin('boxes','in_stocks.box_id','=','boxes.id')
+                    ->join('products','boxes.product_id','=','products.id')
+                    ->groupBy('products.id')
+                    ->get();
+        
+        return $products;
+    }
 }

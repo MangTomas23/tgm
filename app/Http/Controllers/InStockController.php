@@ -48,6 +48,9 @@ class InStockController extends Controller {
         $input = Input::all();
         
         foreach($input['boxes'] as $i=>$box){
+            if($input['quantity'][$i]==0){
+                continue;
+            }
             $instock = new InStock;
 
             $instock->date = $input['date'];

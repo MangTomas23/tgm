@@ -116,6 +116,8 @@ Route::get('/price-list', 'PriceListController@index');
 
 Route::post('/price-list/update', 'PriceListController@update');
 
+Route::get('/test', 'ProductController@test');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

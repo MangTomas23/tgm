@@ -40,9 +40,10 @@
         <tbody>
             @foreach($products as $product)
                 <tr>
-                    <td>{{ $product->product_name }}</td>
+                    <td>{{ $product->pname }}</td>
                     <td>{{ $product->product_category->name or null }}</td>
                     <td>{{ $product->supplier->name or null }}</td>
+                    <td>{{ $product->stock or 0 }}</td>
                 </tr>
             @endforeach
         </tbody>
