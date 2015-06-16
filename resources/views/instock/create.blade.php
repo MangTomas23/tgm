@@ -47,7 +47,7 @@
                 @foreach($products as $product)
                     <tr>
                         <td>
-                            <a href="{{ action('ProductController@show', $product->id) }}">{{ $product->name }}</a>
+                            <a href="{{ action('ProductController@show', $product->id) }}" tabindex="-1">{{ $product->name }}</a>
                             {!! Form::hidden('products[]',$product->id) !!}
                         </td>
                         <td>
