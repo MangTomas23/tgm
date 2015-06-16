@@ -30,6 +30,7 @@
                 <th>Product Name</th>
                 <th>Category</th>
                 <th>Supplier</th>
+                <th>Stock</th>
             </tr>
         </thead>
         <tbody>
@@ -43,6 +44,7 @@
                         <td><a href="{{ action('ProductController@show', $product->id ) }}">{{ $product->name }}</a></td>
                         <td>{{ $product->product_category->name or null }}</td>
                         <td>{{ $product->supplier->name or null }}</td>
+                        <td>0</td>
                     </tr>
                 @endforeach
             @endif

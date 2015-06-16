@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 use App\Supplier;
 use App\Product;
+use App\InStock;
+use App\Box;
+
+use Input;
+use Redirect;
 
 class InStockController extends Controller {
 
@@ -25,12 +30,12 @@ class InStockController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create($date, $supplier)
+	public function create($date, $s)
 	{
         
         $suppliers = Supplier::all();
-        $products = Product::where('supplier_id','=',$supplier->id)->orderBy('name')->get();
-		return view('instock.create', compact(['suppliers','products','date']));
+        $products = Product::where('supplier_id','=',$s->id)->orderBy('name')->get();
+		return view('instock.create', compact(['s','suppliers','products','date']));
 	}
 
 	/**
@@ -40,7 +45,27 @@ class InStockController extends Controller {
 	 */
 	public function store()
 	{
-		//
+        $input = Input::all();
+        
+        foreach($input['boxes'] as $i=>$box){
+            $instock = new InStock;
+
+            $instock->date = $input['date'];
+            $instock->supplier_id = $input['supplier'];
+            $instock->box_id = $box;
+            $b = Box::find($box);
+            $instock->product_id = $b->product_id;
+            $instock->quantity = $input['quantity'][$i];
+            $instock->amount = $input['quantity'][$i] * $b->purchase_price;
+            
+            $instock->save();
+        }
+        
+        return Redirect::action('InventoryController@index');
+        
+        
+        
+//        return Redirect::action('InventoryController@index');
 	}
 
 	/**

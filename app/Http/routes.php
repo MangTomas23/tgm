@@ -108,6 +108,8 @@ Route::get('/inventory', 'InventoryController@index');
 Route::post('/inventory/stocks/in', 'InventoryController@inStocks');
 
 Route::get('/inventory/stocks/in/{date}/{supplier}', 'InStockController@create');
+
+Route::post('/inventory/stocks/in/create', 'InStockController@store');
     
 
 Route::controllers([
