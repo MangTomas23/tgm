@@ -75,7 +75,8 @@ class ProductController extends Controller {
                 $box->size = $v;
                 $box->no_of_packs = $input['packs'][$i];
                 $box->purchase_price = $input['purchase_price'][$i];
-                $box->selling_price = $input['purchase_price'][$i];
+                $box->selling_price_1 = $input['selling_price_1'][$i];
+                $box->selling_price_2 = $input['selling_price_2'][$i];
                 $box->save();
             }
             
@@ -144,7 +145,8 @@ class ProductController extends Controller {
                 $box->size = $input['size'][$i];
                 $box->no_of_packs = $input['packs'][$i];
                 $box->purchase_price = $input['purchase_price'][$i];
-                $box->selling_price = $input['selling_price'][$i];
+                $box->selling_price_1 = $input['selling_price_1'][$i];
+                $box->selling_price_2 = $input['selling_price_2'][$i];
                 $box->save();
             }
             
@@ -155,7 +157,8 @@ class ProductController extends Controller {
                     $box->size = $v;
                     $box->no_of_packs = $input['apacks'][$i];
                     $box->purchase_price = $input['apurchase_price'][$i];
-                    $box->selling_price = $input['aselling_price'][$i];
+                    $box->selling_price_1 = $input['aselling_price_1'][$i];
+                    $box->selling_price_2 = $input['aselling_price_2'][$i];
                     $box->save();
                 }
             }

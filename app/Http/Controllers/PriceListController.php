@@ -6,82 +6,33 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Product;
+use App\Box;
+
+use Input;
+use Redirect;
 
 class PriceListController extends Controller {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
 	public function index()
 	{
         $products = Product::orderBy('name')->get();
 		return view('pricelist.home', compact('products'));
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
+	
+	public function update()
 	{
-		//
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
+        $input = Input::all();
+        
+        foreach($input['id'] as $i=>$id){
+            $box = Box::find($id);
+            $box->purchase_price = $input['purchase_price'][$i];
+            $box->selling_price_1 = $input['selling_price_1'][$i];
+            $box->selling_price_2 = $input['selling_price_2'][$i];
+            $box->save();
+        }
+        
+        return Redirect::action('PriceListController@index');
 	}
 
 }

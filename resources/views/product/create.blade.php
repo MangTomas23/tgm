@@ -12,12 +12,12 @@
     </div>
     
     @if(isset($saveSuccessful))
-        <div class="alert alert-success col-sm-8 col-sm-offset-2">
+        <div class="alert alert-success col-sm-10 col-sm-offset-1">
             <strong>Success!</strong> {{ $input['name'] }} Added. Back to <a href="{{ action('ProductController@index') }}" class="alert-link">Product List</a>.
         </div>
     @endif
     
-    {!! Form::open(['url'=>'/product/create', 'class'=>'form col-sm-8 col-sm-offset-2']) !!}
+    {!! Form::open(['url'=>'/product/create', 'class'=>'form col-sm-10 col-sm-offset-1']) !!}
         <div class="page-header">
             <h4>Product Info</h4>
         </div>
@@ -25,7 +25,7 @@
             {!! Form::label('name', 'Product Name') !!}
             {!! Form::text('name','', ['class'=>'form-control', 'required'=>'true', 'autofocus'=>'true']) !!}
         </div>
-        <div class="form-group col-sm-12">
+        <div class="form-group col-sm-6">
             <label for="product_category">
                 Category
                 <a href="{{ action('ProductCategoryController@index') }}" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-cog"></span></a>
@@ -46,7 +46,7 @@
                 </select>
             @endif
         </div>
-        <div class="form-group col-sm-12">
+        <div class="form-group col-sm-6">
             {!! Form::label('supplier', 'Supplier') !!}
             <select name="supplier" class="form-control">
                 @foreach($suppliers as $supplier)
@@ -60,7 +60,7 @@
                 @endforeach
             </select>
         </div>
-    
+        <span class="clearfix"></span>
 <!-----------------------------------------Product Boxes---------------------------------->    
     
         <div class="page-header">
@@ -72,11 +72,14 @@
         <div class="form-group col-sm-2">
             <label>Number of Packs</label>
         </div>
-        <div class="form-group col-sm-3">
+        <div class="form-group col-sm-2">
             <label>Purchase Price</label>
         </div>
-        <div class="form-group col-sm-3">
-            <label>Selling Price</label>
+        <div class="form-group col-sm-2">
+            <label>Selling Price 1</label>
+        </div>
+        <div class="form-group col-sm-2">
+            <label>Selling Price 2</label>
         </div>
         <div class="form-group col-sm-1">
             <label>Remove</label>
@@ -86,16 +89,19 @@
         
         @if(!isset($input))
             <div class="form-group col-sm-3">
-                <input name="size[]" type="text" class="form-control" placeholder="e.g. 2 x 3" value="">
+                <input name="size[]" type="text" class="form-control size" placeholder="e.g. 2 x 3" value="">
             </div>
             <div class="form-group col-sm-2">
-                <input name="packs[]" type="number" min="0" value="0" class="form-control">
+                <input name="packs[]" type="number" min="0" value="0" class="form-control pack">
             </div>
-            <div class="form-group col-sm-3">
+            <div class="form-group col-sm-2">
                 <input name="purchase_price[]" type="number" min="0.00" value="0.00" step="0.01" class="form-control">
             </div>
-            <div class="form-group col-sm-3">
-                <input name="selling_price[]" type="number" min="0.00" value="0.00" step="0.01" class="form-control">
+            <div class="form-group col-sm-2">
+                <input name="selling_price_1[]" type="number" min="0.00" value="0.00" step="0.01" class="form-control">
+            </div>
+            <div class="form-group col-sm-2">
+                <input name="selling_price_2[]" type="number" min="0.00" value="0.00" step="0.01" class="form-control">
             </div>
             <div class="form-group col-sm-1 text-right">
                 <a class="btn btn-default disabled"><span class="glyphicon glyphicon-minus-sign"></span></a>
@@ -108,11 +114,14 @@
                 <div class="form-group col-sm-2">
                     <input name="packs[]" type="number" min="0" value="{{ $input['packs'][$i] }}" class="form-control">
                 </div>
-                <div class="form-group col-sm-3">
+                <div class="form-group col-sm-2">
                     <input name="purchase_price[]" type="number" min="0.00" value="{{ $input['purchase_price'][$i] }}" step="0.01" class="form-control">
                 </div>
-                <div class="form-group col-sm-3">
-                    <input name="selling_price[]" type="number" min="0.00" value="{{ $input['selling_price'][$i] }}" step="0.01" class="form-control">
+                <div class="form-group col-sm-2">
+                    <input name="selling_price_1[]" type="number" min="0.00" value="{{ $input['selling_price_1'][$i] }}" step="0.01" class="form-control">
+                </div>
+                <div class="form-group col-sm-2">
+                    <input name="selling_price_2[]" type="number" min="0.00" value="{{ $input['selling_price_2'][$i] }}" step="0.01" class="form-control">
                 </div>
                 <div class="form-group col-sm-1 text-right">
                     <a class="btn btn-default disabled"><span class="glyphicon glyphicon-minus-sign"></span></a>
@@ -152,11 +161,14 @@
                     '<div class="form-group col-sm-2">' +
                         '<input name="packs[]" type="number" min="0" value="0" class="form-control">' +
                     '</div>' +
-                    '<div class="form-group col-sm-3">' +
+                    '<div class="form-group col-sm-2">' +
                         '<input name="purchase_price[]" type="number" min="0.00" value="0.00" step="0.01" class="form-control">' +
                     '</div>' +
-                    '<div class="form-group col-sm-3">' +
-                        '<input name="selling_price[]" type="number" min="0.00" value="0.00" step="0.01" class="form-control">'+
+                    '<div class="form-group col-sm-2">' +
+                        '<input name="selling_price_1[]" type="number" min="0.00" value="0.00" step="0.01" class="form-control">'+
+                    '</div>' +
+                    '<div class="form-group col-sm-2">' +
+                        '<input name="selling_price_2[]" type="number" min="0.00" value="0.00" step="0.01" class="form-control">'+
                     '</div>' +
                     '<div class="form-group col-sm-1 text-right">' +
                         '<a class="btn btn-default btn-remove"><span class="glyphicon glyphicon-minus-sign"></span></a>' +
