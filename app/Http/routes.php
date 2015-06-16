@@ -112,6 +112,8 @@ Route::get('/inventory/stocks/in/{date}/{supplier}', 'InStockController@create')
 Route::post('/inventory/stocks/in/create', 'InStockController@store');
     
 
+Route::get('/price-list', 'PriceListController@index');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

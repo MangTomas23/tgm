@@ -39,6 +39,7 @@
 					<li class="@yield('products')"><a href="{{ action('ProductController@index') }}">Products</a></li>
                     <li class="@yield('suppliers')"><a href="{{ action('SupplierController@index') }}">Suppliers</a></li>
                     <li class="@yield('employees')"><a href="{{ action('EmployeeController@index') }}">Employees</a></li>
+                    <li class="@yield('pricelist')"><a href="{{ action('PriceListController@index') }}">Price List</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
