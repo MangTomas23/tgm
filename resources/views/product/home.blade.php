@@ -30,6 +30,7 @@
                 <th>Product Name</th>
                 <th>Category</th>
                 <th>Supplier</th>
+                <th></th>
                 <th>Stock</th>
             </tr>
         </thead>
@@ -44,7 +45,16 @@
                         <td><a href="{{ action('ProductController@show', $product->id ) }}">{{ $product->name }}</a></td>
                         <td>{{ $product->product_category->name or null }}</td>
                         <td>{{ $product->supplier->name or null }}</td>
-                        <td>{{ $product->stock or 0}}</td>
+                        <td>
+                            @foreach($product->boxes as $box)
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        <label>{{ $box->size }}</label>
+                                        <input type="text" value="{{ App\Box::stockCount($box->id) }}" class="form-control">
+                                    </div>
+                                </div>
+                            @endforeach
+                        </td>
                     </tr>
                 @endforeach
             @endif

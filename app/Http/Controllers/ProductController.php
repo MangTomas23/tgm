@@ -24,18 +24,7 @@ class ProductController extends Controller {
 	 */
 	public function index()
 	{
-//        $products = InStock::select(DB::raw('products.*, sum(in_stocks.quantity) as stock'))
-//                    ->rightJoin('boxes','in_stocks.box_id','=','boxes.id')
-//                    ->join('products','boxes.product_id','=','products.id')
-//                    ->groupBy('products.id')
-//                    ->get();
-        
-        $products = Product::join('boxes','products.id','=','boxes.product_id')
-                    ->leftJoin('in_stocks', 'boxes.id','=','in_stocks.box_id')
-                    ->select(DB::raw('products.*, sum(in_stocks.quantity) as stock'))
-                    ->groupBy('products.id')
-                    ->orderBy('name')
-                    ->get();
+        $products = Product::all();
 		return view('product.home', compact('products'));
 	}
 
@@ -223,12 +212,14 @@ class ProductController extends Controller {
     }
 
     public function test(){
-        $products = InStock::select(DB::raw('products.*, sum(in_stocks.quantity) as stock'))
-                    ->rightJoin('boxes','in_stocks.box_id','=','boxes.id')
-                    ->join('products','boxes.product_id','=','products.id')
-                    ->groupBy('products.id')
-                    ->get();
-        
-        return $products;
+//        $products = Product::all();
+//        foreach($products as $product){
+//            echo $product->name;
+//            foreach($product->boxes as $box){
+//                echo Box::stockCount($box->id);
+//            }
+//            echo '<br>';
+//        }
+        return Box::stockCount(46);
     }
 }
