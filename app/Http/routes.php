@@ -41,6 +41,8 @@ Route::post('/products/search', 'ProductController@search');
 
 Route::get('/products/search/{query}', 'ProductController@searchResults');
 
+Route::get('/product/create/duplicate', 'ProductController@duplicate');
+
 
 
 
