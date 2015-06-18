@@ -30,7 +30,7 @@
                 <th>Product Name</th>
                 <th>Category</th>
                 <th>Supplier</th>
-                <th></th>
+                <th>Box</th>
                 <th>Stock</th>
             </tr>
         </thead>
@@ -41,18 +41,28 @@
                 </tr>
             @else
                 @foreach($products as $product)
-                    <tr>
+                    <tr
+                        @if($outOfStock = false) @endif
+                            @foreach($product->boxes as $box)
+                                @if(App\InStock::count($box->id)=='Out of Stock')
+                                    @if($outOfStock = true) @endif
+                                @endif
+                            @endforeach
+                        @if($outOfStock)
+                            class="danger"
+                        @endif
+                    >
                         <td><a href="{{ action('ProductController@show', $product->id ) }}">{{ $product->name }}</a></td>
                         <td>{{ $product->product_category->name or null }}</td>
                         <td>{{ $product->supplier->name or null }}</td>
                         <td>
                             @foreach($product->boxes as $box)
-                                <div class="form-inline">
-                                    <div class="form-group">
-                                        <label>{{ $box->size }}</label>
-                                        <input type="text" value="{{ App\Box::stockCount($box->id) }}" class="form-control">
-                                    </div>
-                                </div>
+                                <p>{{ $box->size }}</p>
+                            @endforeach
+                        </td>
+                        <td>
+                            @foreach($product->boxes as $box)
+                                <p>{{ App\InStock::count($box->id) }}
                             @endforeach
                         </td>
                     </tr>
