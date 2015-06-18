@@ -28,7 +28,7 @@
         <div class="form-group col-sm-6">
             <label for="product_category">
                 Category
-                <a href="{{ action('ProductCategoryController@index') }}" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-cog"></span></a>
+                <a href="{{ action('ProductCategoryController@index') }}" class="btn btn-xs btn-default" tabindex="-1"><span class="glyphicon glyphicon-cog"></span></a>
             </label>
             @if($product_categories->isEmpty())
                 <p class="form-control-static">Please add category first.</p>
