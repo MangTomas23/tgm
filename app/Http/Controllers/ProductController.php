@@ -24,7 +24,7 @@ class ProductController extends Controller {
 	 */
 	public function index()
 	{
-        $products = Product::all();
+        $products = Product::paginate(50);
 		return view('product.home', compact('products'));
 	}
 
