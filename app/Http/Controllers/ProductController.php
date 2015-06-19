@@ -105,7 +105,11 @@ class ProductController extends Controller {
 	{
         $product_categories = ProductCategory::all();
         $suppliers = Supplier::all();
-		return view('product.show', compact('product'))
+        $id = $product->id;
+        $previous = Product::where('id', '<', $id)->max('id');
+        $next = Product::where('id', '>', $id)->min('id');
+        
+		return view('product.show', compact(['product','next','previous']))
             ->with('product_categories', $product_categories)
             ->with('suppliers', $suppliers);
 	}

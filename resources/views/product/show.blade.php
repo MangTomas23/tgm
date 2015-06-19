@@ -7,7 +7,16 @@
 @section('content');
 
 <div class="container">
-
+    <a href="{{ action('ProductController@show',$previous) }}" class="btn btn-default
+        @if($previous==null)
+            disabled                                        
+        @endif
+    "><span class="glyphicon glyphicon-chevron-left"></span></a>
+    <a href="{{ action('ProductController@show',$next) }}" class="btn btn-default 
+        @if($next==null)
+            disabled                                        
+        @endif
+    "><span class="glyphicon glyphicon-chevron-right"></span></a>
     <div class="page-header">
         <h1>
             Update Product
@@ -119,6 +128,8 @@
         </div>
         
     {!! Form::close() !!}
+    
+    
 </div>
 
 <script>
