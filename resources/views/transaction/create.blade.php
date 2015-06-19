@@ -50,7 +50,7 @@
             <thead>
                 <tr>
                     <th>Product</th>
-                    <th></th>
+                    <th>Quantity</th>
                     <th class="text-right">Amount</th>
                 </tr>
             </thead>
@@ -58,13 +58,18 @@
                 <tr>
                     <td>Jelly Cup @ 40 x 24</td>
                     <td>5 Box, 8 Packs</td>
-                    <td class="text-right">P 24,000.00</td>
+                    <td class="text-right text-nowrap">P 24,000.00</td>
                 </tr>
             </tbody>
         </table>
+        <div class="page-header">&nbsp;</div>
         <div class="text-right col-xs-12">
-        <p><strong>Total:</strong>P 24,000.00</p>
+            <p><strong>Total:</strong>P 24,000.00</p>
         </div>
+    </div>
+    <div class="page-header">&nbsp;</div>
+    <div class="col-sm-12 text-right">
+        <a id="savePrint" href="#" class="btn btn-xs btn-success">Save and Print</a>
     </div>
     
 </div>
@@ -90,6 +95,10 @@
                     )
                 })
             })
+        })
+        
+        $('#savePrint').click(function(){
+            $('#invoice').print();
         })
     })
 </script>

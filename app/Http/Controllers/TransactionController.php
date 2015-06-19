@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Supplier;
+use App\ProductCategory;
+use App\Box;
+use App\InStock;
 use Input;
 
 
@@ -87,13 +90,18 @@ class TransactionController extends Controller {
     
     public function query(){
         $input = Input::all();
-        $products = array();
-        $products['products'] = Product::where('name','like','%'.$input['query'].'%')->take(5)->get();
+        $response = array();
+        $response['product'] = Product::where('name','like','%'.$input['query'].'%')->first();
+        $response['supplier'] = Supplier::find($response['product']->supplier_id);
+        $response['category'] = ProductCategory::find($response['product']->product_category_id);
+        $response['boxes'] = Box::where('product_id',$response['product']->id)->get();
+        $response['stocks'] = array();
         
-        $products['supplier'] = Supplier::all();
+        foreach($response['boxes'] as $box){
+            array_push($response['stocks'], InStock::count($box->id));
+        }
         
-        $suppliers = Supplier::all();
-        return $products;
+        return $response;
     }
 
 }
