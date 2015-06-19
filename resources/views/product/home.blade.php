@@ -60,12 +60,12 @@
                         <td>{{ $product->supplier->name or null }}</td>
                         <td>
                             @foreach($product->boxes as $box)
-                                <p>{{ $box->size }}</p>
+                                <p class="text-nowrap">{{ $box->size }}</p>
                             @endforeach
                         </td>
                         <td>
                             @foreach($product->boxes as $box)
-                                <p>{{ App\InStock::count($box->id) }}
+                                <p class="text-nowrap">{{ App\InStock::count($box->id) }}
                             @endforeach
                         </td>
                     </tr>
