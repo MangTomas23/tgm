@@ -32,18 +32,43 @@
     <table class="table table-default">
         <thead>
             <tr>
+                <th>#</th>
                 <th>Product Name</th>
                 <th>Category</th>
                 <th>Supplier</th>
+                <th>Box</th>
+                <th>Stock</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($products as $product)
-                <tr>
-                    <td>{{ $product->pname }}</td>
+            @foreach($products as $i=>$product)
+                <tr
+                    <?php $isOutOfStock = false ?>    
+                    
+                    @foreach($product->boxes as $box)
+                        @if(App\InStock::count($box->id)=='Out of Stock')
+                            <?php $isOutOfStock = true ?>
+                        @endif
+                    @endforeach
+                    
+                    @if($isOutOfStock)
+                        class="danger"
+                    @endif
+                >
+                    <td>{{ $i+1 }}</td>
+                    <td>{{ $product->name }}</td>
                     <td>{{ $product->product_category->name or null }}</td>
                     <td>{{ $product->supplier->name or null }}</td>
-                    <td>{{ $product->stock or 0 }}</td>
+                    <td>
+                        @foreach($product->boxes as $box)
+                            <p>{{ $box->size }}</p>
+                        @endforeach
+                    </td>
+                    <td>
+                        @foreach($product->boxes as $box)
+                            <p>{{ App\InStock::count($box->id) }}</p>
+                        @endforeach
+                    </td>
                 </tr>
             @endforeach
         </tbody>

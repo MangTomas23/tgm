@@ -203,34 +203,11 @@ class ProductController extends Controller {
     }
     
     public function searchResults($query){
-        $products = Product::join('suppliers','products.supplier_id','=','suppliers.id')
-                    ->join('product_categories','products.product_category_id','=','product_categories.id')
-                    ->join('boxes','products.id','=','boxes.product_id')
-                    ->leftJoin('in_stocks', 'boxes.id','=','in_stocks.box_id')
-                    ->select(DB::raw('products.*,products.name as pname, sum(in_stocks.quantity) as stock, suppliers.name'))
-                    ->groupBy('products.id')
-                    ->whereRaw('
-                        products.name like "%'.$query.'%" or
-                        suppliers.name like "%'.$query.'%" or 
-                        product_categories.name like "%'.$query.'%"
-                    ')
-                    ->get();
+        $products = Product::where('name','like','%'.$query.'%')->orderBy('name')->get();
         
         return view('product.search', compact(['products','query']));
     }
 
-    public function test(){
-//        $products = Product::all();
-//        foreach($products as $product){
-//            echo $product->name;
-//            foreach($product->boxes as $box){
-//                echo Box::stockCount($box->id);
-//            }
-//            echo '<br>';
-//        }
-        return Box::stockCount(46);
-    }
-    
     public function duplicate(){
         return view('product.duplicate');   
     }
