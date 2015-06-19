@@ -33,10 +33,10 @@
         {!! Form::close() !!}
         
         <div class="page-header">
-            <h3>Delivered Products</h3>
+            <h3>Add Transaction</h3>
         </div>
         
-        {!! Form::open(['url'=>'/inventory/stocks/delivered']) !!}
+        {!! Form::open(['url'=>'/transaction/add']) !!}
             <div class="form-group col-sm-12">
                 <label>Date</label>
                 <input name="date" type="date" class="form-control" required>

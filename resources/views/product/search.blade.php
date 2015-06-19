@@ -56,7 +56,7 @@
                     @endif
                 >
                     <td>{{ $i+1 }}</td>
-                    <td>{{ $product->name }}</td>
+                    <td><a href="{{ action('ProductController@show',$product->id) }}">{{ $product->name }}</a></td>
                     <td>{{ $product->product_category->name or null }}</td>
                     <td>{{ $product->supplier->name or null }}</td>
                     <td>
