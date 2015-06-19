@@ -89,7 +89,7 @@
         
         @if(!isset($input))
             <div class="form-group col-sm-3">
-                <input name="size[]" type="text" class="form-control size" placeholder="e.g. 2 x 3" value="">
+                <input name="size[]" type="text" class="form-control size" placeholder="e.g. 2 x 3" value="" required>
             </div>
             <div class="form-group col-sm-2">
                 <input name="packs[]" type="number" min="0" value="0" class="form-control pack">
@@ -156,7 +156,7 @@
             $('#box-container').append(
                 '<div>'+
                     '<div class="form-group col-sm-3">' +
-                        '<input name="size[]" type="text" class="form-control" placeholder="e.g. 2 x 3" value="">' +
+                        '<input name="size[]" type="text" class="form-control" placeholder="e.g. 2 x 3" value="" required>' +
                     '</div>' +
                     '<div class="form-group col-sm-2">' +
                         '<input name="packs[]" type="number" min="0" value="0" class="form-control">' +
