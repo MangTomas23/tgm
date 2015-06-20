@@ -14,9 +14,10 @@
     </div>
     <div class="form-group">
         <label>Product</label>
-        <input id="search-productmm" type="text" class="form-control">
+        <input id="search-product" type="text" class="form-control">
     </div>
     <div id="suggestion-container">
+<!--
         <div class="alert alert-info">
             <h4>Jelly Cup</h4>
             <div class="form-group col-sm-2 col-xs-4">
@@ -37,6 +38,7 @@
             </div>
             <span class="clearfix"></span>
         </div>
+-->
     </div>
     
     <div id="invoice">
@@ -82,18 +84,34 @@
             $.get('{{ action('TransactionController@query') }}',{
                 query: $query     
             }, function(data){
-                $('#suggestion-container').empty()
-                $.each(data['products'], function($i,$product){
-                    console.log($product)
-                    $('#suggestion-container').append(
-                        '<div class="alert alert-info">' +
-                        '<p>' + 
-                            $product['name'] + 
-                            '<a href="#" class="btn btn-info btn-xs pull-right">Add</a>' +
-                        '</p>' +
-                        '</div>'
-                    )
+                
+                $str = '<div class="alert alert-info alert-dismissible">' +
+                            '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+                            '<h4>' + data['product']['name'] + '</h4>';
+                
+                $.each(data['boxes'], function($i,$box){
+                    $str +=  '<div class="form-group col-sm-2 col-xs-4">' +
+                                '<label>&nbsp</label>' +
+                                '<p class="form-control-static"><strong>'+ $box['size'] +'</strong></p>' +
+                            '</div>' +
+                            '<div class="form-group col-sm-5 col-xs-4">' +
+                                '<label>Box</label>' +
+                                '<input type="number" class="form-control" min="0" value="0">' +
+                            '</div>' +
+                            '<div class="form-group col-sm-5 col-xs-4">' +
+                                '<label>Pack</label>' +
+                                '<input type="number" class="form-control" min="0" value="0">' +
+                            '</div>';
                 })
+                
+                $str += '<div class="text-right col-xs-12">' +
+                            '<a href="#" class="btn btn-info">Add</a>' +
+                        '</div>' +
+                        '<span class="clearfix"></span>' +
+                    '</div>';
+                
+                
+                $('#suggestion-container').empty().append($str)
             })
         })
         
