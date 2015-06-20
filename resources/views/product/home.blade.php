@@ -12,6 +12,7 @@
         <h1>
             Products
             <a href="{{ action('ProductController@create') }}" class="btn btn-info pull-right">Add</a>
+            <a id="print" href="#" class="btn btn-default" title="Print"><span class="glyphicon glyphicon-print"></span></a>
         </h1>
     </div>
     
@@ -24,7 +25,7 @@
     </div>
     {!! Form::close() !!}
     
-    <table class="table table-default" style="margin-top: 20px">
+    <table id="print-container" class="table table-default" style="margin-top: 20px">
         <thead>
             <tr>
                 <th>#</th>
@@ -75,10 +76,19 @@
     </table>
     
     {!! $products->render() !!}
+    
     <div class="page-header"></div>
     <p class="text-right">
         <strong>Total Products: </strong> <span class="badge">{{ $products->total() }}</span> 
     </p>
     
 </div>
+<script>
+    $(document).ready(function(){
+        $('#print').click(function(){
+            $('#print-container').print()
+        })
+    })
+</script>
+
 @endsection
