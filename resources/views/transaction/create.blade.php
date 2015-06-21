@@ -66,7 +66,7 @@
             
         </div>
         
-        <table class="table table-default" style="min-height: 350px">
+        <table class="table table-default" style="min-height: 280px">
             <thead>
                 <tr>
                     <th>Product</th>
@@ -91,7 +91,6 @@
     <div class="col-sm-12 text-right">
         <a id="savePrint" href="#" class="btn btn-xs btn-success">Save and Print</a>
     </div>
-    
 </div>
 
 <script>
@@ -114,26 +113,26 @@
                                     '<p class="form-control-static"><strong>' + $box['size'] + '</strong></p>' +
                                 '</div>' +
                                 '<div class="form-group col-sm-2 col-xs-4">' +
-                                    '<label>Box</label>' +
+                                    '<label>' + ($i!=0 ? '&nbsp;':'Box') + '</label>' +
                                     '<input type="number" class="form-control" min="0" value="0">' +
                                 '</div>' +
                                 '<div class="form-group col-sm-2 col-xs-4">' +
-                                    '<label>Pack</label>' +
+                                    '<label>' + ($i!=0 ? '&nbsp;':'Packs') + '</label>' +
                                     '<input type="number" class="form-control" min="0" value="0">' +
                                 '</div>' +
                                 '<div class="form-group col-sm-2">' +
-                                    '<label>Price: </label>' +
+                                    '<label>' + ($i!=0 ? '&nbsp;':'Price') + '</label>' +
                                     '<select class="form-control select-price" data-packs="' + $box['no_of_packs'] + '">' +
                                         '<option value="1" data-price="' + $box['selling_price_1'] + '">Selling Price 1</option>' +
                                         '<option value="2" data-price="' + $box['selling_price_2'] + '">Selling Price 2</option>' +
                                     '</select>' +
                                 '</div>' +
                                 '<div class="form-group col-sm-2">' +
-                                    '<label>Price per Box/Pack</label>' +
+                                    '<label>' + ($i!=0 ? '&nbsp;':'Price per Box/Pack') + '</label>' +
                                     '<p class="form-control-static price">' + $box['selling_price_1'] + ' / ' + parseFloat($box['selling_price_1']/$box['no_of_packs']).toFixed(2) + '</p>' +
                                 '</div>' +
                                 '<div class="form-group col-sm-2">' +
-                                    '<label>In Stock</label>' +
+                                    '<label>'+ ($i!=0 ? '&nbsp;':'In Stock') +'</label>' +
                                     '<p class="form-control-static">Out of Stock</p>' +
                                 '</div>' +
                             '</div>';
