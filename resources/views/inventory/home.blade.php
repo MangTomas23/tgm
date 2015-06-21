@@ -33,7 +33,7 @@
         {!! Form::close() !!}
         
         <div class="page-header">
-            <h3>Add Transaction</h3>
+            <h3>Add Order</h3>
         </div>
         
         {!! Form::open(['url'=>'/transaction/add']) !!}
