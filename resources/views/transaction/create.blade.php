@@ -17,13 +17,14 @@
         <input id="search-product" type="text" class="form-control">
     </div>
     <div id="suggestion-container">
+<!--
         <div class="alert alert-info alert-dismissable">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4>Jelly Cup</h4>
             <div class="box-container">
                 <div class="form-group col-sm-2 col-xs-4">
                     <label>&nbsp</label>
-                    <p class="form-control-static"><strong>40 x 24</strong></p>
+                    <p class="form-control-static box-size"><strong>40 x 24</strong></p>
                 </div>
                 <div class="form-group col-sm-2 col-xs-4">
                     <label>Box</label>
@@ -55,6 +56,7 @@
             </div>
             <span class="clearfix"></span>
         </div>
+-->
     </div>
     
     <div id="invoice">
@@ -101,22 +103,39 @@
                 query: $query     
             }, function(data){
                 
-                $str = '<div class="alert alert-info alert-dismissible">' +
+                $str = '<div class="alert alert-info alert-dismissable">' +
                             '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
                             '<h4>' + data['product']['name'] + '</h4>';
                 
                 $.each(data['boxes'], function($i,$box){
-                    $str +=  '<div class="form-group col-sm-2 col-xs-4">' +
-                                '<label>&nbsp</label>' +
-                                '<p class="form-control-static"><strong>'+ $box['size'] +'</strong></p>' +
-                            '</div>' +
-                            '<div class="form-group col-sm-5 col-xs-4">' +
-                                '<label>Box</label>' +
-                                '<input type="number" class="form-control" min="0" value="0">' +
-                            '</div>' +
-                            '<div class="form-group col-sm-5 col-xs-4">' +
-                                '<label>Pack</label>' +
-                                '<input type="number" class="form-control" min="0" value="0">' +
+                    $str += '<div class="box-container">' +
+                                '<div class="form-group col-sm-2 col-xs-4">' +
+                                    '<label>&nbsp</label>' +
+                                    '<p class="form-control-static"><strong>' + $box['size'] + '</strong></p>' +
+                                '</div>' +
+                                '<div class="form-group col-sm-2 col-xs-4">' +
+                                    '<label>Box</label>' +
+                                    '<input type="number" class="form-control" min="0" value="0">' +
+                                '</div>' +
+                                '<div class="form-group col-sm-2 col-xs-4">' +
+                                    '<label>Pack</label>' +
+                                    '<input type="number" class="form-control" min="0" value="0">' +
+                                '</div>' +
+                                '<div class="form-group col-sm-2">' +
+                                    '<label>Price: </label>' +
+                                    '<select class="form-control select-price" data-packs="' + $box['no_of_packs'] + '">' +
+                                        '<option value="1" data-price="' + $box['selling_price_1'] + '">Selling Price 1</option>' +
+                                        '<option value="2" data-price="' + $box['selling_price_2'] + '">Selling Price 2</option>' +
+                                    '</select>' +
+                                '</div>' +
+                                '<div class="form-group col-sm-2">' +
+                                    '<label>Price per Box/Pack</label>' +
+                                    '<p class="form-control-static price">' + $box['selling_price_1'] + ' / ' + parseFloat($box['selling_price_1']/$box['no_of_packs']).toFixed(2) + '</p>' +
+                                '</div>' +
+                                '<div class="form-group col-sm-2">' +
+                                    '<label>In Stock</label>' +
+                                    '<p class="form-control-static">Out of Stock</p>' +
+                                '</div>' +
                             '</div>';
                 })
                 
@@ -137,7 +156,9 @@
         
         $(this).on('change','.select-price',function(){
             $price = $(this).find(':selected').data('price')
-            $(this).closest('.box-container').find('.price').text($price + ' / ' + $price/40)
+            $packs = $(this).data('packs')
+            console.log($packs)
+            $(this).closest('.box-container').find('.price').text($price + ' / ' + parseFloat($price/$packs).toFixed(2))
         })
     })
 </script>
