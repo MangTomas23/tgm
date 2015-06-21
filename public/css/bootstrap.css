@@ -6583,4 +6583,10 @@ button.close {
     display: none !important;
   }
 }
+@media print {
+    .badge{
+        color: #fff !important;
+        background-color: #333 !important;
+    }
+}
 /*# sourceMappingURL=bootstrap.css.map */

@@ -60,12 +60,29 @@
     </div>
     
     <div id="invoice">
+        
+        <p>
+            <strong>Order Slip</strong>
+            <span class="pull-right">
+                <strong>No: </strong>
+                <span class="badge">1234</span>
+            </span>
+        </p>
         <div class="text-center">
             <p><strong>Tradeal General Merchandise</strong></p>
             <p>Pacol, Naga City</p>
-            
         </div>
-        <div class="table-responsive" style="min-height: 280px">
+        <div class="row">
+            <div class="col-xs-6">
+                <p><strong>Ordered by: </strong> Sample Name</p>
+                <p><strong>Address</strong> Sample Address </p>
+            </div>
+            <div class="col-xs-6 text-right">
+                <strong>Date: </strong> 01/01/2015
+            </div>
+        </div>
+        <span class="clearfix"></span>
+        <div class="table-responsive" style="min-height: 280px; margin-top:24px">
             <table class="table table-default">
                 <thead>
                     <tr>
@@ -85,7 +102,7 @@
         </div>
         <div class="page-header">&nbsp;</div>
         <div class="text-right col-xs-12">
-            <p><strong>Total:</strong>P 24,000.00</p>
+            <p><strong>Total: </strong><span id="total-amount">P 0.00</span></p>
         </div>
     </div>
     <div class="page-header">&nbsp;</div>
@@ -95,6 +112,11 @@
 </div>
 
 <script>
+    $.fn.digits = function(){ 
+        return this.each(function(){ 
+            $(this).text( $(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") ); 
+        })
+    }
     $(document).ready(function(){
         $data = null;
         
@@ -123,7 +145,7 @@
                                 '</div>' +
                                 '<div class="form-group col-sm-2 col-xs-4">' +
                                     '<label>' + ($i!=0 ? '&nbsp;':'Packs') + '</label>' +
-                                    '<input type="number" class="form-control" min="0" value="0" ' + ($isOutOfStock ? "readonly":"") + '>' +
+                                    '<input type="number" class="form-control packs" min="0" value="0" ' + ($isOutOfStock ? "readonly":"") + '>' +
                                 '</div>' +
                                 '<div class="form-group col-sm-2">' +
                                     '<label>' + ($i!=0 ? '&nbsp;':'Price') + '</label>' +
@@ -134,11 +156,11 @@
                                 '</div>' +
                                 '<div class="form-group col-sm-2">' +
                                     '<label>' + ($i!=0 ? '&nbsp;':'Price per Box/Pack') + '</label>' +
-                                    '<p class="form-control-static price">' + $box['selling_price_1'] + ' / ' + parseFloat($box['selling_price_1']/$box['no_of_packs']).toFixed(2) + '</p>' +
+                                    '<p class="form-control-static price"><span class="perBox">' + $box['selling_price_1'] + '</span> / <span class="perPack">' + parseFloat($box['selling_price_1']/$box['no_of_packs']).toFixed(2) + '</span></p>' +
                                 '</div>' +
                                 '<div class="form-group col-sm-2">' +
                                     '<label>'+ ($i!=0 ? '&nbsp;':'In Stock') +'</label>' +
-                                    '<p class="form-control-static">' + data['stocks'][$i] + '</p>' +
+                                    '<p class="form-control-static">' + data['stocks'][$i] + (data['stocks'][$i]!='Out of Stock' ? ' Box':'') + '</p>' +
                                 '</div>' +
                             '</div>';
                 })
@@ -161,8 +183,11 @@
         $(this).on('change','.select-price',function(){
             $price = $(this).find(':selected').data('price')
             $packs = $(this).data('packs')
-            $(this).closest('.box-container').find('.price').text($price + ' / ' + parseFloat($price/$packs).toFixed(2))
+            $(this).closest('.box-container').find('.perBox').text($price)
+            $(this).closest('.box-container').find('.perPack').text(parseFloat($price/$packs).toFixed(2))
         })
+        
+        
         
         $(this).on('click','#btn-add', function(){
             
@@ -171,13 +196,30 @@
             $.each($data['boxes'], function($i, $box){
                 $str += '<tr>'
                 $str += '<td>' + $data['product']['name'] + ' @ ' + $box['size'] +'</td>'
-                $str += '<td>' + $('.box')[$i]['value'] + ' Box' + '</td>'
+                $str += '<td>'
+                
+                    if($('.box')[$i]['value']!=0 && $('.packs')[$i]['value']==0){
+                        $str += $('.box')[$i]['value'] + ' Box'
+                    }else if($('.box')[$i]['value']==0 && $('.packs')[$i]['value']!=0){
+                        $str += $('.packs')[$i]['value'] + ' Packs'
+                    }else{
+                        $str += $('.box')[$i]['value'] + ' Box, ' + $('.packs')[$i]['value'] + ' Packs'
+                    }
+                $amount = parseFloat($('.box')[$i]['value'] * parseFloat($('.perBox')[$i]['innerText'])).toFixed(2)
+                $str += '</td>'
+                $str += '<td class="text-right amount" data-amount="'+$amount+'">' + $amount + '</td>'
                 $str += '</tr>'
 
             })
-            
-            
             $('#invoice').find('tbody').append($str)
+            $('.amount').digits()
+            
+            $totalAmount = 0;
+            $.each($('.amount'), function(){
+                $totalAmount += parseFloat($(this).data('amount'))
+            })
+            
+            $('#total-amount').text('P ' + parseFloat($totalAmount).toFixed(2)).digits()
         })
         
        
