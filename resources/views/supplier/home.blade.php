@@ -43,12 +43,18 @@
     </p>
     
     <canvas id="myChart"></canvas>
+    <canvas id="supplierChart"></canvas>
+    <div class="text-center">
+        <ul id="legend" class="list-inline">
+       
+        </ul>
+    </div>
     
     <script>
         $(document).ready(function(){
-            var ctx = $("#myChart").get(0).getContext("2d");
+            var ctx = [$("#myChart").get(0).getContext("2d"),$("#supplierChart").get(0).getContext("2d")];
             
-            var suppliers = [];
+            /*var suppliers = [];
             suppliers['names'] = [];
             suppliers['product_counts'] = [];
             
@@ -109,7 +115,66 @@
                     legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
             }
             
-            var myBarChart = new Chart(ctx).Bar(data, options);
+            var myBarChart = new Chart(ctx[0]).Bar(data, options);*/
+            var colors = [
+                ['#b71066','#34e4ea','#3185fc','#5aff15','#ffc857','#98C9A3'],
+                ['#dd177d','#68eff4','#6fabff','#9fff76','#ffd580','#a4d8af']
+            ];
+            
+            
+            var suppliers = [];
+            
+            @foreach($suppliers as $supplier)
+                suppliers.push( '{{ $supplier->name }}' )
+            @endforeach
+            
+            $.each(suppliers, function(i,supplier){
+                $('#legend').append('<li><span class="media-middle" style="width:12px;height:12px;background-color:'+ colors[0][i] +';display:inline-block"></span> '+ supplier +'</li>')
+            })
+            
+                
+            var data = [
+                            @foreach($suppliers as $i=>$supplier)
+                                {
+                                    value: {{ count($supplier->products) }},
+                                    color: colors[0][{{ $i }}],
+                                    highlight: colors[1][{{ $i }}],
+                                    label: "{{ $supplier->name }}"
+                                }@if($i+1 != count($suppliers)), @endif
+                           @endforeach
+                        ]
+                        
+
+            var options = {
+                            //Boolean - Whether we should show a stroke on each segment
+                            segmentShowStroke : true,
+
+                            //String - The colour of each segment stroke
+                            segmentStrokeColor : "#fff",
+
+                            //Number - The width of each segment stroke
+                            segmentStrokeWidth : 2,
+
+                            //Number - The percentage of the chart that we cut out of the middle
+                            percentageInnerCutout : 50, // This is 0 for Pie charts
+
+                            //Number - Amount of animation steps
+                            animationSteps : 100,
+
+                            //String - Animation easing effect
+                            animationEasing : "easeOutBounce",
+
+                            //Boolean - Whether we animate the rotation of the Doughnut
+                            animateRotate : true,
+
+                            //Boolean - Whether we animate scaling the Doughnut from the centre
+                            animateScale : false,
+
+                            //String - A legend template
+                            legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
+
+                        }
+            var myPieChart = new Chart(ctx[1]).Pie(data,options);
         });
         
     </script>
