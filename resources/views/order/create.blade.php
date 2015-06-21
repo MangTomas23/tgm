@@ -58,18 +58,18 @@
         </div>
 -->
     </div>
-    
+    <hr style="margin-top: 100px">
     <div id="invoice">
         
         <p>
-            <strong>Order Slip</strong>
+            Order Slip
             <span class="pull-right">
-                <strong>No: </strong>
+                No: 
                 <span class="badge">1234</span>
             </span>
         </p>
-        <div class="text-center">
-            <p><strong>Tradeal General Merchandise</strong></p>
+        <div class="text-center" style="margin-top:24px">
+            <h3><strong>Tradeal General Merchandise</strong></h3>
             <p>Pacol, Naga City</p>
         </div>
         <div class="row">
@@ -81,7 +81,7 @@
                 <strong>Date: </strong> 01/01/2015
             </div>
         </div>
-        <span class="clearfix"></span>
+        <hr>
         <div class="table-responsive" style="min-height: 280px; margin-top:24px">
             <table class="table table-default">
                 <thead>
@@ -92,20 +92,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Jelly Cup @ 40 x 24</td>
-                        <td>5 Box, 8 Packs</td>
-                        <td class="text-right text-nowrap">P 24,000.00</td>
-                    </tr>
                 </tbody>
             </table>
         </div>
-        <div class="page-header">&nbsp;</div>
+        <hr>
         <div class="text-right col-xs-12">
             <p><strong>Total: </strong><span id="total-amount">P 0.00</span></p>
         </div>
     </div>
-    <div class="page-header">&nbsp;</div>
+    <hr>
     <div class="col-sm-12 text-right">
         <a id="savePrint" href="#" class="btn btn-xs btn-success">Save and Print</a>
     </div>
