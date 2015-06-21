@@ -42,15 +42,15 @@
                 <input name="date" type="date" class="form-control" required>
             </div>
             <div class="form-group col-sm-6">
-                <label>Delivered by: </label>
-                <select name="delivered_by" class="form-control">
+                <label>Salesman </label>
+                <select name="salesman" class="form-control">
                     @foreach($employees as $employee)
                         <option value="{{ $employee->id }}">{{ $employee->firstname . ' ' . $employee->lastname }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="form-group col-sm-6">
-                <label>Delivered To</label>
+                <label>Ordered By</label>
                 <input name="delivered_to" type="text" class="form-control" required>
                 </select>
             </div>

@@ -186,9 +186,13 @@
         
         $(this).on('click','#btn-add', function(){
             
+            
             $str = null
             
             $.each($data['boxes'], function($i, $box){
+            $boxVal = parseInt($('.box')[$i]['value']);
+            $packsVal = parseInt($('.packs')[$i]['value']);
+                if(($boxVal==0||!$.isNumeric($boxVal))&&($packsVal==0||!$.isNumeric($packsVal))) return true
                 $str += '<tr>'
                 $str += '<td>' + $data['product']['name'] + ' @ ' + $box['size'] +'</td>'
                 $str += '<td>'
