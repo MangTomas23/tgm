@@ -91,7 +91,7 @@ class OrderController extends Controller {
     public function query(){
         $input = Input::all();
         $response = array();
-        $response['product'] = Product::where('name','like','%'.$input['query'].'%')->orderBy('name')->first();
+        $response['product'] = Product::where('name','like',$input['query'].'%')->orderBy('name')->first();
         $response['supplier'] = Supplier::find($response['product']->supplier_id);
         $response['category'] = ProductCategory::find($response['product']->product_category_id);
         $response['boxes'] = Box::where('product_id',$response['product']->id)->get();
