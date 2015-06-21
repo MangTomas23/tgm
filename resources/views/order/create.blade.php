@@ -107,6 +107,7 @@
                             '<h4>' + data['product']['name'] + '</h4>';
                 
                 $.each(data['boxes'], function($i,$box){
+                    $isOutOfStock = data['stocks'][$i] == 'Out of Stock' ? true:false;
                     $str += '<div class="box-container">' +
                                 '<div class="form-group col-sm-2 col-xs-4">' +
                                     '<label>&nbsp</label>' +
@@ -114,11 +115,11 @@
                                 '</div>' +
                                 '<div class="form-group col-sm-2 col-xs-4">' +
                                     '<label>' + ($i!=0 ? '&nbsp;':'Box') + '</label>' +
-                                    '<input type="number" class="form-control" min="0" value="0">' +
+                                    '<input type="number" class="form-control" min="0" value="0" ' + ($isOutOfStock ? "readonly":"") + '>' +
                                 '</div>' +
                                 '<div class="form-group col-sm-2 col-xs-4">' +
                                     '<label>' + ($i!=0 ? '&nbsp;':'Packs') + '</label>' +
-                                    '<input type="number" class="form-control" min="0" value="0">' +
+                                    '<input type="number" class="form-control" min="0" value="0" ' + ($isOutOfStock ? "readonly":"") + '>' +
                                 '</div>' +
                                 '<div class="form-group col-sm-2">' +
                                     '<label>' + ($i!=0 ? '&nbsp;':'Price') + '</label>' +
@@ -133,7 +134,7 @@
                                 '</div>' +
                                 '<div class="form-group col-sm-2">' +
                                     '<label>'+ ($i!=0 ? '&nbsp;':'In Stock') +'</label>' +
-                                    '<p class="form-control-static">Out of Stock</p>' +
+                                    '<p class="form-control-static">' + data['stocks'][$i] + '</p>' +
                                 '</div>' +
                             '</div>';
                 })
