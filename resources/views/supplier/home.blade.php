@@ -49,6 +49,8 @@
        
         </ul>
     </div>
+    <style id="legendStyle">
+    </style>
     
     <script>
         $(document).ready(function(){
@@ -129,7 +131,14 @@
             @endforeach
             
             $.each(suppliers, function(i,supplier){
-                $('#legend').append('<li><span class="media-middle" style="width:12px;height:12px;background-color:'+ colors[0][i] +';display:inline-block"></span> '+ supplier +'</li>')
+                $('#legend').append('<li><div class="media-middle legend'+i+'" style="width:12px;height:12px;background-color:'+ colors[0][i] +';display:inline-block;"></div> '+ supplier +'</li>')
+                $('#legendStyle').append(
+                    '@media print{' +
+                        '.legend' + i + '{' +
+                            'background-color: ' + colors[0][i] + ' !important;' +
+                        '}' +
+                    '}'
+                )
             })
             
                 
