@@ -12,7 +12,7 @@ use App\InStock;
 use Input;
 
 
-class TransactionController extends Controller {
+class OrderController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
@@ -31,7 +31,7 @@ class TransactionController extends Controller {
 	 */
 	public function create()
 	{
-		return view('transaction.create');
+		return view('order.create');
 	}
 
 	/**

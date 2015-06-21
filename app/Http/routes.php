@@ -122,11 +122,11 @@ Route::get('/test', 'ProductController@test');
 
 
 
-Route::post('/transaction/add', 'TransactionController@create');
+Route::post('/transaction/add', 'OrderController@create');
 
-Route::get('/transaction/add', 'TransactionController@create');
+Route::get('/transaction/add', 'OrderController@create');
 
-Route::get('/transaction/query', 'TransactionController@query');
+Route::get('/transaction/query', 'OrderController@query');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

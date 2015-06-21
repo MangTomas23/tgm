@@ -1,12 +1,12 @@
 @extends('app')
 
-@section('title') TGM - Add Transaction @endsection
+@section('title') TGM - Add Order @endsection
 
 @section('content')
 
 <div class="container">
     <div class="page-header">
-        <h1>Add Transaction</h1>
+        <h1>Add Order</h1>
     </div>
     <div class="form-group">
         <label>Date</label>
@@ -98,7 +98,7 @@
         $('#search-product').keyup(function(){
             $query = $(this).val()
             
-            $.get('{{ action('TransactionController@query') }}',{
+            $.get('{{ action('OrderController@query') }}',{
                 query: $query     
             }, function(data){
                 
