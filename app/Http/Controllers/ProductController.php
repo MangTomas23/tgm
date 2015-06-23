@@ -185,12 +185,7 @@ class ProductController extends Controller {
     public function delete(Product $product){
         return view('product.delete', compact('product'));
     }
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
+	
 	public function destroy($id)
 	{
         $product = Product::findOrFail($id);
@@ -210,5 +205,50 @@ class ProductController extends Controller {
 
     public function duplicate(){
         return view('product.duplicate');   
+    }
+    
+    public function test(){
+        /* This will be used later
+        
+        $boxes = Box::all();
+        
+        foreach($boxes as $box){
+            $noOfBox = intval(InStock::countInStocks($box->id));
+            $packsPerBox = $box->no_of_packs; 
+            
+            echo $box->size . ' - ';
+            
+            
+            echo 'Total Packs: ' . ($noOfBox * $packsPerBox). '<br>';
+        }*/
+        
+        $noOfBox = 10;
+        $packsPerBox = 12;
+        $totalPacks = $noOfBox * $packsPerBox;
+        
+        $noOfBoxOrdered = 6;
+        $noOfPacksOrdered = 13;
+        
+        $totalOrders = ($noOfBoxOrdered * $packsPerBox) + $noOfPacksOrdered;
+        $noOfPacksLeft = $totalPacks - $totalOrders;
+        $noOfBoxLeft = floor($noOfPacksLeft / $packsPerBox);
+        
+        
+        $totalLeft = $noOfBoxLeft . ' Box, ' . ($noOfPacksLeft - $noOfBoxLeft * $packsPerBox) . ' Packs';
+            
+        echo 'Number of Box: ' . $noOfBox . '<br>';
+        echo 'Packs Per Box: ' . $packsPerBox . '<br>';
+        echo 'Total Number of Packs: ' . $totalPacks . '<br>';
+        echo '-----------------------------------------------<br>';
+        echo 'No. of Box Ordered: ' . $noOfBoxOrdered . '<br>';
+        echo 'No. of Packs Ordered: ' . $noOfPacksOrdered . '<br>';
+        echo 'No. of Packs Left: ' . $noOfPacksLeft . '<br>';
+        echo 'No. of Box Left: ' . $noOfBoxLeft . '<br>';
+        echo '-----------------------------------------------<br>';
+        echo 'In Stock: ' . $totalLeft;
+        
+        
+        
+        
     }
 }
