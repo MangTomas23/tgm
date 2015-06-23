@@ -36,7 +36,7 @@
             <h3>Add Order</h3>
         </div>
         
-        {!! Form::open(['url'=>'/transaction/add']) !!}
+        {!! Form::open(['url'=>'/order/add']) !!}
             <div class="form-group col-sm-12">
                 <label>Date</label>
                 <input name="date" type="date" class="form-control" required>
