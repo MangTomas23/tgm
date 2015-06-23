@@ -9,7 +9,9 @@ use App\Supplier;
 use App\ProductCategory;
 use App\Box;
 use App\InStock;
+use App\Employee;
 use Input;
+use Redirect;
 
 
 class OrderController extends Controller {
@@ -31,7 +33,9 @@ class OrderController extends Controller {
 	 */
 	public function create()
 	{
-		return view('order.create');
+        $input = Input::all();
+        $employees = Employee::orderBy('firstname')->get();
+		return view('order.create', compact(['employees','input']));
 	}
 
 	/**
