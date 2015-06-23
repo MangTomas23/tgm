@@ -185,8 +185,6 @@
         
         
         $(this).on('click','#btn-add', function(){
-            
-            
             $str = null
             
             $.each($data['boxes'], function($i, $box){
@@ -219,6 +217,12 @@
             })
             
             $('#total-amount').text('P ' + parseFloat($totalAmount).toFixed(2)).digits()
+            $(this).removeClass('btn-info').addClass('btn-success disabled').text('Added')
+            
+            setTimeout(function(){
+                $('#suggestion-container .alert').fadeOut();
+                $('#search-product').focus()
+            }, 2000)
         })
         
        
