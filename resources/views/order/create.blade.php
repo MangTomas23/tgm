@@ -20,7 +20,7 @@
     </div>
     <div class="form-group col-sm-12">
         <label>Address</label>
-        <input name="address" type="text" class="form-control">
+        <input name="address" type="text" class="form-control" value="{{ $input['address'] or null }}">
     </div>
     <div class="form-group col-sm-12">
         <label>Salesman</label>
