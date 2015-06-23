@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Supplier;
 use App\Employee;
+use App\Customer;
 
 use Redirect;
 use Input;
@@ -20,7 +21,8 @@ class InventoryController extends Controller {
 	{
         $suppliers = Supplier::orderBy('name')->get();
         $employees = Employee::orderBy('firstname')->get();
-		return view('inventory.home', compact(['suppliers','employees']));
+        $customers = Customer::orderBy('name')->get();
+		return view('inventory.home', compact(['suppliers','employees','customers']));
 	}
     
     public function inStocks(){

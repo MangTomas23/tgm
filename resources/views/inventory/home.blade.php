@@ -39,7 +39,12 @@
         {!! Form::open(['url'=>'/order/add','method'=>'get']) !!}
             <div class="form-group col-sm-6">
                 <label>Order By</label>
-                <input name="order_by" type="text" class="form-control" required>
+                <input name="order_by" type="text" class="form-control" list="customers-list" required autocomplete="off">
+                <datalist id="customers-list">
+                    @foreach($customers as $customer)
+                        <option>{{ $customer->name }}</option>
+                    @endforeach
+                </datalist>
             </div>
             <div class="form-group col-sm-6">
                 <label>Date</label>
@@ -47,7 +52,7 @@
             </div>
             <div class="form-group col-sm-8">
                 <label>Address</label>
-                <input name="address" class="form-control" type="text" value="{{ $input['address'] or null }}" required>
+                <input name="address" class="form-control" type="text" value="{{ $input['address'] or null }}" required autocomplete="off">
             </div>
             <div class="form-group col-sm-4">
                 <label>Salesman </label>
@@ -72,6 +77,26 @@
             return local.toJSON().slice(0,10);
         });
         $('input[type=date]').val(new Date().toDateInputValue());
+        
+        $customers = []
+        
+        @foreach($customers as $customer)
+            $customers.push({
+                id: {{ $customer->id }},
+                name: '{{ $customer->name }}',
+                address: '{{ $customer->address }}'
+            })
+        @endforeach
+        
+        $("input[name=order_by]").focusout(function(){
+            $customer_name = $(this).val()
+            $.each($customers, function($i, $customer){
+                if($customer.name == $customer_name){
+                    $('input[name=address]').val($customer.address)
+                    return false;
+                }
+            })
+        });
     });
 </script>
 @endsection

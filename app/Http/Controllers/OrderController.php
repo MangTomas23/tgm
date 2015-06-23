@@ -10,6 +10,7 @@ use App\ProductCategory;
 use App\Box;
 use App\InStock;
 use App\Employee;
+use App\Customer;
 use Input;
 use Redirect;
 
@@ -34,8 +35,13 @@ class OrderController extends Controller {
 	public function create()
 	{
         $input = Input::all();
+        
+        $customer = Customer::firstOrNew(['name'=>$input['order_by']]);
+        $customer->address = $input['address'];
+        $customer->save();
+        
         $employees = Employee::orderBy('firstname')->get();
-		return view('order.create', compact(['employees','input']));
+		return view('order.create', compact(['employees','input','customer']));
 	}
 
 	/**

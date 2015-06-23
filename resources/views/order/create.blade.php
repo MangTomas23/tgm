@@ -12,7 +12,8 @@
     </div>
     <div class="form-group col-sm-6">
         <label>Order by</label>
-        <input name="order_by" type="text" class="form-control" required value="{{ $input['order_by'] or null }}">
+        {!! Form::hidden('order_by', $customer->id) !!}
+        <input id="order-by" type="text" class="form-control" required value="{{ $input['order_by'] or null }}">
     </div>
     <div class="form-group col-sm-6">
         <label>Date</label>
@@ -210,14 +211,34 @@
             $(this).closest('.box-container').find('.perPack').text(parseFloat($price/$packs).toFixed(2))
         })
         
-        
+        $(this).on('click','#suggestion-container input[type=number]', function(){
+            $('#btn-add').removeClass('btn-danger').addClass('btn-info').text('Add')
+        })
         
         $(this).on('click','#btn-add', function(){
             $str = null
+            $isValid = false;
+            
+            $.each($('#suggestion-container input[type=number]'), function($i, $v){
+                if($v['value']!=0) $isValid = true;
+            })
+            
+            if(!$isValid){
+                $(this).removeClass('btn-info').addClass('btn-danger').text('Invalid')
+                return;
+            }
+            
+            $(this).removeClass('btn-danger').addClass('btn-success')
             
             $.each($data['boxes'], function($i, $box){
-            $boxVal = parseInt($('.box')[$i]['value']);
-            $packsVal = parseInt($('.packs')[$i]['value']);
+                $boxVal = parseInt($('.box')[$i]['value']);
+                $packsVal = parseInt($('.packs')[$i]['value']);
+                
+                
+                
+                
+                
+                
                 if(($boxVal==0||!$.isNumeric($boxVal))&&($packsVal==0||!$.isNumeric($packsVal))) return true
                 $str += '<tr>'
                 $str += '<td>' + $data['product']['name'] + ' @ ' + $box['size'] +'</td>'

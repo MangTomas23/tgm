@@ -128,6 +128,7 @@ Route::get('/order/query', 'OrderController@query');
 
 Route::get('/test', 'ProductController@test');
 
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
