@@ -36,22 +36,25 @@
             <h3>Add Order</h3>
         </div>
         
-        {!! Form::open(['url'=>'/order/add']) !!}
-            <div class="form-group col-sm-12">
+        {!! Form::open(['url'=>'/order/add','method'=>'get']) !!}
+            <div class="form-group col-sm-6">
+                <label>Order By</label>
+                <input name="order_by" type="text" class="form-control" required>
+            </div>
+            <div class="form-group col-sm-6">
                 <label>Date</label>
                 <input name="date" type="date" class="form-control" required>
             </div>
-            <div class="form-group col-sm-6">
+            <div class="form-group col-sm-8">
+                <label>Address</label>
+                <input name="address" class="form-control" type="text" value="{{ $input['address'] or null }}" required>
+            </div>
+            <div class="form-group col-sm-4">
                 <label>Salesman </label>
                 <select name="salesman" class="form-control">
                     @foreach($employees as $employee)
                         <option value="{{ $employee->id }}">{{ $employee->firstname . ' ' . $employee->lastname }}</option>
                     @endforeach
-                </select>
-            </div>
-            <div class="form-group col-sm-6">
-                <label>Ordered By</label>
-                <input name="delivered_to" type="text" class="form-control" required>
                 </select>
             </div>
             <div class="form-group col-sm-12 text-right">

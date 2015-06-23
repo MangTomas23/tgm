@@ -5,17 +5,36 @@
 @section('content')
 
 <div class="container">
+    {!! Form::open(['url'=>'/order/save','id'=>'order-form']) !!}
+    
     <div class="page-header">
         <h1>Add Order</h1>
     </div>
-    <div class="form-group">
-        <label>Date</label>
-        <input type="datetime-local" class="form-control">
+    <div class="form-group col-sm-6">
+        <label>Order by</label>
+        <input name="order_by" type="text" class="form-control" required value="{{ $input['order_by'] or null }}">
     </div>
-    <div class="form-group">
+    <div class="form-group col-sm-6">
+        <label>Date</label>
+        <input name="date" type="date" class="form-control" value="{{ $input['date'] or null }}">
+    </div>
+    <div class="form-group col-sm-12">
+        <label>Address</label>
+        <input name="address" type="text" class="form-control">
+    </div>
+    <div class="form-group col-sm-12">
+        <label>Salesman</label>
+        <select class="form-control">
+            @foreach($employees as $employee)
+                <option value="{{ $employee->id }}">{{ $employee->firstname . ' ' . $employee->lastname }}</option>
+            @endforeach
+        </select>
+    </div>
+    <div class="form-group col-sm-12">
         <label>Product</label>
         <input id="search-product" type="text" class="form-control">
     </div>
+    <span class="clearfix"></span>
     <div id="suggestion-container">
 <!--
         <div class="alert alert-info alert-dismissable">
@@ -104,6 +123,8 @@
     <div class="col-sm-12 text-right">
         <a id="savePrint" href="#" class="btn btn-xs btn-success">Save and Print</a>
     </div>
+    {!! Form::submit('save') !!}
+    {!! Form::close() !!}
 </div>
 
 <script>
@@ -172,7 +193,14 @@
         })
         
         $('#savePrint').click(function(){
-            $('#invoice').print();
+//            $('#invoice').print();
+            
+            var $myForm = $('#order-form')
+            if (!$myForm[0].checkValidity()) {
+              // If the form is invalid, submit it. The form won't actually submit;
+              // this will just cause the browser to display the native HTML5 error messages.
+              $(':submit').click()
+            }
         })
         
         $(this).on('change','.select-price',function(){
@@ -224,7 +252,6 @@
                 $('#search-product').focus()
             }, 2000)
         })
-        
        
     })
 </script>
