@@ -118,7 +118,6 @@ Route::get('/price-list', 'PriceListController@index');
 
 Route::post('/price-list/update', 'PriceListController@update');
 
-Route::get('/test', 'ProductController@test');
 
 
 
@@ -127,6 +126,10 @@ Route::post('/transaction/add', 'OrderController@create');
 Route::get('/transaction/add', 'OrderController@create');
 
 Route::get('/transaction/query', 'OrderController@query');
+
+
+
+Route::get('/test', 'ProductController@test');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',

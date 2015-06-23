@@ -14,4 +14,9 @@ class InStock extends Model {
         $count = Box::find($box_id)->instocks->sum('quantity');
         return $count==0 ? 'Out of Stock':$count;
     }
+
+    public function scopeCountInStocks($query, $box_id){
+        $count = Box::find($box_id)->instocks->sum('quantity');
+        return $count==0 ? ' 0 ':$count;
+    }
 }
