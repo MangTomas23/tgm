@@ -7,6 +7,17 @@
 @section('content')
 
 <div class="container">
+    
+    
+    <div class="col-xs-12 visible-print">
+        <h3><strong>Tradeal General Merchandise</strong><small id="date" class="pull-right"></small></h3>
+        <h4>Suppliers</h4>
+    </div>
+    <canvas id="supplierChart"></canvas>
+    <div class="text-center" style="margin-top: 24px">
+        <ul id="legend" class="list-inline"></ul>
+    </div>
+    
     <div class="hidden-print">
         <div class="page-header">
             <h1>
@@ -43,89 +54,12 @@
         </p>
     </div>
     
-    <div class="col-xs-12 visible-print">
-        <h3><strong>Tradeal General Merchandise</strong><small id="date" class="pull-right"></small></h3>
-        <h4>Suppliers</h4>
-    </div>
-    
-    
-    
-    <p class="visible-md-12 hidden-print">Press <kbd>ctrl + p</kbd> to print</p>
-
-    <canvas id="myChart"></canvas>
-    <canvas id="supplierChart"></canvas>
-    <div class="text-center" style="margin-top: 24px">
-        <ul id="legend" class="list-inline"></ul>
-    </div>
-    
     <style id="legendStyle"></style>
     
     <script>
         $(document).ready(function(){
-            var ctx = [$("#myChart").get(0).getContext("2d"),$("#supplierChart").get(0).getContext("2d")];
+            var ctx = [$("#supplierChart").get(0).getContext("2d")];
             
-            /*var suppliers = [];
-            suppliers['names'] = [];
-            suppliers['product_counts'] = [];
-            
-            @foreach($suppliers as $supplier)
-                suppliers.names.push('{{ $supplier->name }}');
-                suppliers.product_counts.push({{ count($supplier->products) }});
-            @endforeach
-            
-            
-            console.log(suppliers.names);
-            
-            var data = {
-                labels: suppliers.names,
-                datasets: [
-                    {
-                        label: "My First dataset",
-                        fillColor: "rgba(75, 94, 172, 0.5)",
-                        strokeColor: "rgba(220,220,220,0.8)",
-                        highlightFill: "rgba(220,220,220,0.75)",
-                        highlightStroke: "rgba(220,220,220,1)",
-                        data: suppliers.product_counts
-                    }
-                ]
-            };
-            
-            var options = {
-                    //Boolean - Whether the scale should start at zero, or an order of magnitude down from the lowest value
-                    scaleBeginAtZero : true,
-
-                    //Boolean - Whether grid lines are shown across the chart
-                    scaleShowGridLines : true,
-
-                    //String - Colour of the grid lines
-                    scaleGridLineColor : "rgba(0,0,0,.05)",
-
-                    //Number - Width of the grid lines
-                    scaleGridLineWidth : 1,
-
-                    //Boolean - Whether to show horizontal lines (except X axis)
-                    scaleShowHorizontalLines: true,
-
-                    //Boolean - Whether to show vertical lines (except Y axis)
-                    scaleShowVerticalLines: true,
-
-                    //Boolean - If there is a stroke on each bar
-                    barShowStroke : true,
-
-                    //Number - Pixel width of the bar stroke
-                    barStrokeWidth : 2,
-
-                    //Number - Spacing between each of the X value sets
-                    barValueSpacing : 5,
-
-                    //Number - Spacing between data sets within X values
-                    barDatasetSpacing : 1,
-
-                    //String - A legend template
-                    legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].fillColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
-            }
-            
-            var myBarChart = new Chart(ctx[0]).Bar(data, options);*/
             var colors = [
                 ['#b71066','#34e4ea','#3185fc','#5aff15','#ffc857','#98C9A3'],
                 ['#dd177d','#68eff4','#6fabff','#9fff76','#ffd580','#a4d8af']
@@ -191,7 +125,7 @@
                             legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<segments.length; i++){%><li><span style=\"background-color:<%=segments[i].fillColor%>\"></span><%if(segments[i].label){%><%=segments[i].label%><%}%></li><%}%></ul>"
 
                         }
-            var myPieChart = new Chart(ctx[1]).Pie(data,options);
+            var myPieChart = new Chart(ctx[0]).Pie(data,options);
         });
         
         var d = new Date();
