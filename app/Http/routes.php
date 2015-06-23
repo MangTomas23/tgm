@@ -121,11 +121,11 @@ Route::post('/price-list/update', 'PriceListController@update');
 
 
 
-Route::post('/transaction/add', 'OrderController@create');
+Route::post('/order/add', 'OrderController@create');
 
-Route::get('/transaction/add', 'OrderController@create');
+Route::get('/order/add', 'OrderController@create');
 
-Route::get('/transaction/query', 'OrderController@query');
+Route::get('/order/query', 'OrderController@query');
 
 
 
