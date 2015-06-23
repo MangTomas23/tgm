@@ -120,9 +120,6 @@ Route::post('/price-list/update', 'PriceListController@update');
 
 
 
-
-Route::post('/order/add', 'OrderController@create');
-
 Route::get('/order/add', 'OrderController@create');
 
 Route::get('/order/query', 'OrderController@query');
