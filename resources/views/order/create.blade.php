@@ -138,9 +138,8 @@
     </div>
     <hr>
     <div class="col-sm-12 text-right">
-        <a id="savePrint" class="btn btn-success">Save and Print</a>
+		{!! Form::submit('Save and Print', ['class'=>'btn btn-success','id'=>'savePrint']) !!}
     </div>
-    {!! Form::submit('save') !!}
     {!! Form::close() !!}
     
 </div>

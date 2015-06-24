@@ -17,6 +17,7 @@ return array(
     'CreateDeliveredProductsTable' => $baseDir . '/database/migrations/2015_06_15_122127_create_delivered_products_table.php',
     'CreateDesignationsTable' => $baseDir . '/database/migrations/2015_06_09_181419_create_designations_table.php',
     'CreateInStocksTable' => $baseDir . '/database/migrations/2015_06_14_203818_create_in_stocks_table.php',
+    'CreateOrderItemsTable' => $baseDir . '/database/migrations/2015_06_24_235235_create_order_items_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateProductCategoriesTable' => $baseDir . '/database/migrations/2015_06_10_174508_create_product_categories_table.php',
     'CreateProductsTable' => $baseDir . '/database/migrations/2015_06_09_174025_create_products_table.php',

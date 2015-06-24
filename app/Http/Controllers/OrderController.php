@@ -12,27 +12,20 @@ use App\InStock;
 use App\Employee;
 use App\Customer;
 use App\Order;
+use App\OrderItem;
+
 use Input;
 use Redirect;
 
 
 class OrderController extends Controller {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
 	public function index()
 	{
 		//
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
+	
 	public function create()
 	{
         $input = Input::all();
@@ -49,11 +42,6 @@ class OrderController extends Controller {
 		return view('order.create', compact(['employees','input','customer','customers']));
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
 	public function store()
 	{
         $input = Input::all();
@@ -69,62 +57,36 @@ class OrderController extends Controller {
         $order->type = $input['type'];
         
         $order->save();
+		
         
+		
         
-        
+		
+		
         echo '<br>';
         echo 'Customer ID: '. $customer->id . '<br>';
         echo 'Salesman ID: '. $salesman . '<br>';
         echo 'Date: ' . $input['date'] . '<br>';
         echo 'Type: ' . $input['type'] . '<br>';
         echo 'Order ID: '. $order->id;
-        
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
 		
+		print_r($input);
+        
+		foreach($input['box_id'] as $i=>$box_id){
+			$orderItem = new OrderItem;
+			$orderItem->order_id = $order->id;
+			$orderItem->product_id = Box::find($box_id)->product->id;
+			$orderItem->box_id = $box_id;
+			$orderItem->no_of_box = $input['no_of_box'][$i];
+			$orderItem->no_of_packs = $input['no_of_packs'][$i];
+			$orderItem->amount = $input['amount'][$i];
+			$orderItem->selling_price = $input['selling_price'][$i];
+			$orderItem->save();
+			
+			echo 'saved: ' . $orderItem->id . '<br>';
+		}
 	}
-    
+
     public function query(){
         $input = Input::all();
         $response = array();
