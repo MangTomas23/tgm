@@ -124,8 +124,16 @@ Route::get('/order/add', 'OrderController@create');
 
 Route::get('/order/query', 'OrderController@query');
 
+Route::post('/order/store', function(){
+    abort(503);
+});
 
 
+
+Route::get('/stocks/in', 'InStockController@index');
+
+Route::get('/stocks/in/{date}', 'InStockController@showByDate');
+    
 Route::get('/test', 'ProductController@test');
 
 

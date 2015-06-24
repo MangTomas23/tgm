@@ -36,12 +36,16 @@ class OrderController extends Controller {
 	{
         $input = Input::all();
         
-        $customer = Customer::firstOrNew(['name'=>$input['order_by']]);
-        $customer->address = $input['address'];
-        $customer->save();
+        $customer = null;
+        if($input!=null){
+            $customer = Customer::firstOrNew(['name'=>$input['order_by']]);
+            $customer->address = $input['address'];
+            $customer->save();
+        }
         
         $employees = Employee::orderBy('firstname')->get();
-		return view('order.create', compact(['employees','input','customer']));
+        $customers = Customer::orderBy('name')->get();
+		return view('order.create', compact(['employees','input','customer','customers']));
 	}
 
 	/**

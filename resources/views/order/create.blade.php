@@ -5,15 +5,20 @@
 @section('content')
 
 <div class="container">
-    {!! Form::open(['url'=>'/order/save','id'=>'order-form']) !!}
+    {!! Form::open(['url'=>'/order/store','id'=>'order-form']) !!}
     
     <div class="page-header">
         <h1>Add Order</h1>
     </div>
     <div class="form-group col-sm-6">
         <label>Order by</label>
-        {!! Form::hidden('order_by', $customer->id) !!}
-        <input id="order-by" type="text" class="form-control" required value="{{ $input['order_by'] or null }}">
+        <input type="hidden" value="{{ $customer->id or null }}">
+        <input id="order-by" type="text" class="form-control" value="{{ $input['order_by'] or null }}" list="customer-list" required autocomplete="off">
+        <datalist id="customer-list">
+            @foreach($customers as $customer)
+                <option>{{ $customer->name }}</option>
+            @endforeach
+        </datalist>
     </div>
     <div class="form-group col-sm-6">
         <label>Date</label>
@@ -21,11 +26,19 @@
     </div>
     <div class="form-group col-sm-12">
         <label>Address</label>
-        <input name="address" type="text" class="form-control" value="{{ $input['address'] or null }}">
+        <input name="address" type="text" class="form-control" value="{{ $input['address'] or null }}" required autocomplete="off">
     </div>
-    <div class="form-group col-sm-12">
+    <div class="form-group col-sm-6">
+        <label>Type</label>
+        <select name="type" class="form-control">
+            <option value="Extract">Extract</option>
+            <option value="Booking">Booking</option>
+            <option value="In-House">In-House</option>
+        </select>
+    </div>
+    <div class="form-group col-sm-6">
         <label>Salesman</label>
-        <select class="form-control">
+        <select class="form-control" name="salesman">
             @foreach($employees as $employee)
                 <option value="{{ $employee->id }}">{{ $employee->firstname . ' ' . $employee->lastname }}</option>
             @endforeach
@@ -79,26 +92,28 @@
 -->
     </div>
     <hr style="margin-top: 100px">
-    <div id="invoice">
+    <div id="order-slip">
         
         <p>
             Order Slip
             <span class="pull-right">
                 No: 
-                <span class="badge">1234</span>
+                <span id="os-number"class="badge">1234</span>
             </span>
         </p>
         <div class="text-center" style="margin-top:24px">
             <h3><strong>Tradeal General Merchandise</strong></h3>
+            <p>Smart #: 09199980311 / Globe #: 09173179285</p>
             <p>Pacol, Naga City</p>
         </div>
         <div class="row">
             <div class="col-xs-6">
-                <p><strong>Ordered by: </strong> Sample Name</p>
-                <p><strong>Address</strong> Sample Address </p>
+                <p><strong>Order by: </strong> <span id="os-order-by">{{ $input['order_by'] or null}}</span></p>
+                <p><strong>Address</strong> <span id="os-address">{{ $input['address'] or null }}</span></p>
             </div>
             <div class="col-xs-6 text-right">
-                <strong>Date: </strong> 01/01/2015
+                <p><strong>Date: </strong> <span id="os-date">01/01/2015</span></p>
+                <p><strong>Salesman: </strong><span id="os-salesman"></span></p>
             </div>
         </div>
         <hr>
@@ -109,6 +124,7 @@
                         <th>Product</th>
                         <th>Quantity</th>
                         <th class="text-right">Amount</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -122,159 +138,66 @@
     </div>
     <hr>
     <div class="col-sm-12 text-right">
-        <a id="savePrint" href="#" class="btn btn-xs btn-success">Save and Print</a>
+        <a id="savePrint" class="btn btn-success">Save and Print</a>
     </div>
     {!! Form::submit('save') !!}
     {!! Form::close() !!}
+    
+</div>
+<div id="modal-exceed" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Error</h4>
+            </div>
+            <div class="modal-body">
+                <p>Orders Exceed!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="modal-edit" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Edit</h4>
+            </div>
+            <div class="modal-body">
+                <p>Orders Exceed!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
 </div>
 
-<script>
-    $.fn.digits = function(){ 
-        return this.each(function(){ 
-            $(this).text( $(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,") ); 
-        })
-    }
-    $(document).ready(function(){
-        $data = null;
-        
-        $('#search-product').keyup(function(){
-            $query = $(this).val()
-            
-            $.get('{{ action('OrderController@query') }}',{
-                query: $query     
-            }, function(data){
-                $data = data
-                
-                $str = '<div class="alert alert-info alert-dismissable">' +
-                            '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
-                            '<h4>' + data['product']['name'] + '</h4>';
-                
-                $.each(data['boxes'], function($i,$box){
-                    $isOutOfStock = data['stocks'][$i] == 'Out of Stock' ? true:false;
-                    $str += '<div class="box-container">' +
-                                '<div class="form-group col-sm-2 col-xs-4">' +
-                                    '<label>&nbsp</label>' +
-                                    '<p class="form-control-static"><strong>' + $box['size'] + '</strong></p>' +
-                                '</div>' +
-                                '<div class="form-group col-sm-2 col-xs-4">' +
-                                    '<label>' + ($i!=0 ? '&nbsp;':'Box') + '</label>' +
-                                    '<input type="number" class="form-control box" min="0" value="0" ' + ($isOutOfStock ? "readonly":"") + '>' +
-                                '</div>' +
-                                '<div class="form-group col-sm-2 col-xs-4">' +
-                                    '<label>' + ($i!=0 ? '&nbsp;':'Packs') + '</label>' +
-                                    '<input type="number" class="form-control packs" min="0" value="0" ' + ($isOutOfStock ? "readonly":"") + '>' +
-                                '</div>' +
-                                '<div class="form-group col-sm-2">' +
-                                    '<label>' + ($i!=0 ? '&nbsp;':'Price') + '</label>' +
-                                    '<select class="form-control select-price" data-packs="' + $box['no_of_packs'] + '">' +
-                                        '<option value="1" data-price="' + $box['selling_price_1'] + '">Selling Price 1</option>' +
-                                        '<option value="2" data-price="' + $box['selling_price_2'] + '">Selling Price 2</option>' +
-                                    '</select>' +
-                                '</div>' +
-                                '<div class="form-group col-sm-2">' +
-                                    '<label>' + ($i!=0 ? '&nbsp;':'Price per Box/Pack') + '</label>' +
-                                    '<p class="form-control-static price"><span class="perBox">' + $box['selling_price_1'] + '</span> / <span class="perPack">' + parseFloat($box['selling_price_1']/$box['no_of_packs']).toFixed(2) + '</span></p>' +
-                                '</div>' +
-                                '<div class="form-group col-sm-2">' +
-                                    '<label>'+ ($i!=0 ? '&nbsp;':'In Stock') +'</label>' +
-                                    '<p class="form-control-static">' + data['stocks'][$i] + (data['stocks'][$i]!='Out of Stock' ? ' Box':'') + '</p>' +
-                                '</div>' +
-                            '</div>';
-                })
-                
-                $str += '<div class="text-right col-xs-12">' +
-                            '<a id="btn-add" class="btn btn-info">Add</a>' +
-                        '</div>' +
-                        '<span class="clearfix"></span>' +
-                    '</div>';
-                
-                
-                $('#suggestion-container').empty().append($str)
-            })
-        })
-        
-        $('#savePrint').click(function(){
-//            $('#invoice').print();
-            
-            var $myForm = $('#order-form')
-            if (!$myForm[0].checkValidity()) {
-              // If the form is invalid, submit it. The form won't actually submit;
-              // this will just cause the browser to display the native HTML5 error messages.
-              $(':submit').click()
-            }
-        })
-        
-        $(this).on('change','.select-price',function(){
-            $price = $(this).find(':selected').data('price')
-            $packs = $(this).data('packs')
-            $(this).closest('.box-container').find('.perBox').text($price)
-            $(this).closest('.box-container').find('.perPack').text(parseFloat($price/$packs).toFixed(2))
-        })
-        
-        $(this).on('click','#suggestion-container input[type=number]', function(){
-            $('#btn-add').removeClass('btn-danger').addClass('btn-info').text('Add')
-        })
-        
-        $(this).on('click','#btn-add', function(){
-            $str = null
-            $isValid = false;
-            
-            $.each($('#suggestion-container input[type=number]'), function($i, $v){
-                if($v['value']!=0) $isValid = true;
-            })
-            
-            if(!$isValid){
-                $(this).removeClass('btn-info').addClass('btn-danger').text('Invalid')
-                return;
-            }
-            
-            $(this).removeClass('btn-danger').addClass('btn-success')
-            
-            $.each($data['boxes'], function($i, $box){
-                $boxVal = parseInt($('.box')[$i]['value']);
-                $packsVal = parseInt($('.packs')[$i]['value']);
-                
-                
-                
-                
-                
-                
-                if(($boxVal==0||!$.isNumeric($boxVal))&&($packsVal==0||!$.isNumeric($packsVal))) return true
-                $str += '<tr>'
-                $str += '<td>' + $data['product']['name'] + ' @ ' + $box['size'] +'</td>'
-                $str += '<td>'
-                
-                    if($('.box')[$i]['value']!=0 && $('.packs')[$i]['value']==0){
-                        $str += $('.box')[$i]['value'] + ' Box'
-                    }else if($('.box')[$i]['value']==0 && $('.packs')[$i]['value']!=0){
-                        $str += $('.packs')[$i]['value'] + ' Packs'
-                    }else{
-                        $str += $('.box')[$i]['value'] + ' Box, ' + $('.packs')[$i]['value'] + ' Packs'
-                    }
-                $amount = parseFloat($('.box')[$i]['value'] * parseFloat($('.perBox')[$i]['innerText'])).toFixed(2)
-                $str += '</td>'
-                $str += '<td class="text-right amount" data-amount="'+$amount+'">' + $amount + '</td>'
-                $str += '</tr>'
 
-            })
-            $('#invoice').find('tbody').append($str)
-            $('.amount').digits()
-            
-            $totalAmount = 0;
-            $.each($('.amount'), function(){
-                $totalAmount += parseFloat($(this).data('amount'))
-            })
-            
-            $('#total-amount').text('P ' + parseFloat($totalAmount).toFixed(2)).digits()
-            $(this).removeClass('btn-info').addClass('btn-success disabled').text('Added')
-            
-            setTimeout(function(){
-                $('#suggestion-container .alert').fadeOut();
-                $('#search-product').focus()
-            }, 2000)
+<script>
+    $customers = []
+    $salesmen = []
+    
+    @foreach($customers as $customer)
+        $customers.push({
+            id: {{ $customer->id }},
+            name: '{{ $customer->name }}',
+            address: '{{ $customer->address }}'
         })
-       
-    })
+    @endforeach
+    
+    @foreach($employees as $employee)
+        $salesmen.push({
+            id: {{ $employee->id }},
+            name: '{{ $employee->firstname . ' ' . $employee->lastname}}'
+        })
+    @endforeach
+    
 </script>
+<script src="{{ asset('/js/addOrders.blade.js') }}"></script>
 
 @endsection

@@ -15,21 +15,12 @@ use Redirect;
 
 class InStockController extends Controller {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
 	public function index()
 	{
-		//
+        $instocks = Instock::groupBy('date')->orderBy('date')->get();
+        return view('instock.home', compact('instocks'));
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
 	public function create($date, $s)
 	{
         
@@ -38,11 +29,6 @@ class InStockController extends Controller {
 		return view('instock.create', compact(['s','suppliers','products','date']));
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
 	public function store()
 	{
         $input = Input::all();
@@ -65,54 +51,11 @@ class InStockController extends Controller {
         }
         
         return Redirect::action('InventoryController@index');
-        
-        
-        
-//        return Redirect::action('InventoryController@index');
 	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
+    
+    
+    public function showByDate($date){
+        $instocks = InStock::where('date',$date)->get();
+        return view('instock.showasdate', compact('instocks'));
+    }
 }

@@ -12,7 +12,7 @@
     </div>
     <div class="col-md-10 col-md-offset-1">
         <div class="page-header">
-            <h3>In Stock</h3>
+            <h3>In Stock    <a href="{{ action('InStockController@index') }}" class="btn btn-default pull-right"><span class="glyphicon glyphicon-list-alt"></span></a></h3>
         </div>
         {!! Form::open(['url'=>'/inventory/stocks/in']) !!}
             <div class="form-group col-sm-6">
@@ -31,8 +31,8 @@
                 {!! Form::submit('Next', ['class'=>'btn btn-info']) !!}
             </div>
         {!! Form::close() !!}
-        
-        <div class="page-header">
+        <span class="clearfix"></span>
+        <div class="page-header" style="margin-top: 48px">
             <h3>Add Order</h3>
         </div>
         
@@ -89,9 +89,9 @@
         @endforeach
         
         $("input[name=order_by]").focusout(function(){
-            $customer_name = $(this).val()
+            $customer_name = $(this).val().toLowerCase()
             $.each($customers, function($i, $customer){
-                if($customer.name == $customer_name){
+                if($customer.name.toLowerCase() == $customer_name){
                     $('input[name=address]').val($customer.address)
                     return false;
                 }
