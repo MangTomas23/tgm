@@ -130,7 +130,7 @@ $(document).ready(function () {
 				isExceeded = totalOrders > $totalNoOfPacks,
 				pricePerBox = parseFloat($('.perBox')[i].innerText).toFixed(2),
 				pricePerPack = parseFloat($('.perPack')[i].innerText).toFixed(2),
-				amount = (boxVal * pricePerBox ) + (packsVal * pricePerPack);
+				amount = parseFloat((boxVal * pricePerBox ) + (packsVal * pricePerPack)).toFixed(2);
 
             if (isExceeded) {
                 $('#modal-exceed').modal('show');
@@ -147,7 +147,8 @@ $(document).ready(function () {
 			str += '<input name="box_id[]" type="hidden" value="' + box.id + '">';
 			str += '<input name="no_of_box[]" type="hidden" value="' + boxVal + '">';
 			str += '<input name="no_of_packs[]" type="hidden" value="' + packsVal + '">';
-			str += '<input name="">';
+			str += '<input name="amount[]" type="hidden" value="' + amount + '">';
+			str += '<input name="selling_price[]" type="hidden" value="' + $('.select-price')[0].value + '">';
             str += '<td>';
 
             if ($('.box')[i].value !== 0 && $('.packs')[i].value === 0) {
@@ -196,15 +197,20 @@ $(document).ready(function () {
 
 *****************************************/
 
-    $("#order-by").focusout(function () {
+    $('#order-by').focusout(function () {
         var customer_name = $(this).val().toLowerCase();
         $.each(customers, function (i, customer) {
-            if (customer.name.toLowerCase() === customer_name) {
+            if (customer.name.toLowerCase() == customer_name) {
                 $('input[name=address]').val(customer.address);
+				$('#os-address').text(customer.address);
                 return false;
             }
         });
     });
+	
+	$('input[name]').focusout(function () {
+		$('#os-address').text($(this).val());
+	})
 
 /****************************************
     
@@ -214,7 +220,7 @@ $(document).ready(function () {
     
     setOSSalesman = function () {
         $.each(salesmen, function (i, salesman) {
-            if (salesman.id === $('select[name=salesman]').val()) {
+            if (salesman.id == $('select[name=salesman]').val()) {
                 $('#os-salesman').text(salesman.name);
                 return false;
             }
