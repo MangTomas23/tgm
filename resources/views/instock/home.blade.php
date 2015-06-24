@@ -24,7 +24,6 @@
                 <tr>
                     <td>{{ $i+1 }}</td>
                     <td><a href="{{ action('InStockController@showByDate', $instock->date) }}">{{ $instock->date }}</a></td>
-                    
                 </tr>
             @endforeach
         </tbody>
