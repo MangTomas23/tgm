@@ -13,7 +13,7 @@
     <div class="form-group col-sm-6">
         <label>Order by</label>
         <input type="hidden" value="{{ $customer->id or null }}">
-        <input id="order-by" type="text" class="form-control" value="{{ $input['order_by'] or null }}" list="customer-list" required autocomplete="off">
+        <input id="order-by" name="name" type="text" class="form-control" value="{{ $input['order_by'] or null }}" list="customer-list" required autocomplete="off">
         <datalist id="customer-list">
             @foreach($customers as $customer)
                 <option>{{ $customer->name }}</option>
@@ -179,11 +179,11 @@
 
 
 <script>
-    $customers = []
-    $salesmen = []
+    var customers = [],
+		salesmen = [];
     
     @foreach($customers as $customer)
-        $customers.push({
+        customers.push({
             id: {{ $customer->id }},
             name: '{{ $customer->name }}',
             address: '{{ $customer->address }}'
@@ -191,13 +191,13 @@
     @endforeach
     
     @foreach($employees as $employee)
-        $salesmen.push({
+        salesmen.push({
             id: {{ $employee->id }},
             name: '{{ $employee->firstname . ' ' . $employee->lastname}}'
         })
     @endforeach
     
 </script>
-<script src="{{ asset('/js/addOrders.blade.js') }}"></script>
+<script src="{{ asset('/js/addOrders.js') }}"></script>
 
 @endsection

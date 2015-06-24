@@ -11,6 +11,7 @@ use App\Box;
 use App\InStock;
 use App\Employee;
 use App\Customer;
+use App\Order;
 use Input;
 use Redirect;
 
@@ -55,7 +56,29 @@ class OrderController extends Controller {
 	 */
 	public function store()
 	{
-		//
+        $input = Input::all();
+		$salesman = isset($input['salesman']) ? $input['salesman'] : null;
+        
+        $customer = Customer::firstOrNew(['name'=>$input['name'], 'address'=>$input['address']]);
+        $customer->save();
+        
+        $order = new Order;
+        $order->customer_id = $customer->id;
+        $order->salesman_id = $salesman;
+        $order->date = $input['date'];
+        $order->type = $input['type'];
+        
+        $order->save();
+        
+        
+        
+        echo '<br>';
+        echo 'Customer ID: '. $customer->id . '<br>';
+        echo 'Salesman ID: '. $salesman . '<br>';
+        echo 'Date: ' . $input['date'] . '<br>';
+        echo 'Type: ' . $input['type'] . '<br>';
+        echo 'Order ID: '. $order->id;
+        
 	}
 
 	/**
