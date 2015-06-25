@@ -11,7 +11,8 @@ $(document).ready(function () {
 		data = null,
 		setOSSalesman,
 		setData,
-		setOSDate;
+		setOSDate,
+		isAllZero;
     
     
 /**********************************************************
@@ -130,7 +131,7 @@ $(document).ready(function () {
 				isExceeded = totalOrders > $totalNoOfPacks,
 				pricePerBox = parseFloat($('.perBox')[i].innerText).toFixed(2),
 				pricePerPack = parseFloat($('.perPack')[i].innerText).toFixed(2),
-				amount = parseFloat((boxVal * pricePerBox ) + (packsVal * pricePerPack)).toFixed(2);
+				amount = parseFloat((boxVal * pricePerBox) + (packsVal * pricePerPack)).toFixed(2);
 
             if (isExceeded) {
                 $('#modal-exceed').modal('show');
@@ -210,7 +211,7 @@ $(document).ready(function () {
 	
 	$('input[name]').focusout(function () {
 		$('#os-address').text($(this).val());
-	})
+	});
 
 /****************************************
     
@@ -329,11 +330,13 @@ $(document).ready(function () {
 
 *********************************************/
 
-	var isAllZero = function () {
+	isAllZero = function () {
 		var bool = true;
 		
 		$.each($('#suggestion-container input[type=number]'), function () {
-			if($(this).val() != 0) bool = false;
+			if ($(this).val() !== 0) {
+				bool = false;
+			}
 		});
 		
 		return bool;

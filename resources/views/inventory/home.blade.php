@@ -33,7 +33,7 @@
         {!! Form::close() !!}
         <span class="clearfix"></span>
         <div class="page-header" style="margin-top: 48px">
-            <h3>Add Order</h3>
+            <h3>Add Order <a href="{{ action('OrderController@index') }}" class="btn btn-default pull-right"><span class="glyphicon glyphicon-list-alt"></span></a></h3>
         </div>
         
         {!! Form::open(['url'=>'/order/add','method'=>'get']) !!}

@@ -22,7 +22,8 @@ class OrderController extends Controller {
 
 	public function index()
 	{
-		//
+		$orders = Order::orderBy('date')->get();
+		return view('order.home', compact('orders'));
 	}
 
 	
@@ -102,5 +103,16 @@ class OrderController extends Controller {
         
         return $response;
     }
-
+	
+	public function show($id){
+		$orderItems = OrderItem::where('order_id',$id)->get(); 
+		return view('order.show', compact('orderItems'));
+	}
+	
+	public function search(){
+		$query = intval(Input::get('query'));
+		$orders = Order::where('id', $query)->get();
+		
+		return $orders;
+	}
 }

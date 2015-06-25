@@ -126,6 +126,12 @@ Route::get('/order/query', 'OrderController@query');
 
 Route::post('/order/store', 'OrderController@store');
 
+Route::get('/orders', 'OrderController@index');
+
+Route::get('/order/no/{id}', 'OrderController@show');
+
+Route::get('/order/search', 'OrderController@search');
+
 
 
 Route::get('/stocks/in', 'InStockController@index');

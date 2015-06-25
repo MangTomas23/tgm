@@ -8,4 +8,7 @@ class Employee extends Model {
         return $this->belongsTo('App\Designation');   
     }
 
+	public function orders(){
+		return $this->hasMany('App\Order');
+	}
 }
