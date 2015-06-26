@@ -51,17 +51,7 @@
                     @else
                         <?php $num = $products->currentPage() * $products->perPage() - $products->perPage(); $n = $num<=0 ? 0:$num?>
                         @foreach($products as $product)
-                            <tr
-                                @if($outOfStock = false) @endif
-                                    @foreach($product->boxes as $box)
-                                        @if(App\InStock::count($box->id)=='Out of Stock')
-                                            @if($outOfStock = true) @endif
-                                        @endif
-                                    @endforeach
-                                @if($outOfStock)
-                                    class="danger"
-                                @endif
-                            >
+                            <tr>
                                 <td><?php $n++; echo $n ?></td>
                                 <td><a href="{{ action('ProductController@show', $product->id ) }}">{{ $product->name }}</a></td>
                                 <td>{{ $product->product_category->name or null }}</td>
@@ -73,7 +63,17 @@
                                 </td>
                                 <td>
                                     @foreach($product->boxes as $box)
-                                        <p class="text-nowrap">{{ App\InStock::count($box->id) }}
+										<?php
+											$str = "";
+											$b = App\Box::countStock($box->id)['no_of_box_available'];
+											$p = App\Box::countStock($box->id)['no_of_packs_available'];
+											if($b==0 && $p==0){
+												$str = 'Out of Stock';
+											}else{
+												$str =  $b . ' Box, ' . $p . ' Packs'; 
+											}
+										?>
+                                        <p class="text-nowrap {{ $str=='Out of Stock' ? 'text-danger':'' }}">{{ $str }}</p>
                                     @endforeach
                                 </td>
                             </tr>

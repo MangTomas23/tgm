@@ -132,11 +132,16 @@ Route::get('/order/no/{id}', 'OrderController@show');
 
 Route::get('/order/search', 'OrderController@search');
 
+Route::get('/order/get/id', 'OrderController@getNextID');
+
+
 
 
 Route::get('/stocks/in', 'InStockController@index');
 
 Route::get('/stocks/in/{date}', 'InStockController@showByDate');
+
+Route::get('/stocks/in/{date}/{supplier_id}', 'InStockController@show');
     
 Route::get('/test', 'ProductController@test');
 

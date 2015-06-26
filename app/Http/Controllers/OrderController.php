@@ -13,6 +13,7 @@ use App\Employee;
 use App\Customer;
 use App\Order;
 use App\OrderItem;
+use DB;
 
 use Input;
 use Redirect;
@@ -97,8 +98,9 @@ class OrderController extends Controller {
         $response['boxes'] = Box::where('product_id',$response['product']->id)->get();
         $response['stocks'] = array();
         
-        foreach($response['boxes'] as $box){
-            array_push($response['stocks'], InStock::count($box->id));
+        foreach( $response['boxes'] as $box ){
+			$stock = Box::countStock( $box->id );
+            array_push($response['stocks'], $stock);
         }
         
         return $response;
@@ -114,5 +116,10 @@ class OrderController extends Controller {
 		$orders = Order::where('id', $query)->get();
 		
 		return $orders;
+	}
+	
+	public function getNextID(){
+		$result = DB::select(DB::raw('SHOW TABLE STATUS LIKE "orders"'));
+		return $result[0]->Auto_increment;
 	}
 }

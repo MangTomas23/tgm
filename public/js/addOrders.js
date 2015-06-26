@@ -1,10 +1,3 @@
-$.fn.digits = function () {
-    'use strict';
-    return this.each(function () {
-        $(this).text($(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
-    });
-};
-
 $(document).ready(function () {
 	'use strict';
     var orderedBoxes = [],
@@ -34,34 +27,37 @@ $(document).ready(function () {
                         '<h4>' + data.product.name + '</h4>';
 
             $.each(data.boxes, function (i, box) {
-                var isOutOfStock = data.stocks[i] === 'Out of Stock';
+                var isOutOfStock = data.stocks[i] == 'Out of Stock';
                 str += '<div class="box-container">' +
                             '<div class="form-group col-sm-2 col-xs-4">' +
                                 '<label>&nbsp</label>' +
                                 '<p class="form-control-static"><strong>' + box.size + '</strong></p>' +
                             '</div>' +
                             '<div class="form-group col-sm-2 col-xs-4">' +
-                                '<label>' + (i !== 0 ? '&nbsp' : 'Box') + '</label>' +
+                                '<label>' + (i != 0 ? '&nbsp' : 'Box') + '</label>' +
                                 '<input type="number" class="form-control box" min="0" value="0" ' + (isOutOfStock ? "readonly" : "") + '>' +
                             '</div>' +
                             '<div class="form-group col-sm-2 col-xs-4">' +
-                                '<label>' + (i !== 0 ? '&nbsp' : 'Packs') + '</label>' +
+                                '<label>' + (i != 0 ? '&nbsp' : 'Packs') + '</label>' +
                                 '<input type="number" class="form-control packs" min="0" value="0" ' + (isOutOfStock ? "readonly" : "") + '>' +
                             '</div>' +
                             '<div class="form-group col-sm-2">' +
-                                '<label>' + (i !== 0 ? '&nbsp' : 'Price') + '</label>' +
+                                '<label>' + (i != 0 ? '&nbsp' : 'Price') + '</label>' +
                                 '<select class="form-control select-price" data-packs="' + box.no_of_packs + '">' +
                                     '<option value="1" data-price="' + box.selling_price_1 + '">Selling Price 1</option>' +
                                     '<option value="2" data-price="' + box.selling_price_2 + '">Selling Price 2</option>' +
                                 '</select>' +
                             '</div>' +
                             '<div class="form-group col-sm-2">' +
-                                '<label>' + (i !== 0 ? '&nbsp' : 'Price per Box/Pack') + '</label>' +
+                                '<label>' + (i != 0 ? '&nbsp' : 'Price per Box/Pack') + '</label>' +
                                 '<p class="form-control-static price"><span class="perBox">' + box.selling_price_1 + '</span> / <span class="perPack">' + parseFloat(box.selling_price_1 / box.no_of_packs).toFixed(2) + '</span></p>' +
                             '</div>' +
                             '<div class="form-group col-sm-2">' +
-                                '<label>' + (i !== 0 ? '&nbsp' : 'In Stock') + '</label>' +
-                                '<p class="form-control-static">' + data.stocks[i] + (data.stocks[i] !== 'Out of Stock' ? ' Box' : '') + '</p>' +
+                                '<label>' + (i != 0 ? '&nbsp' : 'In Stock') + '</label>' +
+                                '<p class="form-control-static">' + 
+									data.stocks[i].no_of_box_available + ' Box, ' + 
+									data.stocks[i].no_of_packs_available + ' Packs' +
+								'</p>' +
                             '</div>' +
                         '</div>';
             });
@@ -116,45 +112,51 @@ $(document).ready(function () {
 ******************************************************/
 
     $(this).on('click', '#btn-add', function () {
-        console.log(isPriceSet());
+//        console.log(isPriceSet());
         var str = null,
 			isValid = true,
 			totalAmount = 0;
         
+		
+		
         $(this).removeClass('btn-danger').addClass('btn-success');
+		
         $.each(data.boxes, function (i, box) {
             var boxVal = parseInt($('.box')[i].value, 10),
 				packsVal = parseInt($('.packs')[i].value, 10),
-				stocks = data.stocks[i],
-				$totalNoOfPacks = box.no_of_packs * stocks,
-				totalOrders = boxVal * box.no_of_packs + packsVal,
-				isExceeded = totalOrders > $totalNoOfPacks,
+				boxAvailable = data.stocks[i].no_of_box_available,
+				packsAvailable = data.stocks[i].no_of_packs_available,
+				packsPerBox = box.no_of_packs,
 				pricePerBox = parseFloat($('.perBox')[i].innerText).toFixed(2),
 				pricePerPack = parseFloat($('.perPack')[i].innerText).toFixed(2),
 				amount = parseFloat((boxVal * pricePerBox) + (packsVal * pricePerPack)).toFixed(2);
-
-            if (isExceeded) {
+			
+            if ( isOrderExceed( boxVal, packsVal, boxAvailable, packsAvailable, packsPerBox ) ) {
                 $('#modal-exceed').modal('show');
                 isValid = false;
                 return false;
             }
 
-            if (boxVal === 0 && packsVal === 0) {
+            if ( boxVal == 0 && packsVal == 0 ) {
                 return true;
             }
 			
+			if ( isBoxOrdered( box.id ) ) {
+				return true;
+			}
+			
             str += '<tr>';
             str += '<td>' + data.product.name + ' @ ' + box.size + '</td>';
-			str += '<input name="box_id[]" type="hidden" value="' + box.id + '">';
+			str += '<input id="box_id" name="box_id[]" type="hidden" value="' + box.id + '">';
 			str += '<input name="no_of_box[]" type="hidden" value="' + boxVal + '">';
 			str += '<input name="no_of_packs[]" type="hidden" value="' + packsVal + '">';
 			str += '<input name="amount[]" type="hidden" value="' + amount + '">';
 			str += '<input name="selling_price[]" type="hidden" value="' + $('.select-price')[0].value + '">';
             str += '<td>';
 
-            if ($('.box')[i].value !== 0 && $('.packs')[i].value === 0) {
+            if ($('.box')[i].value != 0 && $('.packs')[i].value == 0) {
                 str += $('.box')[i].value + ' Box';
-            } else if ($('.box')[i].value === 0 && $('.packs')[i].value !== 0) {
+            } else if ($('.box')[i].value == 0 && $('.packs')[i].value != 0) {
                 str += $('.packs')[i].value + ' Packs';
             } else {
                 str += $('.box')[i].value + ' Box, ' + $('.packs')[i].value + ' Packs';
@@ -168,11 +170,10 @@ $(document).ready(function () {
             str += '</tr>';
 			
             orderedBoxes.push(box.id);
-            console.log(orderedBoxes);
         });
 
         
-        if (!isValid || isAllZero()) {
+        if ( !isValid || isAllZero() ) {
             $(this).removeClass('btn-info').addClass('btn-danger').text('Invalid');
 			return;
         }
@@ -191,6 +192,38 @@ $(document).ready(function () {
         
        
     });
+
+/****************************************
+
+	Check if orders Exceed
+
+*****************************************/
+	
+	var isOrderExceed = function (b,p,ba,pa,np) {
+		var orders = b * np + p,
+			available = ba * np + pa;
+		
+		return orders > available;
+	}
+	
+/****************************************
+
+	Checks if box is already added.
+
+*****************************************/
+	
+	var isBoxOrdered = function ( b ) {
+		var ordered = false;
+		
+		$.each( orderedBoxes, function ( i, v ) {
+			if ( b == v ) {
+				ordered = true;
+				return false;
+			}
+		} );
+		return ordered;
+	}
+	
 
 /****************************************
 
@@ -265,6 +298,12 @@ $(document).ready(function () {
 *********************************************/
     
     $(this).on('click', '.remove-item', function () {
+		var boxToRemove = $(this).closest( "tr" ).find( "#box_id" ).val();
+		
+		orderedBoxes = jQuery.grep( orderedBoxes, function( value ) {
+			return value != boxToRemove;
+		} );
+		
         $(this).closest('tr').remove();
     });
     
@@ -277,7 +316,7 @@ $(document).ready(function () {
     
     $('#order-form').on("keyup keypress", function (e) {
         var code = e.keyCode || e.which;
-        if (code === 13) {
+        if (code == 13) {
             e.preventDefault();
             return false;
         }
@@ -292,7 +331,7 @@ $(document).ready(function () {
     
     $('select[name=type]').change(function () {
         var type = $(this).val();
-        $('select[name=salesman]').attr('disabled', type === 'In-House');
+        $('select[name=salesman]').attr('disabled', type == 'In-House');
     });
     
 /********************************************
@@ -303,7 +342,7 @@ $(document).ready(function () {
     
     $(this).on('focusout', '#suggestion-container input[type=number]', function () {
         var v = $(this).val();
-        $(this).val(v === '' || v.isNumber || v < 0 ? '0' : v);
+        $(this).val(v == '' || v.isNumber || v < 0 ? '0' : v);
     });
     
 /*******************************************
@@ -316,7 +355,7 @@ $(document).ready(function () {
         var isset = true;
         
         $.each($('.price'), function (i, price) {
-            console.log($(this).text());
+//            console.log($(this).text());
         });
         
         return isset;
@@ -334,12 +373,40 @@ $(document).ready(function () {
 		var bool = true;
 		
 		$.each($('#suggestion-container input[type=number]'), function () {
-			if ($(this).val() !== 0) {
+			if ($(this).val() != 0) {
 				bool = false;
 			}
 		});
 		
 		return bool;
 	};
+
+/*******************************************
+
+	Get next id.
+
+********************************************/
+	
+	var getNextID = function () {
+		$.get("/order/get/id", function (data) {
+			$("#os-number").text(pad(data, 4));
+		});
+		setTimeout(function () {
+			getNextID()
+		}, 5000);
+	}
     
+	getNextID();
+	
+/********************************************
+
+	Zerofill order number.
+
+*********************************************/
+	
+	var pad = function ( str, max ) {
+		str = str.toString();
+		return str.length < max ? pad( "0" + str, max ) : str;
+	}
+	
 });

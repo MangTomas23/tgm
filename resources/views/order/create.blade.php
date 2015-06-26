@@ -98,7 +98,11 @@
             Order Slip
             <span class="pull-right">
                 No: 
-                <span id="os-number"class="badge">1234</span>
+				<?php
+					$result = DB::select(DB::raw('SHOW TABLE STATUS LIKE "orders"'));
+					$id = $result[0]->Auto_increment;
+				?>
+                <span id="os-number"class="badge">{{ str_pad($id, 4, 0, STR_PAD_LEFT) }}</span>
             </span>
         </p>
         <div class="text-center" style="margin-top:24px">

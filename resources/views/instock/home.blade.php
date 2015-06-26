@@ -15,8 +15,9 @@
             <tr>
                 <th>#</th>
                 <th>Date</th>
-                <th>Total Products</th>
-                <th>Total Products</th>
+				<th>Supplier</th>
+                <th>Products</th>
+				<th class="text-right">Total Amount</th>
             </tr>
         </thead>
         <tbody>
@@ -24,10 +25,12 @@
                 <tr>
                     <td>{{ $i+1 }}</td>
                     <td><a href="{{ action('InStockController@showByDate', $instock->date) }}">{{ $instock->date }}</a></td>
+					<td>{{ $instock->supplier->name }}</td>
+					<td>{{ count( App\Product::where( 'date', $instock->date ) ) }}</td>
+					<td class="text-right currency">{{ App\Instock::where( 'date', $instock->date )->sum('amount') }}</td>
                 </tr>
             @endforeach
         </tbody>
     </table>
 </div>
-
 @endsection

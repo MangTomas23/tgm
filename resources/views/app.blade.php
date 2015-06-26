@@ -66,11 +66,23 @@
     <script src="{{ asset('/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('/js/Chart.js') }}"></script>
     <script src="{{ asset('/js/jQuery.print.js') }}"></script>
-    
+    <script>
+		$.fn.digits = function () {
+			'use strict';
+			return this.each(function () {
+				$(this).text($(this).text().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,"));
+			});
+		};
+	</script>
 <!--	<script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.1/js/bootstrap.min.js"></script>-->
 	@yield('content')
     <footer class="footer" style="padding: 10px">
     
     </footer>
+	<script>
+		$.each($('.currency'), function(){
+			$(this).digits();
+		})
+	</script>
 </body>
 </html>

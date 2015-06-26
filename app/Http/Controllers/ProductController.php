@@ -213,18 +213,18 @@ class ProductController extends Controller {
         $boxes = Box::all();
         
         foreach($boxes as $box){
-            $noOfBox = intval(InStock::countInStocks($box->id));
+            $inStock = intval(InStock::countInStocks($box->id));
             $packsPerBox = $box->no_of_packs; 
             
             echo $box->size . ' - ';
             
             
-            echo 'Total Packs: ' . ($noOfBox * $packsPerBox). '<br>';
+            echo 'Total Packs: ' . ($inStock * $packsPerBox). '<br>';
         }*/
         
-        $noOfBox = 10;
+        $inStock = 10;
         $packsPerBox = 12;
-        $totalPacks = $noOfBox * $packsPerBox;
+        $totalPacks = $inStock * $packsPerBox;
         
         $noOfBoxOrdered = 6;
         $noOfPacksOrdered = 13;
@@ -236,7 +236,7 @@ class ProductController extends Controller {
         
         $totalLeft = $noOfBoxLeft . ' Box, ' . ($noOfPacksLeft - $noOfBoxLeft * $packsPerBox) . ' Packs';
             
-        echo 'Number of Box: ' . $noOfBox . '<br>';
+        echo 'Number of Box: ' . $inStock . '<br>';
         echo 'Packs Per Box: ' . $packsPerBox . '<br>';
         echo 'Total Number of Packs: ' . $totalPacks . '<br>';
         echo '-----------------------------------------------<br>';
@@ -247,8 +247,9 @@ class ProductController extends Controller {
         echo '-----------------------------------------------<br>';
         echo 'In Stock: ' . $totalLeft;
         
+		echo '<br><br>';
         
-        
+//        echo Box::countStock(49)['no_of_box_available'];
         
     }
 }

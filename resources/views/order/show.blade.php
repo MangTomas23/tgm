@@ -48,7 +48,7 @@
 						<tr>
 							<td>{{ $orderItem->product->name . ' @ ' . $orderItem->box->size}}</td>
 							<td>{{ $orderItem->no_of_box . ' Box, ' . $orderItem->no_of_packs . ' Packs' }}</td>
-							<td class="text-right">{{ $orderItem->amount }}</td>
+							<td class="text-right currency">{{ $orderItem->amount }}</td>
 						</tr>
 					@endforeach
 				</tbody>
@@ -56,16 +56,16 @@
         </div>
         <hr>
         <div class="text-right col-xs-12">
-            <p><strong>Total: </strong><span id="total-amount">P {{ $orderItems[0]->order->totalAmount($orderItems[0]->order->id) }}</span></p>
+            <p><strong>Total: </strong><span id="total-amount" class="currency">P {{ $orderItems[0]->order->totalAmount($orderItems[0]->order->id) }}</span></p>
         </div>
     </div>
 </div>
 
 <script>
-	$(document).ready(function(){
-		$('#btn-print').click(function(){
-			$('#order-slip').print();
-		})
-	})
+$(document).ready(function () {
+	$('#btn-print').click(function () {
+		$('#order-slip').print();
+	});
+});
 </script>
 @endsection

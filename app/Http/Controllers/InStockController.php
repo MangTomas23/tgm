@@ -55,7 +55,12 @@ class InStockController extends Controller {
     
     
     public function showByDate($date){
-        $instocks = InStock::where('date',$date)->get();
-        return view('instock.showasdate', compact('instocks'));
+        $instocks = InStock::where('date',$date)->groupBy('supplier_id')->get();
+        return view('instock.showbydate', compact('instocks'));
     }
+	
+	public function show( $date, $supplier_id ) {
+		$instocks = InStock::date( $date )->supplier( $supplier_id )->get();
+		return view( 'instock.show', compact( [ 'date', 'instocks' ] ) );
+	}
 }
