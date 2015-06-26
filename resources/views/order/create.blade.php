@@ -25,7 +25,7 @@
         <input name="date" type="date" class="form-control" value="{{ $input['date'] or null }}">
     </div>
     <div class="form-group col-sm-12">
-        <label>Address</label>
+        <label>Address: </label>
         <input name="address" type="text" class="form-control" value="{{ $input['address'] or null }}" required autocomplete="off">
     </div>
     <div class="form-group col-sm-6">
@@ -188,15 +188,15 @@
     @foreach($customers as $customer)
         customers.push({
             id: {{ $customer->id }},
-            name: '{{ $customer->name }}',
-            address: '{{ $customer->address }}'
+            name: "<?php echo $customer->name ?>",
+            address: "<?php echo $customer->address ?>"
         })
     @endforeach
     
     @foreach($employees as $employee)
         salesmen.push({
             id: {{ $employee->id }},
-            name: '{{ $employee->firstname . ' ' . $employee->lastname}}'
+            name: "{{ $employee->firstname . ' ' . $employee->lastname}}"
         })
     @endforeach
     

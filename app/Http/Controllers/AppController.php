@@ -5,80 +5,57 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-class AppController extends Controller {
+use Input;
+use Redirect;
+use Session;
+use DB;
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
+class AppController extends Controller {
+	
+//	public function __construct(){
+//		return $this->middleware('auth');
+//	}
+
 	public function index()
 	{
 		return view('home');
 	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
+	
+	public function advance() {
+		return view('advance.pass');
 	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
+	
+	public function advancePass() {
+		$passcode = Input::get('passcode');
+		$authenticated = false;
+		
+		if( $passcode == 'sarsanimangtomas' ) {
+			$authenticated = true;
+			return Redirect::action('AppController@advanceHome')->with('authenticated', $authenticated);
+		}
+		
+		return 'Invalid Passcode';
 	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
+	
+	public function advanceHome() {
+		$authenticated = Session::get('authenticated');
+		
+		if( !isset( $authenticated ) || $authenticated == false ) {
+			return 'Unauthorized Access!';
+		}
+		
+		return view('advance.home');
 	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
+	
+	public function advanceExecute() {
+		$tables = Input::get('tables');
+		
+		DB::statement( 'SET foreign_key_checks = 0' );
+		
+		foreach( $tables as $table ) {
+			DB::statement( 'TRUNCATE TABLE ' . $table );
+		}
+		
+		DB::statement( 'SET foreign_key_checks = 1' );
 	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
 }

@@ -27,7 +27,7 @@
 					<td>{{ $order->type }}</td>
 					<td>{{ $order->date }}</td>
 					<td>{{ $order->customer->name }}</td>
-					<td>P {{ $order->totalAmount($order->id) }}</td>
+					<td>P <span class="currency">{{ $order->totalAmount($order->id) }}</span></td>
 				</tr>
 			@endforeach
 		</tbody>

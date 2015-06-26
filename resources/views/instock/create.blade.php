@@ -63,7 +63,7 @@
                             @foreach($product->boxes as $box)
                                 <div class="form-group">
                                     <label>&nbsp;</label>
-                                    <p id="{{ $box->id }}" data-purchase_price="{{ $box->purchase_price }}" class="form-control-static">0.00</p>
+                                    <p id="{{ $box->id }}" data-purchase_price="{{ $box->purchase_price }}" class="form-control-static currency">0.00</p>
                                 </div>
                             @endforeach
                         </td>
@@ -95,9 +95,9 @@
             $box_id = $(q).data('id');
             $quantity = $(q).val();
             
-            $amount = $(q).closest('tr').find('#' + $box_id)
-            $total = $amount.data('purchase_price') * $quantity
-            $amount.text($amount.data('purchase_price') != 0 ? $total:'Price not set!')
+            $amount = $(q).closest('tr').find('#' + $box_id);
+            $total = $amount.data('purchase_price') * $quantity;
+            $amount.text($amount.data('purchase_price') != 0 ? $total:'Price not set!');
         }
     })
 </script>

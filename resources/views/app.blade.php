@@ -81,11 +81,15 @@
     
     </footer>
 	<script>
-		$.each($('.currency'), function(){
-			var v = parseFloat($(this).text()).toFixed(2);
-			$(this).text(v);
-			$(this).digits();
-		})
+		var setAsCurrency = function() {
+			$.each($('.currency'), function(){
+				var v = parseFloat($(this).text()).toFixed(2);
+				$(this).text(v);
+				$(this).digits();
+			})
+		}
+		
+		setAsCurrency();
 	</script>
 </body>
 </html>

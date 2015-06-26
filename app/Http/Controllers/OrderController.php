@@ -60,20 +60,6 @@ class OrderController extends Controller {
         
         $order->save();
 		
-        
-		
-        
-		
-		
-        echo '<br>';
-        echo 'Customer ID: '. $customer->id . '<br>';
-        echo 'Salesman ID: '. $salesman . '<br>';
-        echo 'Date: ' . $input['date'] . '<br>';
-        echo 'Type: ' . $input['type'] . '<br>';
-        echo 'Order ID: '. $order->id;
-		
-		print_r($input);
-        
 		foreach($input['box_id'] as $i=>$box_id){
 			$orderItem = new OrderItem;
 			$orderItem->order_id = $order->id;
@@ -85,8 +71,9 @@ class OrderController extends Controller {
 			$orderItem->selling_price = $input['selling_price'][$i];
 			$orderItem->save();
 			
-			echo 'saved: ' . $orderItem->id . '<br>';
 		}
+		
+		return view('order.addmore');
 	}
 
     public function query(){

@@ -149,6 +149,13 @@ Route::get('/test', 'ProductController@test');
 
 Route::get('/sales/report', 'SalesReportController@index');
 
+Route::get('/developer/advance/options', 'AppController@advance');
+
+Route::post('/developer/advance/options/pass', 'AppController@advancePass');
+
+Route::get('/developer/advance/options/home', 'AppController@advanceHome');
+
+Route::post('/developer/advance/options/execute', 'AppController@advanceExecute');
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
