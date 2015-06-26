@@ -155,7 +155,7 @@
                 <h4 class="modal-title">Error</h4>
             </div>
             <div class="modal-body">
-                <p>Orders Exceed!</p>
+                <p>Orders Exceed! / Out of Stock!</p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>

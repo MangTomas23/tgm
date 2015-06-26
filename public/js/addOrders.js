@@ -332,6 +332,12 @@ $(document).ready(function () {
     $('select[name=type]').change(function () {
         var type = $(this).val();
         $('select[name=salesman]').attr('disabled', type == 'In-House');
+		
+		if( type == "In-House" ) {
+			$("#os-salesman").text( "N/A" );
+		}else{
+			setOSSalesman();
+		}
     });
     
 /********************************************

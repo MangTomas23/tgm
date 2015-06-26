@@ -30,7 +30,20 @@
             </div>
             <div class="col-xs-6 text-right">
                 <p><strong>Date: </strong> <span id="os-date">{{ date_format(date_create($orderItems[0]->order->date),"m/d/Y") }}</span></p>
-                <p><strong>Salesman: </strong><span id="os-salesman">{{ $orderItems[0]->order->salesman->firstname . ' ' . $orderItems[0]->order->salesman->lastname }}</span></p>
+                <p>
+					<strong>Salesman: </strong>
+					<span id="os-salesman">
+<?php
+	$salesman = $orderItems[0]->order->salesman or null;
+	
+	if(!$salesman) {
+		echo 'N/A';
+	}else{
+		echo $salesman->firstname . ' ' , $salesman->lastname;
+	}
+?>
+					</span>
+				</p>
             </div>
         </div>
         <hr>
@@ -56,7 +69,7 @@
         </div>
         <hr>
         <div class="text-right col-xs-12">
-            <p><strong>Total: </strong><span id="total-amount" class="currency">P {{ $orderItems[0]->order->totalAmount($orderItems[0]->order->id) }}</span></p>
+            <p><strong>Total: </strong>P <span id="total-amount" class="currency">{{ $orderItems[0]->order->totalAmount($orderItems[0]->order->id) }}</span></p>
         </div>
     </div>
 </div>

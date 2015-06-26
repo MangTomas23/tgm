@@ -40,6 +40,7 @@
                     <li class="@yield('suppliers')"><a href="{{ action('SupplierController@index') }}">Suppliers</a></li>
                     <li class="@yield('employees')"><a href="{{ action('EmployeeController@index') }}">Employees</a></li>
                     <li class="@yield('pricelist')"><a href="{{ action('PriceListController@index') }}">Price List</a></li>
+                    <li class="@yield('salesreport')"><a href="{{ action('SalesReportController@index') }}">Sales Report</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
@@ -81,6 +82,8 @@
     </footer>
 	<script>
 		$.each($('.currency'), function(){
+			var v = parseFloat($(this).text()).toFixed(2);
+			$(this).text(v);
 			$(this).digits();
 		})
 	</script>

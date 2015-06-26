@@ -48,50 +48,50 @@ class ProductController extends Controller {
 	 */
 	public function store()
 	{
-        $input = Input::all();
-        $product = new Product;
-        $status = array();
-        
-        $rules = array(
-            'name'=>'required',
-            'supplier'=>'required',
-            'product_category'=>'required',
-            'size'=>'required',
-            'packs'=>'required'
-        );
-        
-        $validator = Validator::make($input, $rules);
-        try{
-            if($validator->passes()){
-                $product->name = $input['name'];
-                $product->supplier_id = $input['supplier'];
-                $product->product_category_id = $input['product_category'];
-
-                if($product->save()){
-                    $product_id = $product->id;
-                }
-
-                foreach($input['size'] as $i=>$v){
-                    $box = new Box;
-                    $box->product_id = $product_id;
-                    $box->size = $v;
-                    $box->no_of_packs = $input['packs'][$i];
-                    $box->purchase_price = $input['purchase_price'][$i];
-                    $box->selling_price_1 = $input['selling_price_1'][$i];
-                    $box->selling_price_2 = $input['selling_price_2'][$i];
-                    $box->save();
-                }
-
-                $saveSuccessful = true;
-                $suppliers = Supplier::orderBy('name')->get();
-                $product_categories = ProductCategory::orderBy('name')->get();
-                return view('product.create', compact(['input','saveSuccessful','suppliers','product_categories']));
-            }
-        }catch(\Illuminate\Database\QueryException $e){
-            if($e->getCode()==23000){
-                return Redirect::action('ProductController@duplicate');
-            }
-        }
+//        $input = Input::all();
+//        $product = new Product;
+//        $status = array();
+//        
+//        $rules = array(
+//            'name'=>'required',
+//            'supplier'=>'required',
+//            'product_category'=>'required',
+//            'size'=>'required',
+//            'packs'=>'required'
+//        );
+//        
+//        $validator = Validator::make($input, $rules);
+//        try{
+//            if($validator->passes()){
+//                $product->name = $input['name'];
+//                $product->supplier_id = $input['supplier'];
+//                $product->product_category_id = $input['product_category'];
+//
+//                if($product->save()){
+//                    $product_id = $product->id;
+//                }
+//
+//                foreach($input['size'] as $i=>$v){
+//                    $box = new Box;
+//                    $box->product_id = $product_id;
+//                    $box->size = $v;
+//                    $box->no_of_packs = $input['packs'][$i];
+//                    $box->purchase_price = $input['purchase_price'][$i];
+//                    $box->selling_price_1 = $input['selling_price_1'][$i];
+//                    $box->selling_price_2 = $input['selling_price_2'][$i];
+//                    $box->save();
+//                }
+//
+//                $saveSuccessful = true;
+//                $suppliers = Supplier::orderBy('name')->get();
+//                $product_categories = ProductCategory::orderBy('name')->get();
+//                return view('product.create', compact(['input','saveSuccessful','suppliers','product_categories']));
+//            }
+//        }catch(\Illuminate\Database\QueryException $e){
+//            if($e->getCode()==23000){
+//                return Redirect::action('ProductController@duplicate');
+//            }
+//        }
         return Redirect::action('ProductController@create', compact('saveSuccessful'));
 	}
 

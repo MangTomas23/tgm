@@ -17,7 +17,7 @@
         </div>
     @endif
     
-    {!! Form::open(['url'=>'/product/create', 'class'=>'form col-sm-10 col-sm-offset-1']) !!}
+    {!! Form::open(['url'=>'/product/create', 'class'=>'form col-sm-10 col-sm-offset-1','id'=>'product-form']) !!}
         <div class="page-header">
             <h4>Product Info</h4>
         </div>
@@ -87,6 +87,7 @@
         
         <span class="clearfix"></span>
         
+		<div class="box-row">
         @if(!isset($input))
             <div class="form-group col-sm-3">
                 <input name="size[]" type="text" class="form-control size" placeholder="e.g. 2 x 3" value="" required>
@@ -128,7 +129,7 @@
                 </div>
             @endforeach
         @endif
-    
+		</div>
         <div id="box-container">
     
         </div>
@@ -143,7 +144,7 @@
     
         <div class="col-sm-12 text-right">
             <a href="{{ action('ProductController@index') }}" class="btn btn-default">Cancel</a>
-            {!! Form::submit('Save', ['class'=>'btn btn-success']) !!}
+            {!! Form::submit('Save', ['class'=>'btn btn-success', 'id'=>'btnSave']) !!}
         </div>
     
     {!! Form::close() !!}
@@ -154,12 +155,12 @@
     $(document).ready(function(){
         $('#btnAddMore').click(function(){
             $('#box-container').append(
-                '<div>'+
+                '<div class="box-row">'+
                     '<div class="form-group col-sm-3">' +
-                        '<input name="size[]" type="text" class="form-control" placeholder="e.g. 2 x 3" value="" required>' +
+                        '<input name="size[]" type="text" class="form-control size" placeholder="e.g. 2 x 3" value="" required>' +
                     '</div>' +
                     '<div class="form-group col-sm-2">' +
-                        '<input name="packs[]" type="number" min="0" value="0" class="form-control">' +
+                        '<input name="packs[]" type="number" min="0" value="0" class="form-control pack">' +
                     '</div>' +
                     '<div class="form-group col-sm-2">' +
                         '<input name="purchase_price[]" type="number" min="0.00" value="0.00" step="0.01" class="form-control">' +
@@ -178,8 +179,40 @@
         })
         
         $(this).on('click','.btn-remove', function(){
-            $(this).parent().parent().remove()
+            $(this).closest('.box-row').remove()
         })
+		
+		$(this).on( "keyup", ".size", function(e) {
+			var val = $(this).val(),
+				pack = $(this).closest( ".box-row" ).find(".pack");
+			if( e.keyCode == 32 ) {
+				return;
+			}
+			var f = [];
+			$.each( val.split(), function( i, v ) {
+				if( $.isNumeric( v ) ) {
+					f.push( v );
+					pack.val( f );
+					return false;
+				}
+			} );
+			
+		} );
+		
+		$( "#product-form" ).submit( function( event ) {
+			// check first if there's no 0 pack
+			var hasZero = false;
+			$.each($( ".pack" ), function() {
+				if( $(this).val() == 0 || !$.isNumeric($(this).val())  ) {
+					hasZero = true;
+				}
+			} );
+			
+			if( hasZero ) {
+				alert( "Number of Packs cannot be 0" );
+				event.preventDefault();
+			}
+		} );
     });
 </script>
 

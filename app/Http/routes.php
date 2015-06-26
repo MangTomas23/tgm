@@ -146,6 +146,10 @@ Route::get('/stocks/in/{date}/{supplier_id}', 'InStockController@show');
 Route::get('/test', 'ProductController@test');
 
 
+
+Route::get('/sales/report', 'SalesReportController@index');
+
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
