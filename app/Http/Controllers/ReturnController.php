@@ -4,81 +4,57 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Input;
+use Redirect;
+
+use App\Ret;
+use App\Order;
+use App\ReturnItem;
+
 
 class ReturnController extends Controller {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
+	public function create() {
+		$input = Input::all();
+		$orderItems = Order::find( $input[ 'order_no' ] )->orderItems;
+		return view( 'return.create', compact( [ 'input', 'orderItems' ] ) );
 	}
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
+	
+	public function index() {
+		
+		$returns = Ret::all();
+		
+		
+		return view( 'return.home', compact( 'returns' ) );
 	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
+	
+	public function store() {
+		
+		$input = Input::all();
+		
+		$return  = new Ret;
+		$return->order_id = intval( $input[ 'order_no' ] );
+		$return->date = $input['date'];
+		
+		$return->save();
+		
+		foreach($input['box_id'] as $i=>$box_id) {
+			$returnItem = new ReturnItem;
+			$returnItem->ret_id = $return->id;
+			$returnItem->box_id = $box_id;
+			$returnItem->no_of_box = $input['no_of_box'][$i];
+			$returnItem->no_of_packs = $input['no_of_packs'][$i];
+			$returnItem->save();
+		}
+		
+		return 'Coming Soon!';
 	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
+	
+	public function show( $id ) {
+		$returnItems = Ret::find( $id )->returnItems;
+		$orderNo = str_pad( $returnItems[0]->ret->order->id, 4, 0,
+						   STR_PAD_LEFT );
+		
+		return view( 'return.show', compact( 'returnItems', 'orderNo' ) );
 	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
 }

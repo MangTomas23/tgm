@@ -21,6 +21,10 @@ class Box extends Model {
 //        return $count==0 ? ' 0 ':$count;
 //    }
 	
+	public function returnItems() {
+		return $this->hasMany('App\ReturnItem');
+	}
+	
 	public function scopeCountStock($query, $box_id){
 		$box = Box::find($box_id);
 		$inStock = $box->instocks->sum('quantity');

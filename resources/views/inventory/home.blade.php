@@ -32,13 +32,17 @@
             </div>
         {!! Form::close() !!}
         <span class="clearfix"></span>
-        <div class="page-header" style="margin-top: 48px">
-            <h3>Add Order <a href="{{ action('OrderController@index') }}" class="btn btn-default pull-right"><span class="glyphicon glyphicon-list-alt"></span></a></h3>
-        </div>
 		
 
 <!------------------------------------------ Add Orders ---------------------------------------------------->
-		
+
+        <div class="page-header" style="margin-top: 48px">
+            <h3>Add Order 
+				<a href="{{ action('OrderController@index') }}" class="btn btn-default pull-right">
+					<span class="glyphicon glyphicon-list-alt"></span>
+				</a>
+			</h3>
+        </div>
 		
         
         {!! Form::open(['url'=>'/order/add','method'=>'get']) !!}
@@ -72,17 +76,24 @@
             </div>
         {!! Form::close() !!}
 		
+		<span class="clearfix"></span>
+		
 <!--------------------------------------- Return Items --------------------------------------------->
 		
-		<div class="page-header">
-			<h3>Return</h3>
+		<div class="page-header" style="margin-top: 48px">
+			<h3>
+				Return 
+				<a href="{{ action( 'ReturnController@index' ) }}" class="btn btn-default pull-right">
+					<span class="glyphicon glyphicon-list-alt"></span>
+				</a>
+			</h3>
 		</div>
 		
-		{!! Form::open( [ 'url' => '/return/add' ] ) !!}
+		{!! Form::open( [ 'url' => '/return/add', 'method' => 'get' ] ) !!}
 		
 			<div class="form-group col-sm-6">
 				<label for="order_no" >Order No</label>
-				<input name="order_no" type="text" class="form-control" placeholder="e.g. 0001"> 
+				<input name="order_no" type="text" class="form-control" placeholder="e.g. 0001" required> 
 			</div>
 		
 			<div class="form-group col-sm-6">
@@ -90,12 +101,16 @@
 				<input name="date" type="date" class="form-control" require>
 			</div>
 		
+			<div class="form-group col-sm-12 text-right">
+				{!! Form::submit( 'Next', [ 'class' => 'btn btn-info' ] ) !!}
+			</div>
+		
 		{!! Form::close() !!}
 		
-		
+		<span class="clearfix"></span>
 <!--------------------------------------- Bad Orders --------------------------------------------->
 		
-		<div class="page-header">
+		<div class="page-header" style="margin-top: 48px">
 			<h3>Bad Orders</h3>
 		</div>
 		

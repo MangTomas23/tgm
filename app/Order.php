@@ -16,9 +16,11 @@ class Order extends Model {
 		return Order::find($id)->orderItems->sum('amount');
 	}
 	
-	public function salesman(){
+	public function salesman() {
 		return $this->belongsTo('App\Employee');
 	}
 	
-
+	public function returns() {
+		return $this->hasMany( 'App\Ret' );
+	}
 }

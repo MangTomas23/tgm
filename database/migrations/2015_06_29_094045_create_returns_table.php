@@ -16,6 +16,9 @@ class CreateReturnsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->timestamps();
+			$table->integer('order_id')->unsigned()->nullable();
+			$table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
+			$table->date('date');
 		});
 	}
 

@@ -21,6 +21,7 @@ return array(
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateProductCategoriesTable' => $baseDir . '/database/migrations/2015_06_10_174508_create_product_categories_table.php',
     'CreateProductsTable' => $baseDir . '/database/migrations/2015_06_09_174025_create_products_table.php',
+    'CreateReturnItemsTable' => $baseDir . '/database/migrations/2015_06_29_110222_create_return_items_table.php',
     'CreateReturnsTable' => $baseDir . '/database/migrations/2015_06_29_094045_create_returns_table.php',
     'CreateStockInsTable' => $baseDir . '/database/migrations/2015_06_13_233551_create_stock_ins_table.php',
     'CreateSuppliersTable' => $baseDir . '/database/migrations/2015_06_09_173758_create_suppliers_table.php',

@@ -157,6 +157,20 @@ Route::get('/developer/advance/options/home', 'AppController@advanceHome');
 
 Route::post('/developer/advance/options/execute', 'AppController@advanceExecute');
 
+
+
+Route::get('/returns', 'ReturnController@index');
+
+Route::get('/return/add', 'ReturnController@create');
+
+Route::post('/return/store', 'ReturnController@store');
+
+Route::get('/return/{id}', 'ReturnController@show');
+
+
+
+Route::get('/bad/orders', '');
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',
