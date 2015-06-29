@@ -35,6 +35,11 @@
         <div class="page-header" style="margin-top: 48px">
             <h3>Add Order <a href="{{ action('OrderController@index') }}" class="btn btn-default pull-right"><span class="glyphicon glyphicon-list-alt"></span></a></h3>
         </div>
+		
+
+<!------------------------------------------ Add Orders ---------------------------------------------------->
+		
+		
         
         {!! Form::open(['url'=>'/order/add','method'=>'get']) !!}
             <div class="form-group col-sm-6">
@@ -66,6 +71,34 @@
                 {!! Form::submit('Next', ['class'=>'btn btn-info']) !!}
             </div>
         {!! Form::close() !!}
+		
+<!--------------------------------------- Return Items --------------------------------------------->
+		
+		<div class="page-header">
+			<h3>Return</h3>
+		</div>
+		
+		{!! Form::open( [ 'url' => '/return/add' ] ) !!}
+		
+			<div class="form-group col-sm-6">
+				<label for="order_no" >Order No</label>
+				<input name="order_no" type="text" class="form-control" placeholder="e.g. 0001"> 
+			</div>
+		
+			<div class="form-group col-sm-6">
+				<label for="date">Date</label>
+				<input name="date" type="date" class="form-control" require>
+			</div>
+		
+		{!! Form::close() !!}
+		
+		
+<!--------------------------------------- Bad Orders --------------------------------------------->
+		
+		<div class="page-header">
+			<h3>Bad Orders</h3>
+		</div>
+		
     </div>
 </div>
 

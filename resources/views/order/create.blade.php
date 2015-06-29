@@ -122,13 +122,13 @@
         </div>
         <hr>
         <div class="table-responsive" style="min-height: 280px; margin-top:24px">
-            <table class="table table-default">
+            <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>Product</th>
                         <th>Quantity</th>
                         <th class="text-right">Amount</th>
-                        <th></th>
+                        <th class="hidden-print"></th>
                     </tr>
                 </thead>
                 <tbody>

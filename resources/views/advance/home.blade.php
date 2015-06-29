@@ -19,6 +19,9 @@
 		<label class="checkbox">
 			<input name="tables[]" type="checkbox" value="customers"> Truncate Customers
 		</label>
+		<label class="checkbox">
+			<input name="tables[]" type="checkbox" value="in_stocks"> Truncate In Stocks
+		</label>
 
 	{!! Form::submit( 'Execute',[ 'class' => 'btn btn-danger' ] ) !!}
 	{!! Form::close() !!}
