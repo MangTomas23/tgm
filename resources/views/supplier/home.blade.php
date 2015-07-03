@@ -10,7 +10,10 @@
     
     
     <div class="col-xs-12 visible-print">
-        <h3><strong>Tradeal General Merchandise</strong><small id="date" class="pull-right"></small></h3>
+        <h3>
+            <strong>Tradeal General Merchandise</strong>
+            <small id="date" class="pull-right"></small>
+        </h3>
         <h4>Suppliers</h4>
     </div>
     <canvas id="supplierChart"></canvas>
@@ -22,7 +25,8 @@
         <div class="page-header">
             <h1>
                 Suppliers
-                <a href="{{ action('SupplierController@create') }}" class="btn btn-info pull-right">Add</a>
+                <a  href="{{ action('SupplierController@create') }}" 
+                    class="btn btn-info pull-right">Add</a>
             </h1>
         </div>
 
@@ -40,7 +44,12 @@
                 @else
                     @foreach($suppliers as $supplier)
                         <tr>
-                            <td><a href="{{ action('SupplierController@show', $supplier->id) }}">{{ $supplier->name }}</a></td>
+                            <td>
+                                <a href="{{ action('SupplierController@show', 
+                                        $supplier->id) }}">
+                                    {{ $supplier->name }}
+                                </a>
+                            </td>
                             <td>{{ $supplier->contact }}</td>
                             <td>{{ $supplier->address }}</td>
                         </tr>
@@ -61,11 +70,9 @@
             var ctx = [$("#supplierChart").get(0).getContext("2d")];
             
             var colors = [
-                ['#b71066','#34e4ea','#3185fc','#5aff15','#ffc857','#98C9A3'],
-                ['#dd177d','#68eff4','#6fabff','#9fff76','#ffd580','#a4d8af']
+                ['#b71066','#34e4ea','#3185fc','#5aff15','#ffc857','#98C9A3','#960200'],
+                ['#dd177d','#68eff4','#6fabff','#9fff76','#ffd580','#a4d8af','#960200']
             ];
-            
-            
             var suppliers = [];
             
             @foreach($suppliers as $supplier)
@@ -73,7 +80,12 @@
             @endforeach
             
             $.each(suppliers, function(i,supplier){
-                $('#legend').append('<li><div class="media-middle legend'+i+'" style="width:12px;height:12px;background-color:'+ colors[0][i] +';display:inline-block;"></div> '+ supplier.name +' <span class="badge">'+ supplier.productCount +'</span></li>')
+                $('#legend').append(
+                    '<li><div class="media-middle legend' + i + 
+                    '" style="width:12px;height:12px;background-color:' + 
+                    colors[0][i] + ';display:inline-block;"></div> ' + 
+                    supplier.name + ' <span class="badge">' + 
+                    supplier.productCount +'</span></li>')
                 $('#legendStyle').append(
                     '@media print{' +
                         '.legend' + i + '{' +

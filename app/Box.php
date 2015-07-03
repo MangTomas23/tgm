@@ -30,17 +30,30 @@ class Box extends Model {
 		$inStock = $box->instocks->sum('quantity');
         $packsPerBox = $box->no_of_packs;
         $totalPacks = $inStock * $packsPerBox;
-        
+		
         $noOfBoxOrdered = $box->orderItems->sum('no_of_box');
         $noOfPacksOrdered =$box->orderItems->sum('no_of_packs');
         
         $totalOrders = ($noOfBoxOrdered * $packsPerBox) + $noOfPacksOrdered;
-        $noOfPacksLeft = $totalPacks - $totalOrders;
-        $noOfBoxLeft = floor($noOfPacksLeft / $packsPerBox);
+        $totalNoOfPacksLeft = $totalPacks - $totalOrders;
+        $totalNoOfBoxLeft = floor($totalNoOfPacksLeft / $packsPerBox);
 		
-		$totalLeft = ['no_of_box_available'=>$noOfBoxLeft,
-					  'no_of_packs_available'=>($noOfPacksLeft - $noOfBoxLeft * $packsPerBox)];
+		$totalLeft = ['no_of_box_available'=>$totalNoOfBoxLeft,
+					  'no_of_packs_available'=>($totalNoOfPacksLeft - $totalNoOfBoxLeft * $packsPerBox)];
         
 		return $totalLeft;
+	}
+
+	public function scopeCountReturns($query, $box_id) {
+		$box = Box::find($box_id);
+
+		$packsPerBox = $box->no_of_packs;
+
+		$noOfBoxLeft = $box->returnItems->sum('no_of_box');
+		$noOfPacksLeft = $box->returnItems->sum('no_of_packs');
+
+
+
+		return $noOfBoxLeft * $packsPerBox + $noOfPacksLeft;
 	}
 }

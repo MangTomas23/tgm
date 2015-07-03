@@ -10,6 +10,10 @@ use Redirect;
 use Session;
 use DB;
 
+use App\Box;
+use App\Employee;
+use App\Customer;
+
 class AppController extends Controller {
 	
 //	public function __construct(){
@@ -57,5 +61,20 @@ class AppController extends Controller {
 		}
 		
 		DB::statement( 'SET foreign_key_checks = 1' );
+	}
+
+	public function test() {
+
+		$salesmen = Employee::all();
+
+		return view('advance.test', compact('salesmen'));
+	}
+
+	public function untested() {
+		$customers = Customer::all();
+		$salesmen = Employee::all();
+
+		return view('advance.untested', compact('customers',
+					'salesmen'));
 	}
 }

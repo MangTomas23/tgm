@@ -42,21 +42,13 @@
         </thead>
         <tbody>
             @foreach($products as $i=>$product)
-                <tr
-                    <?php $isOutOfStock = false ?>    
-                    
-                    @foreach($product->boxes as $box)
-                        @if(App\InStock::count($box->id)=='Out of Stock')
-                            <?php $isOutOfStock = true ?>
-                        @endif
-                    @endforeach
-                    
-                    @if($isOutOfStock)
-                        class="danger"
-                    @endif
-                >
+                <tr>
                     <td>{{ $i+1 }}</td>
-                    <td><a href="{{ action('ProductController@show',$product->id) }}">{{ $product->name }}</a></td>
+                    <td>
+                        <a href="{{ action('ProductController@show',$product->id) }}">
+                            {{ $product->name }}
+                        </a>
+                    </td>
                     <td>{{ $product->product_category->name or null }}</td>
                     <td>{{ $product->supplier->name or null }}</td>
                     <td>
@@ -66,16 +58,28 @@
                     </td>
                     <td>
                         @foreach($product->boxes as $box)
-                            <p>{{ App\InStock::count($box->id) }}</p>
+                            <?php
+                                $str = "";
+                                $b = App\Box::countStock($box->id)['no_of_box_available'];
+                                $p = App\Box::countStock($box->id)['no_of_packs_available'];
+                                if($b==0 && $p==0){
+                                    $str = 'Out of Stock';
+                                }else{
+                                    $str =  $b . ' Box, ' . $p . ' Packs'; 
+                                }
+                            ?>
+                            <p class="text-nowrap {{ $str=='Out of Stock' ? 'text-danger':'' }}">
+                                {{ $str }}
+                            </p>
                         @endforeach
                     </td>
                 </tr>
             @endforeach
         </tbody>
+            
     </table>
     
     @endif
 </div>
-
 
 @endsection

@@ -95,10 +95,9 @@
 				<label for="order_no" >Order No</label>
 				<input name="order_no" type="text" class="form-control" placeholder="e.g. 0001" required> 
 			</div>
-		
 			<div class="form-group col-sm-6">
 				<label for="date">Date</label>
-				<input name="date" type="date" class="form-control" require>
+				<input name="date" type="date" class="form-control" required>
 			</div>
 		
 			<div class="form-group col-sm-12 text-right">
@@ -110,9 +109,33 @@
 		<span class="clearfix"></span>
 <!--------------------------------------- Bad Orders --------------------------------------------->
 		
+		{!! Form::open( [ 'url' => '/bad/order/add', 'method' => 'get' ] ) !!}
+		
 		<div class="page-header" style="margin-top: 48px">
-			<h3>Bad Orders</h3>
+			<h3>
+				Bad Orders
+				<a href="{{ action('BadOrderController@index') }}" class="btn btn-default pull-right">
+					<span class="glyphicon glyphicon-list-alt"></span>
+				</a>
+			</h3>
 		</div>
+		
+		<div class="form-group col-sm-6">
+			<label>Order No</label>
+			<input name="order_no" type="text" class="form-control"
+				   placeholder="e.g. 0001" required>
+		</div>
+		
+		<div class="form-group col-sm-6">
+			<label>Date</label>
+			<input name="date" type="date" class="form-control" required>
+		</div>
+		
+		<div class="form-group col-sm-12 text-right">
+			{!! Form::submit( 'Next', [ 'class' => 'btn btn-info' ] ) !!}
+		</div>
+		
+		{!! Form::close() !!}
 		
     </div>
 </div>
