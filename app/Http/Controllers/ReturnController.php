@@ -10,14 +10,19 @@ use Redirect;
 use App\Ret;
 use App\Order;
 use App\ReturnItem;
+use App\Employee;
+use App\Customer;
 
 
 class ReturnController extends Controller {
 
 	public function create() {
 		$input = Input::all();
-		$orderItems = Order::find( $input[ 'order_no' ] )->orderItems;
-		return view( 'return.create', compact( [ 'input', 'orderItems' ] ) );
+		$customers = Customer::all();
+		$salesmen = Employee::all();
+
+		return view( 'return.create', 
+			compact('input', 'customers', 'salesmen'));
 	}
 	
 	public function index() {
@@ -32,22 +37,12 @@ class ReturnController extends Controller {
 		
 		$input = Input::all();
 		
-		$return  = new Ret;
-		$return->order_id = intval( $input[ 'order_no' ] );
-		$return->date = $input['date'];
+		$customer = Customer::firstOrNew(['name' => $input['customer']]);
+
+		$customer->address = $input['address'];
+
+		$customer->save();
 		
-		$return->save();
-		
-		foreach($input['box_id'] as $i=>$box_id) {
-			$returnItem = new ReturnItem;
-			$returnItem->ret_id = $return->id;
-			$returnItem->box_id = $box_id;
-			$returnItem->no_of_box = $input['no_of_box'][$i];
-			$returnItem->no_of_packs = $input['no_of_packs'][$i];
-			$returnItem->save();
-		}
-		
-		return 'Coming Soon!';
 	}
 	
 	public function show( $id ) {

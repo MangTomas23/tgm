@@ -22,6 +22,7 @@ class CreateReturnItemsTable extends Migration {
 			$table->foreign('box_id')->references('id')->on('boxes')->onDelete('set null');
 			$table->integer('no_of_box')->unsigned();
 			$table->integer('no_of_packs')->unsigned();
+			$table->decimal('amount', 11, 2);
 		});
 	}
 

@@ -178,6 +178,20 @@ Route::get('/developer/test', 'AppController@test');
 Route::get('/developer/untested', 'AppController@untested');
 
 
+
+Route::get('/customers', 'CustomerController@index');
+
+Route::get('/customer/delete/{id}', 'CustomerController@delete');
+
+Route::get('/customer/destroy/{id}', 'CustomerController@destroy');
+
+Route::get('/customer/edit/{id}', 'CustomerController@edit');
+
+Route::post('/customer/update', 'CustomerController@update');
+
+Route::get('/customer/{id}', 'CustomerController@show');
+
+
 Route::controllers([
 	'auth' => 'Auth\AuthController',
 	'password' => 'Auth\PasswordController',

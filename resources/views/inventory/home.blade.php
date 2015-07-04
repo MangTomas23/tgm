@@ -12,7 +12,13 @@
     </div>
     <div class="col-md-10 col-md-offset-1">
         <div class="page-header">
-            <h3>In Stock    <a href="{{ action('InStockController@index') }}" class="btn btn-default pull-right"><span class="glyphicon glyphicon-list-alt"></span></a></h3>
+            <h3>
+                In Stock 
+                <a href="{{ action('InStockController@index') }}" 
+                    class="btn btn-default pull-right">
+                    <span class="glyphicon glyphicon-list-alt"></span>
+                </a>
+            </h3>
         </div>
         {!! Form::open(['url'=>'/inventory/stocks/in']) !!}
             <div class="form-group col-sm-6">
@@ -23,7 +29,9 @@
                 <label>Supplier</label>
                 <select name="supplier" class="form-control">
                     @foreach($suppliers as $supplier)
-                        <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                        <option value="{{ $supplier->id }}">
+                            {{ $supplier->name }}
+                        </option>
                     @endforeach
                 </select>
             </div>
@@ -34,11 +42,12 @@
         <span class="clearfix"></span>
 		
 
-<!------------------------------------------ Add Orders ---------------------------------------------------->
+<!------------------------ Add Orders ---------------------------------->
 
         <div class="page-header" style="margin-top: 48px">
             <h3>Add Order 
-				<a href="{{ action('OrderController@index') }}" class="btn btn-default pull-right">
+				<a href="{{ action('OrderController@index') }}" 
+                    class="btn btn-default pull-right">
 					<span class="glyphicon glyphicon-list-alt"></span>
 				</a>
 			</h3>
@@ -48,7 +57,8 @@
         {!! Form::open(['url'=>'/order/add','method'=>'get']) !!}
             <div class="form-group col-sm-6">
                 <label>Order By</label>
-                <input name="order_by" type="text" class="form-control" list="customers-list" required autocomplete="off">
+                <input name="order_by" type="text" class="form-control" 
+                    list="customers-list" required autocomplete="off">
                 <datalist id="customers-list">
                     @foreach($customers as $customer)
                         <option>{{ $customer->name }}</option>
@@ -61,13 +71,18 @@
             </div>
             <div class="form-group col-sm-8">
                 <label>Address</label>
-                <input name="address" class="form-control" type="text" value="{{ $input['address'] or null }}" required autocomplete="off">
+                <input name="address" class="form-control" type="text" 
+                    value="{{ $input['address'] or null }}" required 
+                    autocomplete="off">
             </div>
             <div class="form-group col-sm-4">
                 <label>Salesman </label>
                 <select name="salesman" class="form-control">
                     @foreach($employees as $employee)
-                        <option value="{{ $employee->id }}">{{ $employee->firstname . ' ' . $employee->lastname }}</option>
+                        <option value="{{ $employee->id }}">
+                            {{ $employee->firstname . ' ' . 
+                                $employee->lastname }}
+                        </option>
                     @endforeach
                 </select>
             </div>
@@ -78,12 +93,13 @@
 		
 		<span class="clearfix"></span>
 		
-<!--------------------------------------- Return Items --------------------------------------------->
+<!----------------------------- Return Items ------------------------------>
 		
 		<div class="page-header" style="margin-top: 48px">
 			<h3>
 				Return 
-				<a href="{{ action( 'ReturnController@index' ) }}" class="btn btn-default pull-right">
+				<a href="{{ action( 'ReturnController@index' ) }}" 
+                    class="btn btn-default pull-right">
 					<span class="glyphicon glyphicon-list-alt"></span>
 				</a>
 			</h3>
@@ -92,13 +108,20 @@
 		{!! Form::open( [ 'url' => '/return/add', 'method' => 'get' ] ) !!}
 		
 			<div class="form-group col-sm-6">
-				<label for="order_no" >Order No</label>
-				<input name="order_no" type="text" class="form-control" placeholder="e.g. 0001" required> 
-			</div>
-			<div class="form-group col-sm-6">
-				<label for="date">Date</label>
-				<input name="date" type="date" class="form-control" required>
-			</div>
+                <label>Customer</label>
+                <input name="customer" type="text" class="form-control" 
+                    list="customers-list" required autocomplete="off">
+            </div>
+
+            <div class="form-group col-sm-6">
+                <label>Date</label>
+                <input name="date" type="date" class="form-control">
+            </div>
+
+            <div class="form-group col-sm-12">
+                <label>Address</label>
+                <input name="address" type="text" class="form-control">
+            </div>
 		
 			<div class="form-group col-sm-12 text-right">
 				{!! Form::submit( 'Next', [ 'class' => 'btn btn-info' ] ) !!}
@@ -107,14 +130,16 @@
 		{!! Form::close() !!}
 		
 		<span class="clearfix"></span>
-<!--------------------------------------- Bad Orders --------------------------------------------->
+
+<!-------------------------------- Bad Orders ------------------------------------>
 		
 		{!! Form::open( [ 'url' => '/bad/order/add', 'method' => 'get' ] ) !!}
 		
 		<div class="page-header" style="margin-top: 48px">
 			<h3>
 				Bad Orders
-				<a href="{{ action('BadOrderController@index') }}" class="btn btn-default pull-right">
+				<a href="{{ action('BadOrderController@index') }}" 
+                    class="btn btn-default pull-right">
 					<span class="glyphicon glyphicon-list-alt"></span>
 				</a>
 			</h3>
@@ -159,7 +184,7 @@
             })
         @endforeach
         
-        $("input[name=order_by]").focusout(function(){
+        $("input[name=order_by], input[name=customer]").focusout(function(){
             $customer_name = $(this).val().toLowerCase()
             $.each($customers, function($i, $customer){
                 if($customer.name.toLowerCase() == $customer_name){
