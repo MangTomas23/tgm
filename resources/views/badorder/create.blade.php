@@ -18,6 +18,11 @@
 			<p>
 				<strong>Date: </strong>
 				<span id="date"></span>
+
+				<span class="pull-right">
+					<strong>No: </strong>
+					<span id="no"></span>
+				</span>
 			</p>
 			<p>
 				<strong>Truck #:</strong> 
@@ -41,8 +46,9 @@
 
 		<hr>
 
-		
-		
+		<p>Received by: </p>
+		<p>Salesman</p>
+
 	</div>
 
 	<hr>
@@ -52,6 +58,21 @@
 	</div>
 
 	<!-- Form -->
+
+	<div class="alert alert-info">
+		
+		<div class="form-group">
+			<label>Product</label>
+			<input id="product" type="text" class="form-control">
+		</div>
+
+		<hr>
+
+		<div id="suggestion-container">
+			
+		</div>
+
+	</div>
 
 	<div class="form-group col-sm-6">
 		<label>Truck #</label>
