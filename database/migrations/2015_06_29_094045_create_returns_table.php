@@ -20,11 +20,11 @@ class CreateReturnsTable extends Migration {
 			$table->foreign('customer_id')->references('id')
 				  ->on('customers')->onDelete('set null');
 			$table->date('date');
-			$table->integer('reference_no');
+			$table->integer('reference_no')->nullable();
 			$table->integer('salesman')->unsigned()->nullable();
 			$table->foreign('salesman')->references('id')->on('employees')
 				  ->onDelete('set null');
-			$table->string('area');
+			$table->string('area')->nullable();
 			$table->string('received_by');
 			$table->string('checked_by');
 		});

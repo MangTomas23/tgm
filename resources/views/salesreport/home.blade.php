@@ -10,6 +10,7 @@
 	<div class="page-header">
 		<h1>Sales Report</h1>
 	</div>
+	<p>Sample Data</p>
 	<canvas id="myChart"></canvas>
 
 </div>

@@ -42,7 +42,17 @@ class ReturnController extends Controller {
 		$customer->address = $input['address'];
 
 		$customer->save();
-		
+
+		$ret = new Ret;
+		$ret->customer_id = $customer->id;
+		$ret->date = $input['date'];
+		$ret->reference_no = $input['ref_no'];
+		$ret->salesman = $input['salesman'];
+		$ret->area = $input['area'];
+		$ret->received_by = $input['received_by'];
+		$ret->checked_by = $input['chec'];
+
+		$ret->save();
 	}
 	
 	public function show( $id ) {

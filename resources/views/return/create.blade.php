@@ -45,6 +45,11 @@
 			<span id="p-address">
 				{{ $input['address'] or null }}
 			</span>
+
+			<span class="pull-right">
+				<strong>Ref no</strong>
+				<span id="p-ref_no"></span>
+			</span>
 		</p>
 
 		<div class="table-responsive" style="min-height: 360px">
@@ -54,6 +59,7 @@
 						<th>Product</th>
 						<th>Quantity</th>
 						<th>Amount</th>
+						<th class="hidden-print"></th>
 					</tr>
 				</thead>
 				<tbody id="p-table">
@@ -137,10 +143,15 @@
 			value="{{ $input['date'] or null }}">
 	</div>
 
-	<div class="form-group col-sm-12">
+	<div class="form-group col-sm-9">
 		<label>Address</label>
 		<input name="address" type="text" class="form-control"
 			value="{{ $input['address'] or null }}">
+	</div>
+
+	<div class="form-group col-sm-3">
+		<label>Ref. no</label>
+		<input name="ref_no" type="text" class="form-control">
 	</div>
 
 	<div class="form-group col-sm-6">
@@ -314,13 +325,24 @@ $(document).ready( function() {
 			str += "<tr>";
 			str += "<td>" + product.name + " @ " + box.size + "</td>";
 			str += "<td>" + b + " Box, " + p + " Packs" + "</td>";
-			str += "<td>" + $(".s-amount")[i].innerHTML + "</td>";
+			str += "<td class='p-amount'>" + $(".s-amount")[i].innerHTML + "</td>";
+			str += "<td class='hidden-print text-center'>" + 
+					"<a class='btn btn-default btn-sm btn-remove'>" + 
+					"<span class='glyphicon glyphicon-minus'></span>" +
+					"</a></td>";
 			str += "</tr>";
+
 		});
 
 
 		$("#p-table").append( str );
 		$("#btn-add").addClass("disabled");
+
+		setTotalAmount();
+	});
+
+	$("input[name=ref_no]").keyup( function() {
+		$("#p-ref_no").text($(this).val());
 	});
 
 	$("#btn-print").click( function() {
@@ -335,6 +357,10 @@ $(document).ready( function() {
 
 	$(this).on("change", ".s-price", function() {
 		setAmount($(this));
+	});
+
+	$(this).on("click", ".btn-remove", function() {
+		$(this).closest("tr").remove();
 	});
 
 	var setAmount = function(obj) {
@@ -356,7 +382,16 @@ $(document).ready( function() {
 
 		sAmount.text(totalAmount);		
 		sAmount.digits();
+	};
 
+	var setTotalAmount = function() {
+		var totalAmount = 0;
+
+		$.each($(".p-amount"), function(){
+			totalAmount += parseFloat($(this).text().replace(/,/g, ''),10);
+		} );
+
+		$("#p-totalamount").text(totalAmount);
 	};
 
 } );
