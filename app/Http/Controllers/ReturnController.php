@@ -33,6 +33,12 @@ class ReturnController extends Controller {
 		return view( 'return.home', compact( 'returns' ) );
 	}
 	
+
+	/**
+	 * Store the return items data 
+	 * 
+	 * @return ReturnController@index
+	 */
 	public function store() {
 		
 		$input = Input::all();
