@@ -72,6 +72,12 @@
 			
 		</div>
 
+		<hr>
+
+		<div id="btn-add" class="text-right">
+			<a class="btn btn-default">Add</a>
+		</div>
+
 	</div>
 
 	<div class="form-group col-sm-6">
@@ -107,6 +113,8 @@
 	
 	$(document).ready( function() {
 
+		var product, boxes;
+
 		$("input[name=truck_no]").keyup( function() {
 			$("#truck-no").text($(this).val());
 		});
@@ -114,6 +122,56 @@
 		$("input[name=date]").change( function() {
 			$("#date").text($(this).val());
 		});
+
+		$("#product").keyup( function() {
+			var str = "";
+
+			$.get('/order/query', {
+				query: $(this).val()
+			}, function( response ) {
+
+				product = response.product;
+				boxes = response.boxes;
+
+				str += "<h3>" + product.name + "</h3>";				
+
+				str += "<hr>";
+
+				str += "<p class='col-sm-4'>Size</p>";
+				str += "<p class='col-sm-4'>No of Box</p>";
+				str += "<p class='col-sm-4'>No of Packs</p>";
+
+				str += "<span class='clearfix'></span>";
+
+				$.each(boxes, function(i, box) {
+
+					str += "<div class='form-group col-sm-4'>" + 
+								"<p class='form-control-static'>" + 
+									box.size +
+								"</p>" + 
+							"</div>";
+
+					str += "<div class='form-group col-sm-4'>" + 
+								"<input type='number' class='form-control'" + 
+								" min='0'>" + 
+							"</div>";
+
+					str += "<div class='form-group col-sm-4'>" + 
+								"<input type='number' class='form-control'" + 
+								" min='0'>" + 
+							"</div>";
+
+					str += "<span class='clearfix'></span>";					
+				});
+
+
+				$("#suggestion-container").empty().append( str );
+			});
+
+
+		});
+
+		
 
 	});	
 </script>
