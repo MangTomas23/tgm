@@ -6,12 +6,15 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Input;
 use App\Order;
+use App\Employee;
 
 class BadOrderController extends Controller {
 	
 	public function create() {
-		
-		return view('badorder.create');	
+
+		$salesmen = Employee::orderBy('firstname')->get();
+
+		return view('badorder.create', compact('salesmen'));	
 	}
 
 }
