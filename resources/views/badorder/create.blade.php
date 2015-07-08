@@ -18,7 +18,53 @@
 			<p>Date: </p>
 			<p>Truck #: </p>
 		</div>
+
+		<div class="table-responsive" style="min-height: 360px">
+			<table class="table table-bordered">
+				<thead>
+					<tr>
+						<th>Product</th>
+						<th>Quantity</th>
+					</tr>					
+				</thead>
+				<tbody>
+
+				</tbody>
+			</table>
+		</div>
 	</div>
+
+	<hr>
+
+	<div class="page-header">
+		<h2>Bad Orders</h2>
+	</div>
+
+	<!-- Form -->
+
+	<div class="form-group col-sm-6">
+		<label>Truck #</label>
+		<input type="text" class="form-control" required>
+	</div>
+
+	<div class="form-group col-sm-6">
+		<label>Date</label>
+		<input type="date" class="form-control" required>
+	</div>
+
+	<div class="form-group col-sm-6">
+		<label>Received by</label>
+		<input type="text" class="form-control" required>
+	</div>
+
+	<div class="form-group col-sm-6">
+		<label>Salesman</label>
+		<select name="salesman" class="form-control">
+			
+		</select>
+	</div>
+
+	<!-- End Form -->
 </div>
 
 @endsection

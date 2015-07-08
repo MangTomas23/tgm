@@ -11,6 +11,7 @@ class BadOrderController extends Controller {
 	
 	public function create() {
 		
+		return view('badorder.create');	
 	}
 
 }
