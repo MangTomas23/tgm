@@ -194,8 +194,10 @@
 							"</div>";
 
 					str += "<div class='form-group col-sm-2'>" + 
-								"<p class='form-control-static'>0.00</p>" +
+								"<p class='form-control-static s-amount'>0.00</p>" +
 							"</div>";
+
+					str += "<p class='hidden packsPerBox'>" + box.no_of_packs + "</p>";
 
 					str += "</div>";
 					str += "<span class='clearfix'></span>";					
@@ -266,10 +268,14 @@
 			obj = obj.closest(".box-row");
 
 			var pricePerBox = obj.find("select").val();
-			var noOfBox = obj.find(".box").val();
-			var noOfPacks = obj.find(".packs").val();
+			var packsPerBox = obj.find(".packsPerBox").text();
+			var pricePerPack = pricePerBox / packsPerBox;
+			var noOfBox = parseInt(obj.find(".box").val(), 10);
+			var noOfPacks = parseInt(obj.find(".packs").val(), 10);
+			var totalPacks = noOfBox * packsPerBox + noOfPacks;
+			var amount = parseFloat(totalPacks * pricePerPack).toFixed(2);
 
-			console.log(noOfPacks);
+			obj.find(".s-amount").text(amount).digits();
 		}
 
 
