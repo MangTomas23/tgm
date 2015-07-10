@@ -172,6 +172,8 @@ Route::get('/bad/order/add', 'BadOrderController@create');
 
 Route::get('/bad/orders', 'BadOrderController@index');
 
+Route::post('/bad/orders/store', 'BadOrderController@store');
+
 
 Route::get('/developer/test', 'BadOrderController@test');
 

@@ -23,6 +23,9 @@ class BadOrderController extends Controller {
 		return $result[0]->Auto_increment or 0;
 	}
 
-	
+	public function store() {
+		$badOrder = new BadOrder;
+		
+	}	
 
 }

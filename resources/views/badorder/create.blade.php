@@ -7,6 +7,8 @@
 @section('content')
 
 <div class="container">
+
+	{!! Form::open(['url'=>'/bad/orders/store']) !!}
 	<div class="print-area">
 		<div class="text-center">
 			<h4>Tradeal General Merchandise</h4>
@@ -36,6 +38,7 @@
 					<tr>
 						<th>Product</th>
 						<th>Quantity</th>
+						<th>Amount</th>
 					</tr>					
 				</thead>
 				<tbody id="p-table">
@@ -116,7 +119,9 @@
 		{!! Form::submit('Save', ['class' => 'btn btn-success']) !!}
 	</div>
 
+	{!! Form::close() !!}
 	<!-- End Form -->
+	}
 </div>
 
 <script type="text/javascript">
@@ -147,32 +152,52 @@
 
 				str += "<hr>";
 
-				str += "<p class='col-sm-4'>Size</p>";
-				str += "<p class='col-sm-4'>No of Box</p>";
-				str += "<p class='col-sm-4'>No of Packs</p>";
+				str += "<p class='col-sm-2'>Size</p>";
+				str += "<p class='col-sm-3'>No of Box</p>";
+				str += "<p class='col-sm-3'>No of Packs</p>";
+				str += "<p class='col-sm-2'>Price</p>";
+				str += "<p class='col-sm-2'>Amount</p>";
 
 				str += "<span class='clearfix'></span>";
 
 				$.each(boxes, function(i, box) {
 
-					str += "<div class='form-group col-sm-4'>" + 
+					str += "<div class='box-row'>";
+
+					str += "<div class='form-group col-sm-2'>" + 
 								"<p class='form-control-static'>" + 
 									box.size +
 								"</p>" + 
 							"</div>";
 
-					str += "<div class='form-group col-sm-4'>" + 
+					str += "<div class='form-group col-sm-3'>" + 
 								"<input type='number'" + 
 								" class='form-control box'" + 
 								" min='0' value='0'>" + 
 							"</div>";
 
-					str += "<div class='form-group col-sm-4'>" + 
+					str += "<div class='form-group col-sm-3'>" + 
 								"<input type='number'" + 
 								" class='form-control packs'" + 
 								" min='0' value='0'>" + 
 							"</div>";
 
+					str += "<div class='form-group col-sm-2'>" +
+								"<select name='price' class='form-control'>" +
+									"<option value='" + box.purchase_price + 
+									"'>Purchase Price</option>" +
+									"<option value='" + box.selling_price_1 + 
+									"'>Selling Price 1</option>" +
+									"<option value='" + box.selling_price_2 + 
+									"'>Selling Price 2</option>" +
+								"</select>" +
+							"</div>";
+
+					str += "<div class='form-group col-sm-2'>" + 
+								"<p class='form-control-static'>0.00</p>" +
+							"</div>";
+
+					str += "</div>";
 					str += "<span class='clearfix'></span>";					
 				});
 
@@ -199,7 +224,13 @@
 
 				str += "<td>" + 
 						product.name + 
-						" @ " + box.size 
+						" @ " + box.size  +
+						"<input type='hidden' name='boxes[]' value='" + 
+						box.id + "'>" +
+						"<input type='hidden' name='no_of_box[]' value='" + 
+						$b + "'>" +
+						"<input type='hidden' name='no_of_packs[]' value='" + 
+						$p + "'>" +
 						"</td>";
 
 				str += "<td>" + $b + " Box, " + $p + " Packs" +"</td>";
@@ -226,6 +257,20 @@
 		});
 
 		$("#p-salesman").text($("select[name=salesman] option:selected").text());
+
+		$(this).on("change", "select[name=price]", function() {
+			setAmount($(this));
+		});
+
+		var setAmount = function(obj) {
+			obj = obj.closest(".box-row");
+
+			var pricePerBox = obj.find("select").val();
+			var noOfBox = obj.find(".box").val();
+			var noOfPacks = obj.find(".packs").val();
+
+			console.log(noOfPacks);
+		}
 
 
 	});	
