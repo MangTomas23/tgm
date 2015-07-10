@@ -154,13 +154,13 @@
 					str += "<div class='form-group col-sm-4'>" + 
 								"<input type='number'" + 
 								" class='form-control box'" + 
-								" min='0'>" + 
+								" min='0' value='0'>" + 
 							"</div>";
 
 					str += "<div class='form-group col-sm-4'>" + 
 								"<input type='number'" + 
-								" class='form-control' packs" + 
-								" min='0'>" + 
+								" class='form-control packs'" + 
+								" min='0' value='0'>" + 
 							"</div>";
 
 					str += "<span class='clearfix'></span>";					
@@ -178,16 +178,33 @@
 
 			$.each(boxes, function(i, box) {
 
+				$b = $(".box")[i].value;
+				$p = $(".packs")[i].value;
+
+				if($b == 0 && $p == 0){
+					return true;
+				}
+
+				str += "<tr>";
+
+				str += "<td>" + 
+						product.name + 
+						" @ " + box.size 
+						"</td>";
+
+				str += "<td>" + $b + " Box, " + $p + " Packs" +"</td>";
+
+				str += "</tr>";
 			});
 
-			str += "<tr>";
-			str += "<td>" + 
-					product.name + 
-					" @ " + 
-					"</td>";
-			str += "</tr>";
 
 			$("#p-table").append( str );
+		});
+
+		$(this).on("focusout", ".box, .packs", function() {
+			if($(this).val() == ""){
+				$(this).val(0);
+			}
 		});
 
 	});	

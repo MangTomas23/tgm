@@ -173,7 +173,7 @@ Route::get('/bad/order/add', 'BadOrderController@create');
 Route::get('/bad/orders', 'BadOrderController@index');
 
 
-Route::get('/developer/test', 'AppController@test');
+Route::get('/developer/test', 'BadOrderController@test');
 
 Route::get('/developer/untested', 'AppController@untested');
 

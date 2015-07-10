@@ -12,6 +12,7 @@ return array(
     'AddProductCategoryId' => $baseDir . '/database/migrations/2015_06_10_175343_add_product_category_id.php',
     'AddProductIdOnBoxes' => $baseDir . '/database/migrations/2015_06_11_002703_add_product_id_on_boxes.php',
     'AddUniqueIndexToProduct' => $baseDir . '/database/migrations/2015_06_18_235137_add_unique_index_to_product.php',
+    'CreateBadOrdersTable' => $baseDir . '/database/migrations/2015_07_10_142032_create_bad_orders_table.php',
     'CreateBoxesTable' => $baseDir . '/database/migrations/2015_06_11_002216_create_boxes_table.php',
     'CreateCustomersTable' => $baseDir . '/database/migrations/2015_06_23_193652_create_customers_table.php',
     'CreateDeliveredProductsTable' => $baseDir . '/database/migrations/2015_06_15_122127_create_delivered_products_table.php',

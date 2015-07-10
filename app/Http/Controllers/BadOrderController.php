@@ -17,4 +17,8 @@ class BadOrderController extends Controller {
 		return view('badorder.create', compact('salesmen'));	
 	}
 
+	public function test() {
+		return 'hehe';
+	}
+
 }
