@@ -38,7 +38,7 @@
 						<th>Quantity</th>
 					</tr>					
 				</thead>
-				<tbody>
+				<tbody id="p-table">
 
 				</tbody>
 			</table>
@@ -152,12 +152,14 @@
 							"</div>";
 
 					str += "<div class='form-group col-sm-4'>" + 
-								"<input type='number' class='form-control'" + 
+								"<input type='number'" + 
+								" class='form-control box'" + 
 								" min='0'>" + 
 							"</div>";
 
 					str += "<div class='form-group col-sm-4'>" + 
-								"<input type='number' class='form-control'" + 
+								"<input type='number'" + 
+								" class='form-control' packs" + 
 								" min='0'>" + 
 							"</div>";
 
@@ -171,7 +173,22 @@
 
 		});
 
-		
+		$("#btn-add").click( function() {
+			str = "";
+
+			$.each(boxes, function(i, box) {
+
+			});
+
+			str += "<tr>";
+			str += "<td>" + 
+					product.name + 
+					" @ " + 
+					"</td>";
+			str += "</tr>";
+
+			$("#p-table").append( str );
+		});
 
 	});	
 </script>
