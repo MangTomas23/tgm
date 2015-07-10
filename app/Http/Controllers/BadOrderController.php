@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Input;
 use App\Order;
 use App\Employee;
+use DB;
 
 class BadOrderController extends Controller {
 	
@@ -17,8 +18,11 @@ class BadOrderController extends Controller {
 		return view('badorder.create', compact('salesmen'));	
 	}
 
-	public function test() {
-		return 'hehe';
+	public function getNextID() {
+		$result = DB::select(DB::raw('SHOW TABLE STATUS LIKE "bad_orders"'));
+		return $result[0]->Auto_increment or 0;
 	}
+
+	
 
 }

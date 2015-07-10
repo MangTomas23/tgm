@@ -16,6 +16,7 @@ class CreateBadOrdersTable extends Migration {
 		{
 			$table->increments('id');
 			$table->timestamps();
+			
 		});
 	}
 

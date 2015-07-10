@@ -21,7 +21,7 @@
 
 				<span class="pull-right">
 					<strong>No: </strong>
-					<span id="no"></span>
+					<span id="p-no"></span>
 				</span>
 			</p>
 			<p>
@@ -46,8 +46,14 @@
 
 		<hr>
 
-		<p>Received by: </p>
-		<p>Salesman</p>
+		<p>
+			<strong>Received by: </strong>
+			<span id="p-received_by"></span>
+		</p>
+		<p>
+			<strong>Salesman: </strong>
+			<span id="p-salesman"></span>
+		</p>
 
 	</div>
 
@@ -92,7 +98,7 @@
 
 	<div class="form-group col-sm-6">
 		<label>Received by</label>
-		<input type="text" class="form-control" required>
+		<input name="received_by" type="text" class="form-control" required>
 	</div>
 
 	<div class="form-group col-sm-6">
@@ -104,6 +110,10 @@
 				</option>
 			@endforeach
 		</select>
+	</div>
+
+	<div class="col-sm-12 text-right">
+		{!! Form::submit('Save', ['class' => 'btn btn-success']) !!}
 	</div>
 
 	<!-- End Form -->
@@ -206,6 +216,17 @@
 				$(this).val(0);
 			}
 		});
+
+		$("input[name=received_by]").keyup( function() {
+			$("#p-received_by").text( $(this).val());
+		});
+
+		$("select[name=salesman]").change( function() {
+			$("#p-salesman").text($("select[name=salesman] option:selected").text());
+		});
+
+		$("#p-salesman").text($("select[name=salesman] option:selected").text());
+
 
 	});	
 </script>
