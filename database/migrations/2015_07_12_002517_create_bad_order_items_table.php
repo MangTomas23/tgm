@@ -18,9 +18,9 @@ class CreateBadOrderItemsTable extends Migration {
 			$table->timestamps();
 			$table->integer('bad_order_id')->unsigned();
 			$table->foreign('bad_order_id')->references('id')->on('bad_orders')
-					->onDelete('set null');
+					->onDelete('cascade');
 			$table->integer('box_id')->unsigned()->nullable();
-			$table->foreign('box_id')->references('id')->('boxes')
+			$table->foreign('box_id')->references('id')->on('boxes')
 					->onDelete('set null');
 			$table->integer('no_of_box');
 			$table->integer('no_of_packs');
