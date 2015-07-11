@@ -276,6 +276,7 @@
 			var amount = parseFloat(totalPacks * pricePerPack).toFixed(2);
 
 			obj.find(".s-amount").text(amount).digits();
+			return amount;
 		}
 
 

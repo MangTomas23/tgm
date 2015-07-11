@@ -25,7 +25,9 @@ class BadOrderController extends Controller {
 
 	public function store() {
 		$badOrder = new BadOrder;
-		
+
+
+		$badOrder->save();
 	}	
 
 }
