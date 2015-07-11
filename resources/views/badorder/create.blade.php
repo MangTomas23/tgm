@@ -19,7 +19,7 @@
 		<div>
 			<p>
 				<strong>Date: </strong>
-				<span id="date"></span>
+				<span id="date">{{ $input['date'] or null }}</span>
 
 				<span class="pull-right">
 					<strong>No: </strong>
@@ -28,7 +28,7 @@
 			</p>
 			<p>
 				<strong>Truck #:</strong> 
-				<span id="truck-no"></span>
+				<span id="truck-no">{{ $input['truck_no'] or null }}</span>
 			</p>
 		</div>
 
@@ -38,7 +38,7 @@
 					<tr>
 						<th>Product</th>
 						<th>Quantity</th>
-						<th>Amount</th>
+						<th class="text-right">Amount</th>
 					</tr>					
 				</thead>
 				<tbody id="p-table">
@@ -48,6 +48,11 @@
 		</div>
 
 		<hr>
+
+		<p class="text-right">
+			<strong>Total Amount: </strong>			
+			<span id="p-total_amount">0.00</span>
+		</p>
 
 		<p>
 			<strong>Received by: </strong>
@@ -91,12 +96,14 @@
 
 	<div class="form-group col-sm-6">
 		<label>Truck #</label>
-		<input name="truck_no" type="text" class="form-control" required>
+		<input name="truck_no" type="text" class="form-control" required
+			value="{{ $input['truck_no'] or null }}">
 	</div>
 
 	<div class="form-group col-sm-6">
 		<label>Date</label>
-		<input name="date" type="date" class="form-control" required>
+		<input name="date" type="date" class="form-control" required
+			value="{{ $input['date'] or null }}">
 	</div>
 
 	<div class="form-group col-sm-6">
@@ -194,7 +201,9 @@
 							"</div>";
 
 					str += "<div class='form-group col-sm-2'>" + 
-								"<p class='form-control-static s-amount'>0.00</p>" +
+								"<p class='form-control-static s-amount'" + 
+								" data-amt=''" +
+								">0.00</p>" +
 							"</div>";
 
 					str += "<p class='hidden packsPerBox'>" + box.no_of_packs + "</p>";
@@ -212,6 +221,12 @@
 
 		$("#btn-add").click( function() {
 			str = "";
+
+			var sAmounts = [];
+
+			$.each($(".s-amount"), function() {
+				sAmounts.push($(this));
+			});
 
 			$.each(boxes, function(i, box) {
 
@@ -236,6 +251,12 @@
 						"</td>";
 
 				str += "<td>" + $b + " Box, " + $p + " Packs" +"</td>";
+
+				str += "<td class='text-right'>" + 
+						sAmounts[i].data("amt") + 
+						"</td>";
+
+				// console.log(sAmounts[i]);
 
 				str += "</tr>";
 			});
@@ -264,6 +285,10 @@
 			setAmount($(this));
 		});
 
+		$(this).on("keyup change", ".box, .packs", function(){
+			setAmount($(this));
+		});
+
 		var setAmount = function(obj) {
 			obj = obj.closest(".box-row");
 
@@ -276,24 +301,28 @@
 			var amount = parseFloat(totalPacks * pricePerPack).toFixed(2);
 
 			obj.find(".s-amount").text(amount).digits();
+			obj.find(".s-amount").attr("data-amt", amount);
 			return amount;
 		}
 
+		var setBadOrderNo = function() {
+			$.get('/bad/order/nextid', {
 
-	var setBadOrderNo = function() {
-		$.get('/bad/order/nextid', {
+			}, function(response) {
+				
+				$("#p-no").text(response);
 
-		}, function(response) {
+				setTimeout(function() {
+					setBadOrderNo();
+				}, 5000)
+			});
+		}
+
+		var setTotalAmount = function() {
 			
-			$("#p-no").text(response);
+		}
 
-			setTimeout(function() {
-				setBadOrderNo();
-			}, 5000)
-		});
-	}
-
-	setBadOrderNo();
+		setBadOrderNo();
 
 	});	
 </script>

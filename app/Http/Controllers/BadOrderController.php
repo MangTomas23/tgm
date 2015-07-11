@@ -14,8 +14,9 @@ class BadOrderController extends Controller {
 	public function create() {
 
 		$salesmen = Employee::orderBy('firstname')->get();
+		$input = Input::all();
 
-		return view('badorder.create', compact('salesmen'));	
+		return view('badorder.create', compact('salesmen', 'input'));	
 	}
 
 	public function getNextID() {

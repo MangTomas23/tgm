@@ -145,16 +145,15 @@
 			</h3>
 		</div>
 		
-		<div class="form-group col-sm-6">
-			<label>Order No</label>
-			<input name="order_no" type="text" class="form-control"
-				   placeholder="e.g. 0001" required>
-		</div>
-		
-		<div class="form-group col-sm-6">
-			<label>Date</label>
-			<input name="date" type="date" class="form-control" required>
-		</div>
+        <div class="form-group col-sm-6">
+            <label>Truck no</label>
+            <input name="truck_no" class="form-control" type="text">
+        </div>
+
+        <div class="form-group col-sm-6">
+            <label>Date</label>
+            <input name="date" type="date" class="form-control">
+        </div>
 		
 		<div class="form-group col-sm-12 text-right">
 			{!! Form::submit( 'Next', [ 'class' => 'btn btn-info' ] ) !!}
