@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Input;
 use App\Order;
 use App\Employee;
+use App\BadOrder;
 use DB;
 
 class BadOrderController extends Controller {
@@ -30,9 +31,18 @@ class BadOrderController extends Controller {
 	}
 
 	public function store() {
+
+		$input = Input::all();
+
 		$badOrder = new BadOrder;
 
+		$badOrder->truck_no = $input['truck_no'];
+		$badOrder->date = $input['date'];
+		$badOrder->received_by = $input['received_by'];
+		$badOrder->salesman = $input['salesman'];
+
 		$badOrder->save();
+
 	}	
 
 }
