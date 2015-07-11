@@ -280,6 +280,21 @@
 		}
 
 
+	var setBadOrderNo = function() {
+		$.get('/bad/order/nextid', {
+
+		}, function(response) {
+			
+			$("#p-no").text(response);
+
+			setTimeout(function() {
+				setBadOrderNo();
+			}, 5000)
+		});
+	}
+
+	setBadOrderNo();
+
 	});	
 </script>
 

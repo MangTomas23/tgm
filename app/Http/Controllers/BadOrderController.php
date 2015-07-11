@@ -20,12 +20,16 @@ class BadOrderController extends Controller {
 
 	public function getNextID() {
 		$result = DB::select(DB::raw('SHOW TABLE STATUS LIKE "bad_orders"'));
-		return $result[0]->Auto_increment or 0;
+
+		if($result == null){
+			return str_pad(1, 4, 0, STR_PAD_LEFT);
+		}
+
+		return str_pad($result[0]->Auto_increment, 4, 0, STR_PAD_LEFT);
 	}
 
 	public function store() {
 		$badOrder = new BadOrder;
-
 
 		$badOrder->save();
 	}	
