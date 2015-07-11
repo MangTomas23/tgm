@@ -16,7 +16,12 @@ class CreateBadOrdersTable extends Migration {
 		{
 			$table->increments('id');
 			$table->timestamps();
-			
+			$table->string('truck_no')->nullable();
+			$table->date('date');
+			$table->string('received_by')->nullable();
+			$table->integer('salesman')->unsigned()->nullable();
+			$table->foreign('salesman')->references('id')->on('employees')
+					->onDelete('set null');
 		});
 	}
 
