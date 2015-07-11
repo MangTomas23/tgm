@@ -252,7 +252,8 @@
 
 				str += "<td>" + $b + " Box, " + $p + " Packs" +"</td>";
 
-				str += "<td class='text-right'>" + 
+				str += "<td class='text-right p-amount'" + 
+						" data-pamt='" + sAmounts[i].data("amt") + "'>" + 
 						sAmounts[i].data("amt") + 
 						"</td>";
 
@@ -263,6 +264,7 @@
 
 
 			$("#p-table").append( str );
+			setTotalAmount();
 		});
 
 		$(this).on("focusout", ".box, .packs", function() {
@@ -319,7 +321,12 @@
 		}
 
 		var setTotalAmount = function() {
-			
+			var totalAmount = 0;
+			$.each($(".p-amount"), function() {
+				totalAmount += parseFloat($(this).data("pamt"));
+			});
+
+			$("#p-total_amount").text(parseFloat(totalAmount).toFixed(2));
 		}
 
 		setBadOrderNo();
