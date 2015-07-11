@@ -39,6 +39,7 @@
 						<th>Product</th>
 						<th>Quantity</th>
 						<th class="text-right">Amount</th>
+						<th class="hidden-print"></th>
 					</tr>					
 				</thead>
 				<tbody id="p-table">
@@ -248,6 +249,8 @@
 						$b + "'>" +
 						"<input type='hidden' name='no_of_packs[]' value='" + 
 						$p + "'>" +
+						"<input type='hidden' name='amount' value='" + 
+						sAmounts[i].data("amt") + "'>" + 
 						"</td>";
 
 				str += "<td>" + $b + " Box, " + $p + " Packs" +"</td>";
@@ -255,6 +258,12 @@
 				str += "<td class='text-right p-amount'" + 
 						" data-pamt='" + sAmounts[i].data("amt") + "'>" + 
 						sAmounts[i].data("amt") + 
+						"</td>";
+
+				str += "<td class='text-right hidden-print'>" + 
+						"<a class='btn btn-xs btn-danger btn-remove'>" + 
+						"<span class='glyphicon glyphicon-remove'></span>" +
+						"</a>" + 
 						"</td>";
 
 				// console.log(sAmounts[i]);
@@ -289,6 +298,11 @@
 
 		$(this).on("keyup change", ".box, .packs", function(){
 			setAmount($(this));
+		});
+
+		$(this).on("click", ".btn-remove", function() {
+			$(this).closest("tr").remove();
+			setTotalAmount();
 		});
 
 		var setAmount = function(obj) {
