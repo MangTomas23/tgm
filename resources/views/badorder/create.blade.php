@@ -15,7 +15,7 @@
 	</div>
 
 	{!! Form::open(['url'=>'/bad/orders/store']) !!}
-	<div class="print-area">
+	<div id="print-area">
 		<div class="text-center">
 			<h4>Tradeal General Merchandise</h4>
 			<p>Smart # 09199980311 / Globe # 09173179285</p>
@@ -313,6 +313,10 @@
 		$(this).on("click", ".btn-remove", function() {
 			$(this).closest("tr").remove();
 			setTotalAmount();
+		});
+
+		$("#btn-print").click( function() {
+			$("#print-area").print();
 		});
 
 		var setAmount = function(obj) {
