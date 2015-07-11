@@ -8,6 +8,12 @@
 
 <div class="container">
 
+	<div class="text-right">
+		<a id="btn-print" class="btn btn-default" title="Print">
+			<span class="glyphicon glyphicon-print"></span>			
+		</a>
+	</div>
+
 	{!! Form::open(['url'=>'/bad/orders/store']) !!}
 	<div class="print-area">
 		<div class="text-center">
@@ -129,7 +135,7 @@
 
 	{!! Form::close() !!}
 	<!-- End Form -->
-	}
+
 </div>
 
 <script type="text/javascript">
@@ -207,7 +213,9 @@
 								">0.00</p>" +
 							"</div>";
 
-					str += "<p class='hidden packsPerBox'>" + box.no_of_packs + "</p>";
+					str += "<p class='hidden packsPerBox'>" + 
+							box.no_of_packs + 
+							"</p>";
 
 					str += "</div>";
 					str += "<span class='clearfix'></span>";					
@@ -287,10 +295,12 @@
 		});
 
 		$("select[name=salesman]").change( function() {
-			$("#p-salesman").text($("select[name=salesman] option:selected").text());
+			$("#p-salesman").text($("select[name=salesman] option:selected").
+				text());
 		});
 
-		$("#p-salesman").text($("select[name=salesman] option:selected").text());
+		$("#p-salesman").text($("select[name=salesman] option:selected").
+			text());
 
 		$(this).on("change", "select[name=price]", function() {
 			setAmount($(this));
