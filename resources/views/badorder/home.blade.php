@@ -14,10 +14,25 @@
 	<table class="table table-default">
 		<thead>
 			<tr>
-				<th>Order No</th>
+				<th>No</th>
 				<th>Date</th>
+				<th>Total Amount</th>
 			</tr>
 		</thead>
+		<tbody>
+			@foreach($bad_orders as $bad_order)			
+				<tr>
+					<td>
+						<a href="{{ action('BadOrderController@show', 
+						$bad_order->id) }}">
+							{{ str_pad($bad_order->id, 4, 0, STR_PAD_LEFT) }}
+						</a>
+					</td>
+					<td>{{ $bad_order->date }}</td>
+					<td>{{ $bad_order->badOrderItems->sum('amount') }}</td>
+				</tr>
+			@endforeach
+		</tbody>
 	</table>
 </div>
 

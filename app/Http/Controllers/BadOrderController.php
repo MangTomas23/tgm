@@ -11,6 +11,18 @@ use App\BadOrder;
 use DB;
 
 class BadOrderController extends Controller {
+
+	public function index() {
+		$bad_orders = BadOrder::all();
+
+		return view('badorder.home', compact('bad_orders'));
+	}
+
+	public function show($id) {
+		$bad_order = BadOrder::find($id);
+		$bo_items = $bad_order->badOrderItems;
+		return view('badorder.show', compact('bad_order'));
+	}	
 	
 	public function create() {
 

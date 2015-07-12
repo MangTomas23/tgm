@@ -176,6 +176,12 @@ Route::post('/bad/orders/store', 'BadOrderController@store');
 
 Route::get('/bad/order/nextid', 'BadOrderController@getNextID');
 
+Route::get('/bad/order/{id}', 'BadOrderController@show');
+
+
+
+
+
 Route::get('/developer/test', 'BadOrderController@test');
 
 Route::get('/developer/untested', 'AppController@untested');
