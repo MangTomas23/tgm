@@ -8,8 +8,15 @@
 
 <div class="container">
 
-	{!! Form::open([ 'url' => '/return/store']) !!}
+	<div class="text-right">
+		<a class="btn btn-default">
+			<span class="glyphicon glyphicon-print"></span>
+		</a>
+	</div>
 
+	<hr>
+
+	{!! Form::open([ 'url' => '/return/store']) !!}
 	<div id="print-area">	
 		<p>
 			<strong>Returned Stocks</strong>
@@ -22,7 +29,7 @@
 
 		<div class="text-center">
 			<h2>Tradeal General Merchandise</h2>
-			<p>Contact</p>
+			<p>Smart # 09199980311 / Globe # 09173179285</p>
 			<h4>RETURNED STOCKS REPORT</h4>	
 		</div>
 
@@ -328,7 +335,7 @@ $(document).ready( function() {
 			str += "<td class='p-amount'>" + $(".s-amount")[i].innerHTML + "</td>";
 			str += "<td class='hidden-print text-center'>" + 
 					"<a class='btn btn-default btn-sm btn-remove'>" + 
-					"<span class='glyphicon glyphicon-minus'></span>" +
+					"<span class='glyphicon glyphicon-remove'></span>" +
 					"</a></td>";
 			str += "</tr>";
 

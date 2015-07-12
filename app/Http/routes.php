@@ -178,6 +178,9 @@ Route::get('/bad/order/nextid', 'BadOrderController@getNextID');
 
 Route::get('/bad/order/{id}', 'BadOrderController@show');
 
+Route::get('/bad/order/delete/{id}', 'BadOrderController@delete');
+
+Route::post('/bad/order/destroy', 'BadOrderController@destroy');
 
 
 

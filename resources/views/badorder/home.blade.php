@@ -17,6 +17,7 @@
 				<th>No</th>
 				<th>Date</th>
 				<th>Total Amount</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -30,6 +31,10 @@
 					</td>
 					<td>{{ $bad_order->date }}</td>
 					<td>{{ $bad_order->badOrderItems->sum('amount') }}</td>
+					<td>
+						<a href="{{ action('BadOrderController@delete', 
+						$bad_order->id) }}">Delete</a>
+					</td>
 				</tr>
 			@endforeach
 		</tbody>

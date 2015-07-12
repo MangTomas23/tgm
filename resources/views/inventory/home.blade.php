@@ -161,6 +161,17 @@
 		
 		{!! Form::close() !!}
 		
+
+<!------------------------------ Lost Items ---------------------------------->
+
+    {!! Form::open(['url' => '/lost/items/add', 'method' => 'get']) !!}
+
+    <div class="page-header">
+        <h3>Lost Items</h3>
+    </div>
+
+    {!! Form::close() !!}
+
     </div>
 </div>
 

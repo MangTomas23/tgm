@@ -11,6 +11,7 @@ use App\BadOrder;
 use App\BadOrderItem;
 use App\Box;
 use DB;
+use Redirect;
 
 class BadOrderController extends Controller {
 
@@ -70,7 +71,19 @@ class BadOrderController extends Controller {
 			$bo_items->save();
 		}
 
-		return "success!";
-	}	
+		return Redirect::action('BadOrderController@index');
+	}
 
+	public function delete($id) {
+		return view('badorder.delete', compact('id'));
+	}
+
+	public function destroy() {
+		$id = Input::get('id');
+
+		$bad_order = BadOrder::findOrFail($id);
+		$bad_order->delete();
+
+		return Redirect::action('BadOrderController@index');
+	}
 }

@@ -82,7 +82,7 @@
 
 		<p>
 			<strong>Received by: </strong>
-			<span>{{ $bad_order->received_by }}</span>
+			<span>{{ $bad_order->received_by or null }}</span>
 		</p>
 		<p>
 			<strong>Salesman: </strong>
