@@ -14,7 +14,8 @@
 		</a>
 	</div>
 
-	{!! Form::open(['url'=>'/bad/orders/store']) !!}
+	{!! Form::open(['url'=>'/bad/orders/store', 'id'=>'p-form']) !!}
+
 	<div id="print-area">
 		<div class="text-center">
 			<h4>Tradeal General Merchandise</h4>
@@ -257,7 +258,7 @@
 						$b + "'>" +
 						"<input type='hidden' name='no_of_packs[]' value='" + 
 						$p + "'>" +
-						"<input type='hidden' name='amount' value='" + 
+						"<input type='hidden' name='amount[]' value='" + 
 						sAmounts[i].data("amt") + "'>" + 
 						"</td>";
 
@@ -317,6 +318,13 @@
 
 		$("#btn-print").click( function() {
 			$("#print-area").print();
+		});
+
+		$("#p-form").submit( function( event ) {
+			if($("#p-table tr").length == 0) {
+				alert("Invalid!!");
+				event.preventDefault();
+			}
 		});
 
 		var setAmount = function(obj) {

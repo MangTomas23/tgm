@@ -8,6 +8,8 @@ use Input;
 use App\Order;
 use App\Employee;
 use App\BadOrder;
+use App\BadOrderItem;
+use App\Box;
 use DB;
 
 class BadOrderController extends Controller {
@@ -21,7 +23,7 @@ class BadOrderController extends Controller {
 	public function show($id) {
 		$bad_order = BadOrder::find($id);
 		$bo_items = $bad_order->badOrderItems;
-		return view('badorder.show', compact('bad_order'));
+		return view('badorder.show', compact('bad_order', 'bo_items'));
 	}	
 	
 	public function create() {
@@ -55,6 +57,20 @@ class BadOrderController extends Controller {
 
 		$badOrder->save();
 
+		foreach ($input['boxes'] as $i => $box) {
+			$bo_items = new BadOrderItem;
+
+			$bo_items->bad_order_id = $badOrder->id;
+			$bo_items->box_id = $box;
+			$bo_items->no_of_box = $input['no_of_box'][$i];		
+			$bo_items->no_of_packs = $input['no_of_packs'][$i];		
+			$bo_items->amount = $input['amount'][$i];		
+			$bo_items->product_id = Box::find($box)->product->id;
+
+			$bo_items->save();
+		}
+
+		return "success!";
 	}	
 
 }

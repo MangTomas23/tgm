@@ -45,11 +45,28 @@
 						<th>Product</th>
 						<th>Quantity</th>
 						<th class="text-right">Amount</th>
-						<th class="hidden-print"></th>
 					</tr>					
 				</thead>
 				<tbody id="p-table">
-
+					@foreach($bo_items as $bo_item)
+						<tr>
+							<td>
+								{{ 
+									$bo_item->product->name . ' @ ' .
+									$bo_item->box->size
+								}}
+							</td>
+							<td>
+								{{ 
+									$bo_item->no_of_box . ' Box, ' .
+									$bo_item->no_of_packs . ' Packs'
+								}}
+							</td>
+							<td class="text-right">
+								{{ $bo_item->amount }}
+							</td>
+						</tr>
+					@endforeach
 				</tbody>
 			</table>
 		</div>
@@ -58,7 +75,9 @@
 
 		<p class="text-right">
 			<strong>Total Amount: </strong>			
-			<span id="p-total_amount">0.00</span>
+			<span id="p-total_amount">
+				{{ $bad_order->badOrderItems->sum('amount') }}
+			</span>
 		</p>
 
 		<p>
@@ -68,8 +87,8 @@
 		<p>
 			<strong>Salesman: </strong>
 			<span>
-				{{ $bad_order->employee->firstname .
-				' ' . $bad_order->employee->lastname }}
+				{{ $bad_order->employee->firstname . ' ' . 
+				$bad_order->employee->lastname }}
 			</span>
 		</p>
 
