@@ -61,11 +61,8 @@ class ReturnController extends Controller {
 	}
 	
 	public function show( $id ) {
-		$returnItems = Ret::find( $id )->returnItems;
-		$orderNo = str_pad( $returnItems[0]->ret->order->id, 4, 0,
-						   STR_PAD_LEFT );
-		
-		return view( 'return.show', compact( 'returnItems', 'orderNo' ) );
+
+		return view('return.show');
 	}
 
 }
