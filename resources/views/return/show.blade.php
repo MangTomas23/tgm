@@ -122,4 +122,10 @@
 	</div>
 </div>
 
+<script type="text/javascript">
+	$("#btn-print").click( function() {
+		$("#print-area").print();
+	});	
+</script>
+
 @endsection
