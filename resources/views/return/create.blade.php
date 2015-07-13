@@ -23,7 +23,7 @@
 
 			<span class="pull-right">
 				<strong>No: </strong>
-				<span id="p-no">0001</span>
+				<span id="p-no"></span>
 			</span>
 		</p>
 
@@ -402,6 +402,20 @@ $(document).ready( function() {
 
 		$("#p-totalamount").text(totalAmount);
 	};
+
+	var setNextID = function() {
+		$.get('/return/nextid', {
+
+		}, function(response) {
+			$("#p-no").text(response);
+			
+			setTimeout(function() {
+				setNextID();
+			}, 5000);
+		});
+	}
+
+	setNextID();
 
 } );
 

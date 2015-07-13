@@ -165,7 +165,10 @@ Route::get('/return/add', 'ReturnController@create');
 
 Route::post('/return/store', 'ReturnController@store');
 
+Route::get('/return/nextid', 'ReturnController@getNextID');
+
 Route::get('/return/{id}', 'ReturnController@show');
+
 
 
 Route::get('/bad/order/add', 'BadOrderController@create');

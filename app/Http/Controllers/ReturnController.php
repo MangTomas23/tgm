@@ -12,6 +12,7 @@ use App\Order;
 use App\ReturnItem;
 use App\Employee;
 use App\Customer;
+use DB;
 
 
 class ReturnController extends Controller {
@@ -62,7 +63,19 @@ class ReturnController extends Controller {
 	
 	public function show( $id ) {
 
-		return view('return.show');
+		$return = Ret::find($id);
+
+		return view('return.show', compact('return'));
+	}
+
+	public function getNextID() {
+		$result = DB::select(DB::raw('SHOW TABLE STATUS LIKE "returns"'));
+
+		if($result == null){
+			return str_pad(1, 4, 0, STR_PAD_LEFT);
+		}
+
+		return str_pad($result[0]->Auto_increment, 4, 0, STR_PAD_LEFT);
 	}
 
 }

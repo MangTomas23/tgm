@@ -22,7 +22,9 @@
 
 			<span class="pull-right">
 				<strong>No: </strong>
-				<span id="p-no">0001</span>
+				<span id="p-no">
+					{{ str_pad($return->id, 4, 0, STR_PAD_LEFT) }}
+				</span>
 			</span>
 		</p>
 
@@ -35,13 +37,13 @@
 		<p>
 			<strong>Customer: </strong>
 			<span id="p-customer">
-				{{ $input['customer'] or null }}
+				{{ $return->customer->name }}
 			</span>
 
 			<span class="pull-right">
 				<strong>Date: </strong>
 				<span id="p-date">
-					{{ $input['date'] or null }}
+					{{ $return->date }}
 				</span>
 			</span>
 		</p>
@@ -49,12 +51,14 @@
 		<p>
 			<strong>Address: </strong>
 			<span id="p-address">
-				{{ $input['address'] or null }}
+				{{ $return->customer->address }}
 			</span>
 
 			<span class="pull-right">
 				<strong>Ref no: </strong>
-				<span id="p-ref_no"></span>
+				<span id="p-ref_no">
+					{{ $return->reference_no }}
+				</span>
 			</span>
 		</p>
 
@@ -88,21 +92,30 @@
 
 		<p>
 			<strong>Salesman: </strong>
-			<span id="p-salesman"></span>
+			<span id="p-salesman">
+				{{ $return->employee->firstname . ' ' .
+					$return->employee->lastname }}
+			</span>
 
 			<span class="pull-right">
 				<strong>Area: </strong>
-				<span id="p-area"></span>
+				<span id="p-area">
+					{{ $return->area }}
+				</span>
 			</span>
 		</p>
 
 		<p>
 			<strong>Received by: </strong>
-			<span id="p-received_by"></span>
+			<span id="p-received_by">
+				{{ $return->received_by }}
+			</span>
 
 			<span class="pull-right">
 				<strong>Checked by: </strong>
-				<span id="p-checked_by"></span>
+				<span id="p-checked_by">
+					{{ $return->checked_by }}
+				</span>
 			</span>
 		</p>
 
