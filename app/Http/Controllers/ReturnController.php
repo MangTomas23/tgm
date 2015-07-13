@@ -29,7 +29,6 @@ class ReturnController extends Controller {
 		
 		$returns = Ret::all();
 		
-		
 		return view( 'return.home', compact( 'returns' ) );
 	}
 	
@@ -56,7 +55,7 @@ class ReturnController extends Controller {
 		$ret->salesman = $input['salesman'];
 		$ret->area = $input['area'];
 		$ret->received_by = $input['received_by'];
-		$ret->checked_by = $input['chec'];
+		$ret->checked_by = $input['checked_by'];
 
 		$ret->save();
 	}

@@ -9,7 +9,7 @@
 <div class="container">
 
 	<div class="text-right">
-		<a class="btn btn-default">
+		<a id="btn-print" class="btn btn-default">
 			<span class="glyphicon glyphicon-print"></span>
 		</a>
 	</div>
@@ -54,7 +54,7 @@
 			</span>
 
 			<span class="pull-right">
-				<strong>Ref no</strong>
+				<strong>Ref no: </strong>
 				<span id="p-ref_no"></span>
 			</span>
 		</p>
@@ -75,10 +75,10 @@
 			</table>
 		</div>
 
-		<div class="text-right">
+		<p class="text-right">
 			<strong>Total Amount: </strong>
-			<p id="p-totalamount"></p>
-		</div>
+			<span id="p-totalamount"></span>
+		</p>
 
 		<hr>
 
@@ -360,7 +360,7 @@ $(document).ready( function() {
 
 	$("#p-salesman").text( $("select[name=salesman] option:selected").text() );
 
-	$(this).on("keyup", ".box, .packs", function() {
+	$(this).on("keyup change", ".box, .packs", function() {
 		setAmount($(this));
 	});
 
