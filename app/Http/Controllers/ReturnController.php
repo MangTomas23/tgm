@@ -59,6 +59,8 @@ class ReturnController extends Controller {
 		$ret->checked_by = $input['checked_by'];
 
 		$ret->save();
+
+		return Redirect::action('InventoryController@index');
 	}
 	
 	public function show( $id ) {

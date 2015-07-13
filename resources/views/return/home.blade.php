@@ -17,6 +17,7 @@
 			<tr>
 				<th>No</th>
 				<th>Date</th>
+				<th>Total Amount</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -28,7 +29,10 @@
 							{{ str_pad($return->id, 4, 0, STR_PAD_LEFT) }}
 						</a>
 					</td>
-					<td></td>
+					<td>
+						{{ $return->date }}
+					</td>
+					<td>0.00</td>
 				</tr>
 			@endforeach
 		</tbody>
