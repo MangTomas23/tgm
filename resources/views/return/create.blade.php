@@ -243,7 +243,8 @@ $(document).ready( function() {
 	});
 
 	$("select[name=salesman]").change( function() {
-		$("#p-salesman").text($("select[name=salesman] option:selected").text());
+		$("#p-salesman").text($("select[name=salesman] option:selected")
+			.text());
 	});
 
 	$("#in-product").keyup( function() {
@@ -302,7 +303,8 @@ $(document).ready( function() {
 				str += "</select>";
 				str += "</div>";
 
-				str += "<span class='ppb' data-no='" + box.no_of_packs + "'></span>";
+				str += "<span class='ppb' data-no='" + box.no_of_packs + "'>" + 
+				"</span>";
 
 				str += "<div class='form-group col-sm-2'>";
 				str += "<p class='form-control-static s-amount'>0.00</p>";
