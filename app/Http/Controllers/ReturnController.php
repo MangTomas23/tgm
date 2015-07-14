@@ -12,6 +12,7 @@ use App\Order;
 use App\ReturnItem;
 use App\Employee;
 use App\Customer;
+use App\Box;
 use DB;
 
 
@@ -60,14 +61,28 @@ class ReturnController extends Controller {
 
 		$ret->save();
 
+		foreach ($input['boxes'] as $i => $box) {
+			$retItem = new ReturnItem;
+
+			$retItem->ret_id = $ret->id;
+			$retItem->box_id = $box;
+			$retItem->no_of_box = $input['no_of_box'][$i];
+			$retItem->no_of_packs = $input['no_of_packs'][$i];
+			$retItem->amount = $input['amount'][$i];
+			$retItem->product_id = Box::find($box)->product->id;
+
+			$retItem->save();
+		}
+
 		return Redirect::action('InventoryController@index');
 	}
 	
 	public function show( $id ) {
 
 		$return = Ret::find($id);
+		$retItems = $return->returnItems;
 
-		return view('return.show', compact('return'));
+		return view('return.show', compact('return', 'retItems'));
 	}
 
 	public function getNextID() {

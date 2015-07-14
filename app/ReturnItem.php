@@ -13,4 +13,7 @@ class ReturnItem extends Model {
 		return $this->belongsTo('App\Box');
 	}
 	
+	public function product() {
+		return $this->belongsTo('App\Product');
+	}
 }

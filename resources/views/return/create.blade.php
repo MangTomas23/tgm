@@ -179,12 +179,12 @@
 
 	<div class="form-group col-sm-6">
 		<label>Received by</label>
-		<input name="received_by" type="text" class="form-control">
+		<input name="received_by" type="text" class="form-control" required>
 	</div>
 
 	<div class="form-group col-sm-6">
 		<label>Checked by</label>
-		<input name="checked_by" type="text" class="form-control">
+		<input name="checked_by" type="text" class="form-control" required>
 	</div>
 
 	<div class="col-sm-12 text-right">
@@ -322,6 +322,11 @@ $(document).ready( function() {
 
 	$("#btn-add").click( function() {
 		var str = "";
+		var amt = [];
+
+		$.each($(".s-amount"), function() {
+			amt.push($(this).data("amt"));
+		});
 
 		$.each(boxes, function(i, box) {
 			var b = $(".box")[i].value;
@@ -332,7 +337,12 @@ $(document).ready( function() {
 			}
 
 			str += "<tr>";
-			str += "<td>" + product.name + " @ " + box.size + "</td>";
+			str += "<td>" + product.name + " @ " + box.size +
+					"<input name='boxes[]' type='hidden' value='" + box.id + "'>" + 
+					"<input name='no_of_box[]' type='hidden' value='" + b + "'>" + 
+					"<input name='no_of_packs[]' type='hidden' value='" + p + "'>" + 
+					"<input name='amount[]' type='hidden' value='" + amt[i] + "'>" + 
+				 "</td>";
 			str += "<td>" + b + " Box, " + p + " Packs" + "</td>";
 			str += "<td class='p-amount'>" + $(".s-amount")[i].innerHTML + "</td>";
 			str += "<td class='hidden-print text-center'>" + 
@@ -389,7 +399,8 @@ $(document).ready( function() {
 
 		var sAmount = obj.closest(".box-row").find(".s-amount");
 
-		sAmount.text(totalAmount);		
+		sAmount.text(totalAmount);
+		sAmount.attr("data-amt", totalAmount);
 		sAmount.digits();
 	};
 

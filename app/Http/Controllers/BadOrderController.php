@@ -86,4 +86,8 @@ class BadOrderController extends Controller {
 
 		return Redirect::action('BadOrderController@index');
 	}
+
+	public function test() {
+		return $this->getNextID();
+	}
 }

@@ -68,19 +68,35 @@
 					<tr>
 						<th>Product</th>
 						<th>Quantity</th>
-						<th>Amount</th>
-						<th class="hidden-print"></th>
+						<th class="text-right">Amount</th>
 					</tr>
 				</thead>
 				<tbody id="p-table">
-
+					@foreach($retItems as $retItem)
+						<tr>
+							<td> 
+								{{ $retItem->product->name . ' @ ' . 
+									$retItem->box->size}} 
+							</td>
+							<td>
+								{{ $retItem->no_of_box . ' Box, ' .
+									$retItem->no_of_packs . ' Packs' }}
+							</td>
+							<td class="text-right" class="currency">
+								{{ $retItem->amount }}
+							</td>
+						</tr>
+					@endforeach
 				</tbody>
 			</table>
 		</div>
 
 		<p class="text-right">
 			<strong>Total Amount: </strong>
-			<span id="p-totalamount"></span>
+			P 
+			<span id="p-totalamount">
+				{{ $retItems->sum('amount') }}
+			</span>
 		</p>
 
 		<hr>
@@ -126,6 +142,10 @@
 	$("#btn-print").click( function() {
 		$("#print-area").print();
 	});	
+
+	$.each($(".currency"), function() {
+		$(this).digits();
+	});
 </script>
 
 @endsection

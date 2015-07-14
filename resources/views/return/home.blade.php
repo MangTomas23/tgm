@@ -32,7 +32,9 @@
 					<td>
 						{{ $return->date }}
 					</td>
-					<td>0.00</td>
+					<td>
+						{{ $return->returnItems->sum('amount') }}
+					</td>
 				</tr>
 			@endforeach
 		</tbody>
