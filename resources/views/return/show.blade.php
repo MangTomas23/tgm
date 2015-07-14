@@ -94,7 +94,7 @@
 		<p class="text-right">
 			<strong>Total Amount: </strong>
 			P 
-			<span id="p-totalamount">
+			<span id="p-totalamount" class="currency">
 				{{ $retItems->sum('amount') }}
 			</span>
 		</p>
@@ -139,13 +139,17 @@
 </div>
 
 <script type="text/javascript">
-	$("#btn-print").click( function() {
-		$("#print-area").print();
-	});	
 
-	$.each($(".currency"), function() {
-		$(this).digits();
+	$(document).ready( function() {
+		$("#btn-print").click( function() {
+			$("#print-area").print();
+		});	
+
+		$.each($(".currency"), function() {
+			$(this).digits();
+		});
 	});
+
 </script>
 
 @endsection
