@@ -33,11 +33,14 @@
 						{{ $return->date }}
 					</td>
 					<td>
-						{{ $return->returnItems->sum('amount') }}
+						P
+						<span class="currency">
+							{{ $return->returnItems->sum('amount') }}
+						</span>
 					</td>
 					<td>
 						<a href="{{ action('ReturnController@delete', 
-							$return->id) }}" class="btn btn-danger btn-sm" 
+							$return->id) }}" class="btn btn-danger btn-xs" 
 							title="Delete">
 							<span class="glyphicon glyphicon-remove"></span>
 						</a>
@@ -48,5 +51,13 @@
 	</table>
 
 </div>
+
+<script type="text/javascript">
+	$(document).ready( function() {
+		$.each($(".currency"), function() {
+			$(this).digits();
+		});
+	});
+</script>
 
 @endsection
