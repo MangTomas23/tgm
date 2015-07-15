@@ -95,4 +95,16 @@ class ReturnController extends Controller {
 		return str_pad($result[0]->Auto_increment, 4, 0, STR_PAD_LEFT);
 	}
 
+	public function delete($id) {
+		$return = Ret::find($id);
+		return view('return.delete', compact('return'));
+	}
+
+	public function destroy() {
+		$ret = Ret::findOrfail(Input::get('id'));
+		$ret->delete();
+
+		return Redirect::action('ReturnController@index');
+	}
+
 }

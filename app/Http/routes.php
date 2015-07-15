@@ -169,6 +169,10 @@ Route::get('/return/nextid', 'ReturnController@getNextID');
 
 Route::get('/return/{id}', 'ReturnController@show');
 
+Route::get('/return/delete/{id}', 'ReturnController@delete');
+
+Route::post('/return/destroy', 'ReturnController@destroy');
+
 
 
 Route::get('/bad/order/add', 'BadOrderController@create');

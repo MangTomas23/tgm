@@ -35,6 +35,13 @@
 					<td>
 						{{ $return->returnItems->sum('amount') }}
 					</td>
+					<td>
+						<a href="{{ action('ReturnController@delete', 
+							$return->id) }}" class="btn btn-danger btn-sm" 
+							title="Delete">
+							<span class="glyphicon glyphicon-remove"></span>
+						</a>
+					</td>
 				</tr>
 			@endforeach
 		</tbody>
