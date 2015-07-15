@@ -30,11 +30,7 @@
     <hr>
 
     <div class="page-header">
-        <h3>Sales of the Day</h3>
-    </div>
-
-    <div class="page-header">
-        <h3>Actual Sales</h3>
+        <h3>Best Selling Product</h3>
     </div>
 
 </div>

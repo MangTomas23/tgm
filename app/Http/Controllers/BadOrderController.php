@@ -10,6 +10,7 @@ use App\Employee;
 use App\BadOrder;
 use App\BadOrderItem;
 use App\Box;
+use App\OrderItem;
 use DB;
 use Redirect;
 
@@ -88,6 +89,8 @@ class BadOrderController extends Controller {
 	}
 
 	public function test() {
-		return $this->getNextID();
+		return OrderItem::select(DB::raw('product_id, 
+				count(product_id) as count'))->whereRaw('MONTH(created_at)=6')
+				->groupBy('product_id')->take(5)->orderBy('count')->get();
 	}
 }
