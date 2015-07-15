@@ -89,8 +89,12 @@ class BadOrderController extends Controller {
 	}
 
 	public function test() {
-		return OrderItem::select(DB::raw('product_id, 
+		$orderItems = OrderItem::select(DB::raw('product_id, 
 				count(product_id) as count'))->whereRaw('MONTH(created_at)=6')
 				->groupBy('product_id')->take(5)->orderBy('count')->get();
+
+		foreach ($orderItems as $i => $orderItem) {
+			echo $orderItem->product->name . '<br>';
+		}
 	}
 }
