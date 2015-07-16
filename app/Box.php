@@ -26,10 +26,14 @@ class Box extends Model {
 	}
 	
 	public function scopeCountStock($query, $box_id){
+		$ret = Box::countReturns($box_id);
+        $rbox = $ret['no_of_box'];
+        $rpacks = $ret['no_of_packs'];
+
 		$box = Box::find($box_id);
-		$inStock = $box->instocks->sum('quantity');
+		$inStock = $box->instocks->sum('quantity') + $rbox;
         $packsPerBox = $box->no_of_packs;
-        $totalPacks = $inStock * $packsPerBox;
+        $totalPacks = ($inStock * $packsPerBox) + $rpacks;
 		
         $noOfBoxOrdered = $box->orderItems->sum('no_of_box');
         $noOfPacksOrdered =$box->orderItems->sum('no_of_packs');
@@ -38,14 +42,14 @@ class Box extends Model {
         $totalNoOfPacksLeft = $totalPacks - $totalOrders;
         $totalNoOfBoxLeft = floor($totalNoOfPacksLeft / $packsPerBox);
 
-        $ret = Box::countReturns($box_id);
-        $rbox = $ret['no_of_box'];
-        $rpacks = $ret['no_of_packs'];
+        $totalNoOfBoxLeft == null ? 0:$totalNoOfBoxLeft;
+        $totalNoOfPacksLeft == null ? 0:$totalNoOfPacksLeft;
 
-        $totalNoOfBoxLeft += $rbox;
-		
+
+        
 		$totalLeft = ['no_of_box_available'=>$totalNoOfBoxLeft,
-					  'no_of_packs_available'=>(($totalNoOfPacksLeft - ($totalNoOfBoxLeft * $packsPerBox)) + $rpacks)];
+					  'no_of_packs_available'=>$totalNoOfPacksLeft - 
+					  ($totalNoOfBoxLeft * $packsPerBox)];
         
 		return $totalLeft;
 	}
@@ -62,10 +66,15 @@ class Box extends Model {
 	}
 
 	public function scopeCountReturns2($query, $box_id) {
+
+		$ret = Box::countReturns($box_id);
+        $rbox = $ret['no_of_box'];
+        $rpacks = $ret['no_of_packs'];
+
 		$box = Box::find($box_id);
-		$inStock = $box->instocks->sum('quantity');
+		$inStock = $box->instocks->sum('quantity') + $rbox;
         $packsPerBox = $box->no_of_packs;
-        $totalPacks = $inStock * $packsPerBox;
+        $totalPacks = ($inStock * $packsPerBox) + $rpacks;
 		
         $noOfBoxOrdered = $box->orderItems->sum('no_of_box');
         $noOfPacksOrdered =$box->orderItems->sum('no_of_packs');
@@ -78,15 +87,9 @@ class Box extends Model {
         $totalNoOfPacksLeft == null ? 0:$totalNoOfPacksLeft;
 
 
-        $ret = Box::countReturns($box_id);
-        $rbox = $ret['no_of_box'];
-        $rpacks = $ret['no_of_packs'];
-
-
-        $totalNoOfBoxLeft += $rbox;
-		
+        
 		$totalLeft = ['no_of_box_available'=>$totalNoOfBoxLeft,
-					  'no_of_packs_available'=>(($totalNoOfPacksLeft - ($totalNoOfBoxLeft * $packsPerBox)) + $rpacks)];
+					  'no_of_packs_available'=>$totalNoOfPacksLeft - ($totalNoOfBoxLeft * $packsPerBox)];
         
 		return $totalLeft;
 	}
