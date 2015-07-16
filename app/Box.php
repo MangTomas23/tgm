@@ -37,23 +37,57 @@ class Box extends Model {
         $totalOrders = ($noOfBoxOrdered * $packsPerBox) + $noOfPacksOrdered;
         $totalNoOfPacksLeft = $totalPacks - $totalOrders;
         $totalNoOfBoxLeft = floor($totalNoOfPacksLeft / $packsPerBox);
+
+        $ret = Box::countReturns($box_id);
+        $rbox = $ret['no_of_box'];
+        $rpacks = $ret['no_of_packs'];
+
+        $totalNoOfBoxLeft += $rbox;
 		
 		$totalLeft = ['no_of_box_available'=>$totalNoOfBoxLeft,
-					  'no_of_packs_available'=>($totalNoOfPacksLeft - $totalNoOfBoxLeft * $packsPerBox)];
+					  'no_of_packs_available'=>(($totalNoOfPacksLeft - ($totalNoOfBoxLeft * $packsPerBox)) + $rpacks)];
         
 		return $totalLeft;
 	}
 
 	public function scopeCountReturns($query, $box_id) {
+		$returnItems = Box::find($box_id)->returnItems;
+
+		$no_of_box = $returnItems->sum('no_of_box');
+		$no_of_packs = $returnItems->sum('no_of_packs');
+
+		$data = [ 'no_of_box' => $no_of_box, 'no_of_packs' => $no_of_packs ];
+
+		return $data;
+	}
+
+	public function scopeCountReturns2($query, $box_id) {
 		$box = Box::find($box_id);
+		$inStock = $box->instocks->sum('quantity');
+        $packsPerBox = $box->no_of_packs;
+        $totalPacks = $inStock * $packsPerBox;
+		
+        $noOfBoxOrdered = $box->orderItems->sum('no_of_box');
+        $noOfPacksOrdered =$box->orderItems->sum('no_of_packs');
+        
+        $totalOrders = ($noOfBoxOrdered * $packsPerBox) + $noOfPacksOrdered;
+        $totalNoOfPacksLeft = $totalPacks - $totalOrders;
+        $totalNoOfBoxLeft = floor($totalNoOfPacksLeft / $packsPerBox);
 
-		$packsPerBox = $box->no_of_packs;
-
-		$noOfBoxLeft = $box->returnItems->sum('no_of_box');
-		$noOfPacksLeft = $box->returnItems->sum('no_of_packs');
+        $totalNoOfBoxLeft == null ? 0:$totalNoOfBoxLeft;
+        $totalNoOfPacksLeft == null ? 0:$totalNoOfPacksLeft;
 
 
+        $ret = Box::countReturns($box_id);
+        $rbox = $ret['no_of_box'];
+        $rpacks = $ret['no_of_packs'];
 
-		return $noOfBoxLeft * $packsPerBox + $noOfPacksLeft;
+
+        $totalNoOfBoxLeft += $rbox;
+		
+		$totalLeft = ['no_of_box_available'=>$totalNoOfBoxLeft,
+					  'no_of_packs_available'=>(($totalNoOfPacksLeft - ($totalNoOfBoxLeft * $packsPerBox)) + $rpacks)];
+        
+		return $totalLeft;
 	}
 }

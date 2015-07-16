@@ -10,6 +10,7 @@ use App\ProductCategory;
 use App\Box;
 use App\InStock;
 use App\Customer;
+use App\OrderItem;
 use Redirect;
 use Input;
 use DB;
@@ -39,7 +40,8 @@ class ProductController extends Controller {
         $suppliers = Supplier::orderBy('name')->get();
         $product_categories = ProductCategory::orderBy('name')->get();
         
-		return view('product.create', compact('suppliers'))->with('product_categories', $product_categories);
+		return view('product.create', compact('suppliers'))
+            ->with('product_categories', $product_categories);
 	}
 
 	/**
@@ -86,14 +88,16 @@ class ProductController extends Controller {
                 $saveSuccessful = true;
                 $suppliers = Supplier::orderBy('name')->get();
                 $product_categories = ProductCategory::orderBy('name')->get();
-                return view('product.create', compact(['input','saveSuccessful','suppliers','product_categories']));
+                return view('product.create', compact(['input','saveSuccessful',
+                    'suppliers','product_categories']));
             }
         }catch(\Illuminate\Database\QueryException $e){
             if($e->getCode()==23000){
                 return Redirect::action('ProductController@duplicate');
             }
         }
-        return Redirect::action('ProductController@create', compact('saveSuccessful'));
+        return Redirect::action('ProductController@create', 
+            compact('saveSuccessful'));
 	}
 
 	/**
@@ -195,17 +199,26 @@ class ProductController extends Controller {
 	}
     
     public function search(){
-        return Redirect::action('ProductController@searchResults', Input::get('query'));
+        return Redirect::action('ProductController@searchResults', 
+            Input::get('query'));
     }
     
     public function searchResults($query){
-        $products = Product::where('name','like','%'.$query.'%')->orderBy('name')->get();
+        $products = Product::where('name','like','%'.$query.'%')
+            ->orderBy('name')->get();
         
         return view('product.search', compact(['products','query']));
     }
 
     public function duplicate(){
         return view('product.duplicate');   
+    }
+
+    public function getBestSellingProduct() {
+        $products = OrderItem::select(DB::raw('product_id, 
+                count(product_id) as count'))->whereRaw('MONTH(created_at)=6')
+                ->groupBy('product_id')->take(5)->orderBy('count')->get();
+        return $products;
     }
     
     public function test(){
@@ -256,4 +269,5 @@ class ProductController extends Controller {
 			echo $customer->name . ' - ' . $customer->address . '<br>';
 		}
     }
+
 }

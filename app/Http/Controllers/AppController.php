@@ -13,6 +13,7 @@ use DB;
 use App\Box;
 use App\Employee;
 use App\Customer;
+use App\Product;
 
 class AppController extends Controller {
 	
@@ -22,6 +23,7 @@ class AppController extends Controller {
 
 	public function index()
 	{
+		
 		return view('home');
 	}
 	
@@ -64,10 +66,11 @@ class AppController extends Controller {
 	}
 
 	public function test() {
-
-		$salesmen = Employee::all();
-
-		return view('advance.test', compact('salesmen'));
+		// jelly cup 47
+		// coco jelly 67 - product_id
+		
+		// return Product::find(67)->boxes;
+		return Box::countReturns(49);
 	}
 
 	public function untested() {
@@ -76,5 +79,9 @@ class AppController extends Controller {
 
 		return view('advance.untested', compact('customers',
 					'salesmen'));
+	}
+
+	public function test2() {
+		return Box::countReturns2(49);
 	}
 }

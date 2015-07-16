@@ -32,6 +32,31 @@
     <div class="page-header">
         <h3>Best Selling Product</h3>
     </div>
+    
+    <div class="row">
+        <div class="col-md-3">
+            <div class="thumbnail">
+
+            <div class="caption">
+                <h1>Jelly Cup</h1>
+
+                <p>Lai Hong Marketing</p>
+
+                <ul class="list-unstyled">
+                    <li>Purchase Price: </li>
+                    <li>Selling Price 1: </li>
+                    <li>Selling Price 2: </li>
+                </ul>
+
+                <p>In Stock: </p>
+                <ul class="list-inline">
+                    <li>Box</li>
+                    <li>Packs</li>
+                </ul>
+            </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 
