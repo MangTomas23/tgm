@@ -164,11 +164,23 @@
 
 <!------------------------------ Lost Items ---------------------------------->
 
-    {!! Form::open(['url' => '/lost/items/add', 'method' => 'get']) !!}
+    {!! Form::open(['url' => '/lost/item/create', 'method' => 'get']) !!}
 
     <div class="page-header">
         <h3>Lost Items</h3>
     </div>
+
+    <div class="form-group col-sm-6">
+        <label>Date</label>
+        <input name="date" type="date" class="form-control"> 
+    </div>
+
+    <div class="form-group col-sm-6">
+        <label>Checked by</label>
+        <input nmae="checked_by" type="text" class="form-control" required>
+    </div>
+
+    {!! Form::submit('Next', ['class' => 'btn btn-info']) !!}
 
     {!! Form::close() !!}
 

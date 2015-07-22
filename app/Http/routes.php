@@ -212,6 +212,8 @@ Route::post('/customer/update', 'CustomerController@update');
 
 Route::get('/customer/{id}', 'CustomerController@show');
 
+Route::resource('/lost/item', 'LostItemController');
+
 
 Route::controllers([
 	'auth' => 'Auth\AuthController',
