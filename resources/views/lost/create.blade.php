@@ -121,14 +121,18 @@
 							"</div>";
 
 					str +=	"<div class='form-group col-sm-2'>" +
-								"<input type='number' class='form-control packs'>" +
+								"<input type='number' class='form-control" + 
+								" packs' min='0' value='0'>" +
 							 "</div>";
 
 					str += "<div class='form-group col-sm-2'>" + 
 							"<select class='form-control price'>" +
-								"<option value='" + box.purchase_price + "'>Purchase Price</option>" + 
-								"<option value='" + box.selling_price_1 + "'>Selling Price 1</option>" + 
-								"<option value='" + box.selling_price_2 + "'>Selling Price 2</option>" + 
+								"<option value='" + box.purchase_price + 
+								"'>Purchase Price</option>" + 
+								"<option value='" + box.selling_price_1 + 
+								"'>Selling Price 1</option>" + 
+								"<option value='" + box.selling_price_2 + 
+								"'>Selling Price 2</option>" + 
 							"</select>" + 
 							"</div>";
 
@@ -164,9 +168,12 @@
 				str += "<td>" + $(".s-amount")[i].innerHTML + "</td>";
 				str += "<td class='text-center'>" +
 							"<a class='btn btn-default btn-remove'>" + 
-								"<span class='glyphicon glyphicon-remove'></span>"
+							"<span class='glyphicon glyphicon-remove'></span>"
 							"</a>" + 
 						"</td>";
+
+				str += "<input name='product[]' type='hidden' value='" + 
+						product.id + "'>";
 				str += "</tr>";
 			});
 
