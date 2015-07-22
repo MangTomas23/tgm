@@ -15,6 +15,8 @@
 	</div>
 
 	<hr>
+	
+	{!! Form::open(['url' => '/lost/item']) !!}
 
 	<div class="print-area">
 
@@ -75,8 +77,26 @@
 				<a id="btn-add" class="btn btn-default">Add</a>
 			</div>
 		</div>
+
+		<hr>
+
+		<div class="form-group col-sm-6">
+			<label>Date</label>
+			<input name="date" type="date" class="form-control">
+		</div>
+
+		<div class="form-group col-sm-6">
+			<label for="">Checked by</label>
+			<input type="text" name="checked_by" class="form-control">
+		</div>
+
+		<div class="text-right col-sm-12">
+			{!! Form::submit('Save', ['class' => 'btn btn-success']) !!}
+		</div>
 		
 	</div>
+
+	{!! Form::close() !!}
 
 </div>
 
@@ -168,7 +188,7 @@
 				str += "<td>" + $(".s-amount")[i].innerHTML + "</td>";
 				str += "<td class='text-center'>" +
 							"<a class='btn btn-default btn-remove'>" + 
-							"<span class='glyphicon glyphicon-remove'></span>"
+							"<span class='glyphicon glyphicon-remove'></span>" +
 							"</a>" + 
 						"</td>";
 
