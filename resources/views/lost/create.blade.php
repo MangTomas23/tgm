@@ -102,7 +102,7 @@
 
 				str += "<p class='col-sm-2'><strong>Size</strong></p>";
 				str += "<p class='col-sm-2'><strong>No of Box</strong></p>";
-				str += "<p class='col-sm-2'><strong>No of Pscks</strong></p>";
+				str += "<p class='col-sm-2'><strong>No of Packs</strong></p>";
 				str += "<p class='col-sm-2'><strong>Price</strong></p>";
 				str += "<p class='col-sm-2'><strong>Amount</strong></p>";
 
@@ -115,8 +115,9 @@
 					str += "<p class='col-sm-2'>" + box.size + "</p>";
 
 					str += "<div class='form-group col-sm-2'>" +
-								"<input type='number' class='form-control box'" +
-								" data-packs_per_box='" + box.no_of_packs + "'>" +
+							"<input type='number' class='form-control box'" +
+							" data-packs_per_box='" + box.no_of_packs + "' " + 
+							"value='0' min='0'>" +
 							"</div>";
 
 					str +=	"<div class='form-group col-sm-2'>" +
@@ -131,7 +132,7 @@
 							"</select>" + 
 							"</div>";
 
-					str += "<p class='col-sm-2 s-amount'>0.00</p>";
+					str += "<p  class='col-sm-2 s-amount'>0.00</p>";
 
 					str += "</div>";
 
@@ -149,10 +150,18 @@
 			var str = "";
 
 			$.each(boxes, function(i, box) {
+
+				var b = $(".box")[i].value;
+				var p = $(".packs")[i].value;
+
+				if(b == 0 && p == 0){
+					return true;
+				}
+
 				str += "<tr>";
 				str += "<td>" + product.name + " @ " + box.size + "</td>";
-				str += "<td>test b</td>";
-				str += "<td>test c</td>";
+				str += "<td>" + b + " Box, " + p + " Packs</td>";
+				str += "<td>" + $(".s-amount")[i].innerHTML + "</td>";
 				str += "<td class='text-center'>" +
 							"<a class='btn btn-default btn-remove'>" + 
 								"<span class='glyphicon glyphicon-remove'></span>"
@@ -180,19 +189,22 @@
 		});
 
 
-		var setAmount = function(obj) {
-			var noOfBox = obj.closest(".box-row").find(".box").val();
-			var noOfPacks = obj.closest(".box-row").find(".packs").val();
-			var packsPerBox = obj.closest(".box-row").find(".box").data("packs_per_box");
-			var pricePerBox = obj.closest(".box-row").find("select").val();
-			var sAmount = obj.closest(".box-row").find(".s-amount");
-			var pricePerPack = pricePerBox/packsPerBox;
+		var setAmount   = function(obj) {
 
+			var noOfBox     = obj.closest(".box-row").find(".box").val();
+			var noOfPacks   = obj.closest(".box-row").find(".packs").val();
+			var packsPerBox = obj.closest(".box-row").find(".box")
+								.data("packs_per_box");
+			var pricePerBox = obj.closest(".box-row").find("select").val();
+			var sAmount     = obj.closest(".box-row").find(".s-amount");
+			var pricePerPack = pricePerBox/packsPerBox;
+			
 			var amount = parseFloat((noOfBox * pricePerBox) + 
 						(noOfPacks * pricePerPack)).toFixed(2);
 
 
 			sAmount.text(amount).digits();
+			sAmount.attr("data-amount", amount);
 		}
 	});
 
