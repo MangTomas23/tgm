@@ -82,12 +82,12 @@
 
 		<div class="form-group col-sm-6">
 			<label>Date</label>
-			<input name="date" type="date" class="form-control">
+			<input name="date" type="date" class="form-control" required>
 		</div>
 
 		<div class="form-group col-sm-6">
 			<label for="">Checked by</label>
-			<input type="text" name="checked_by" class="form-control">
+			<input type="text" name="checked_by" class="form-control" required>
 		</div>
 
 		<div class="text-right col-sm-12">

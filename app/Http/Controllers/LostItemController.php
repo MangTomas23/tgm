@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Input;
 
 class LostItemController extends Controller {
 
@@ -34,7 +35,7 @@ class LostItemController extends Controller {
 	 */
 	public function store()
 	{
-		return 'store';
+		return Input::all();
 	}
 
 	/**
