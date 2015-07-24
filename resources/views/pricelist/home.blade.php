@@ -61,7 +61,7 @@
             @endforeach
         </tbody>        
     </table>
-    
+    {!! $products->render() !!}
     <div class="page-header">&nbsp;</div>
     
     <div class="form-group text-right">

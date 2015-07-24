@@ -194,6 +194,18 @@
 
 				str += "<input name='product[]' type='hidden' value='" + 
 						product.id + "'>";
+
+				str += "<input name='boxes[]' type='hidden' value='" + 
+						box.id + "'>";
+
+				str += "<input name='no_of_box[]' type='hidden' value='" + b 
+						+ "'>";
+
+				str += "<input name='no_of_packs[]' type='hidden' value='" + p 
+						+ "'>";
+
+				str += "<input name='amount[]' type='hidden' value=''>";
+
 				str += "</tr>";
 			});
 

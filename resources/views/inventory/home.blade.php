@@ -180,7 +180,9 @@
         <input nmae="checked_by" type="text" class="form-control" required>
     </div>
 
-    {!! Form::submit('Next', ['class' => 'btn btn-info']) !!}
+    <div class="form-group col-sm-12 text-right">
+        {!! Form::submit('Next', ['class' => 'btn btn-info']) !!}
+    </div>
 
     {!! Form::close() !!}
 

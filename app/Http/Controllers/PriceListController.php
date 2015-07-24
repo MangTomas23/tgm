@@ -15,7 +15,7 @@ class PriceListController extends Controller {
 
 	public function index()
 	{
-        $products = Product::orderBy('name')->get();
+        $products = Product::orderBy('name')->paginate(50);
 		return view('pricelist.home', compact('products'));
 	}
 
