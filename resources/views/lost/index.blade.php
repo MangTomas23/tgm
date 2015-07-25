@@ -12,7 +12,7 @@
 		<h1>Lost Items</h1>		
 	</div>
 
-	<div class="table-responsive">
+	<div class="table-responsive" style="min-height: 360px">
 		<table class="table table-default">
 			<thead>
 				<tr>
@@ -41,8 +41,13 @@
 				@endforeach
 			</tbody>
 		</table>
+
 	</div>
 
+		<p class="text-right">
+			<strong>Total Amount Lost: </strong>
+			{{ $totalAmount }}
+		</p>
 	<hr>
 	
 </div>

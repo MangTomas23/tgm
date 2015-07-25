@@ -20,7 +20,9 @@ class LostItemController extends Controller {
 	{
 		$losts = Lost::all();
 
-		return view('lost.index', compact('losts'));
+		$totalAmount = LostItem::sum('amount');
+
+		return view('lost.index', compact('losts', 'totalAmount'));
 	}
 
 	/**
