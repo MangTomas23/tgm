@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Input;
 use App\Lost;
 use App\LostItem;
+use App\Box;
 
 class LostItemController extends Controller {
 
@@ -55,9 +56,9 @@ class LostItemController extends Controller {
 			$lostItem->no_of_box   = $input['no_of_box'][$i];
 			$lostItem->no_of_packs = $input['no_of_packs'][$i];
 			$lostItem->amount      = $input['amount'][$i];
-			$lostItem->box_id      = $box->id;
-			$lostItem->product_id  = Box::find($box->id)->product->id;
-			
+			$lostItem->box_id      = $box;
+			$lostItem->product_id  = Box::find($box)->product->id;
+
 			$lostItem->save();
 		}
 
