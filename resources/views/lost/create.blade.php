@@ -52,7 +52,7 @@
 		</div>
 
 	</div>
-		
+
 
 	<hr>
 
@@ -174,6 +174,11 @@
 
 		$("#btn-add").click( function() {
 			var str = "";
+			var sAmount = [];			
+
+			$.each( $(".s-amount"), function() {
+				sAmount.push($(this).data("amount"));
+			});
 
 			$.each(boxes, function(i, box) {
 
@@ -206,7 +211,7 @@
 				str += "<input name='no_of_packs[]' type='hidden' value='" + p 
 						+ "'>";
 
-				str += "<input name='amount[]' type='hidden' value=''>";
+				str += "<input name='amount[]' type='hidden' value='" + sAmount[i] + "'>";
 
 				str += "</tr>";
 			});
