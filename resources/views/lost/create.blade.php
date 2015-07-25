@@ -51,50 +51,52 @@
 			</table>
 		</div>
 
-		<hr>
-
-		<div class="alert alert-info">
-			<div class="form-group">
-				<label>Product</label>
-				<input name="product" type="text" class="form-control">
-			</div>
-			<p id="loading" class="hidden">Loading</p>
-
-			<hr>
-
-			<h3 id="s-pname"></h3>
-			<p id="s-sname"></p>
-
-			<hr>
-
-			<div id="suggestion-box">
-				
-			</div>
-
-			<hr>
-
-			<div class="text-right">
-				<a id="btn-add" class="btn btn-default">Add</a>
-			</div>
-		</div>
-
-		<hr>
-
-		<div class="form-group col-sm-6">
-			<label>Date</label>
-			<input name="date" type="date" class="form-control" required>
-		</div>
-
-		<div class="form-group col-sm-6">
-			<label for="">Checked by</label>
-			<input type="text" name="checked_by" class="form-control" required>
-		</div>
-
-		<div class="text-right col-sm-12">
-			{!! Form::submit('Save', ['class' => 'btn btn-success']) !!}
-		</div>
-		
 	</div>
+		
+
+	<hr>
+
+	<div class="alert alert-info">
+		<div class="form-group">
+			<label>Product</label>
+			<input name="product" type="text" class="form-control">
+		</div>
+		<p id="loading" class="hidden">Loading</p>
+
+		<hr>
+
+		<h3 id="s-pname"></h3>
+		<p id="s-sname"></p>
+
+		<hr>
+
+		<div id="suggestion-box">
+			
+		</div>
+
+		<hr>
+
+		<div class="text-right">
+			<a id="btn-add" class="btn btn-default">Add</a>
+		</div>
+	</div>
+
+	<hr>
+
+	<div class="form-group col-sm-6">
+		<label>Date</label>
+		<input name="date" type="date" class="form-control" required>
+	</div>
+
+	<div class="form-group col-sm-6">
+		<label for="">Checked by</label>
+		<input type="text" name="checked_by" class="form-control" required>
+	</div>
+
+	<div class="text-right col-sm-12">
+		{!! Form::submit('Save', ['class' => 'btn btn-success']) !!}
+	</div>
+		
 
 	{!! Form::close() !!}
 
