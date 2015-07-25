@@ -103,7 +103,7 @@ class LostItemController extends Controller {
 	}
 
 	public function delete($id) {
-		return view('lost.delete');
+		return view('lost.delete', ['id' => $id]);
 	}
 
 	/**
