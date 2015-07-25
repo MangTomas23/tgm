@@ -16,6 +16,8 @@ class CreateLostsTable extends Migration {
 		{
 			$table->increments('id');
 			$table->timestamps();
+			$table->date("date");
+			$table->string("checked_by");
 		});
 	}
 
