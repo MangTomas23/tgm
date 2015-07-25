@@ -42,19 +42,22 @@
 						<tr>
 							<th>Product</th>
 							<th>Quantity</th>
-							<th>Amount</th>
-							<th></th>
+							<th class="text-right">Amount</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
 							@foreach($lostItems as $lostItem)
-								<td>{{ $lostItem->product_id }}</td>
-								<td></td>
-								<td></td>
-								<td></td>
+								<tr>
+									<td>{{ $lostItem->product->name }}</td>
+									<td>
+										{{ $lostItem->no_of_box . ' Box, ' . 
+										$lostItem->no_of_packs . ' Packs' }}
+									</td>
+									<td class="text-right currency">
+										{{ $lostItem->amount }}
+									</td>
+								</tr>
 							@endforeach							
-						</tr>
 					</tbody>
 				</table>
 			</div>
@@ -72,6 +75,10 @@
 		$(document).ready( function() {
 			$("#btn-print").click( function() {
 				$("#print-area").print();
+			});
+
+			$.each(".currency", function() {
+				$(this).digits();
 			});
 		});
 	</script>
