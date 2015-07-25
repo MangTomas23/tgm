@@ -16,8 +16,8 @@
 		<table class="table table-default">
 			<thead>
 				<tr>
+					<th>No</th>
 					<th>Date</th>
-					<th>Quantity</th>
 					<th>Checked by</th>
 					<th>Total Amount</th>
 					<th></th>
@@ -28,8 +28,9 @@
 					<tr>
 						<td>
 							<a href="{{ '/lost/item/' . $lost->id }}">
-								{{ str_pad($lost->id, 4, 0, STR_PAD_LEFT) }}</td>
+								{{ str_pad($lost->id, 4, 0, STR_PAD_LEFT) }}
 							</a>
+						</td>
 						<td>{{ $lost->date }}</td>
 						<td>{{ $lost->checked_by }}</td>
 						<td>{{ $lost->lostItems->sum('amount') }}</td>
