@@ -194,7 +194,7 @@
 				str += "<td>" + b + " Box, " + p + " Packs</td>";
 				str += "<td>" + $(".s-amount")[i].innerHTML + "</td>";
 				str += "<td class='text-center'>" +
-							"<a class='btn btn-default btn-remove'>" + 
+							"<a class='btn btn-default btn-remove btn-sm'>" + 
 							"<span class='glyphicon glyphicon-remove'></span>" +
 							"</a>" + 
 						"</td>";
