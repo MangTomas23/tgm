@@ -212,6 +212,10 @@ Route::post('/customer/update', 'CustomerController@update');
 
 Route::get('/customer/{id}', 'CustomerController@show');
 
+
+
+Route::get('/lost/item/delete/{id}', 'LostItemController@delete');
+
 Route::resource('/lost/item', 'LostItemController');
 
 
