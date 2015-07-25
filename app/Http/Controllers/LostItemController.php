@@ -73,7 +73,7 @@ class LostItemController extends Controller {
 
 		return view('lost.show', [
 			'lost' => $lost,
-			'lostItem' => $lost->lostItems
+			'lostItems' => $lost->lostItems
 			]);
 	}
 
