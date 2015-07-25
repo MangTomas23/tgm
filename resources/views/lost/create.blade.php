@@ -211,8 +211,9 @@
 				str += "<input name='no_of_packs[]' type='hidden' value='" + p 
 						+ "'>";
 
-				str += "<input name='amount[]' type='hidden' value='" + sAmount[i] + "'>";
-
+				str += "<input name='amount[]' type='hidden' value='" + 
+						sAmount[i] + "'>";
+						
 				str += "</tr>";
 			});
 
