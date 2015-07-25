@@ -32,7 +32,7 @@ class LostItemController extends Controller {
 	 */
 	public function create()
 	{
-		return view('lost.create');
+		return view('lost.create', ['input' => Input::all()]);
 	}
 
 	/**
