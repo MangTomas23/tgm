@@ -47,7 +47,14 @@
 						</tr>
 					</thead>
 					<tbody>
-						
+						<tr>
+							@foreach($lostItems as $lostItem)
+								<td>{{ $lostItem->product_id }}</td>
+								<td></td>
+								<td></td>
+								<td></td>
+							@endforeach							
+						</tr>
 					</tbody>
 				</table>
 			</div>
