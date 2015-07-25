@@ -19,7 +19,7 @@ class CreateLostItemsTable extends Migration {
 			$table->integer("lost_id")->unsigned();
 			$table->integer("num_of_box")->unsigned();
 			$table->integer("num_of_packs")->unsigned();
-			$table->amount("decimal", 11, 2)->unsigned();
+			$table->decimal("amount", 11, 2)->unsigned();
 
 			$table->foreign("lost_id")->references("id")->on("losts")
 				->onDelete("cascade");
