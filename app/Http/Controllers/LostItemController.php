@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Input;
 use App\Lost;
+use App\LostItem;
 
 class LostItemController extends Controller {
 
@@ -45,12 +46,18 @@ class LostItemController extends Controller {
 		$lost->date       = $input["date"];
 		$lost->checked_by = $input["checked_by"];
 
-		if($lost->save()) {
-			return "Success!";
-		}else {
-			return "Failed!";
-		}
+		$lost->save();
 
+		foreach ($input['boxes'] as $i => $box) {
+			$lostItem = new LostItem;
+
+			$lostItem->lost_id     = $lost->id;
+			$lostItem->no_of_box   = $input['no_of_box'][$i];
+			$lostItem->no_of_packs = $input['no_of_packs'][$i];
+			$lostItem->amount      = $input['amount'][$i];
+
+			$lostItem->save();
+		}
 
 	}
 
