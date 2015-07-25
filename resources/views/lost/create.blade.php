@@ -9,7 +9,7 @@
 <div class="container">
 
 	<div class="text-right">
-		<a class="btn btn-default">
+		<a id="btn-print" class="btn btn-default">
 			<span class="glyphicon glyphicon-print"></span>
 		</a>
 	</div>
@@ -225,6 +225,10 @@
 
 		$(this).on("click", ".btn-remove", function() {
 			$(this).closest("tr").remove();
+		});
+
+		$("#btn-print").click( function() {
+			$("#print-area").print();
 		});
 
 
