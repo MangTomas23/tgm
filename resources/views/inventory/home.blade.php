@@ -185,7 +185,7 @@
 
     <div class="form-group col-sm-6">
         <label>Checked by</label>
-        <input nmae="checked_by" type="text" class="form-control" required>
+        <input name="checked_by" type="text" class="form-control" required>
     </div>
 
     <div class="form-group col-sm-12 text-right">

@@ -28,13 +28,23 @@
 
 		<p>
 			<strong>Date: </strong>
-			<span id="p-date"></span>
+			<span id="p-date">
+				{{ $input['date'] or null }}
+			</span>
 
 			<span class="pull-right">
 				<strong>No: </strong>
 				<span id="p-no"></span>
 			</span>
 		</p>
+		
+		<p>
+			<strong>Checked by: </strong>
+			<span id="p-checked_by">
+				{{ $input['checked_by'] or null }}
+			</span>
+		</p>
+
 		<div class="table-responsive" style="min-height: 360px">
 			<table class="table table-bordered">
 				<thead>
@@ -85,12 +95,14 @@
 
 	<div class="form-group col-sm-6">
 		<label>Date</label>
-		<input name="date" type="date" class="form-control" required>
+		<input name="date" type="date" class="form-control" 
+			value="{{ $input['date'] or null }}" required>
 	</div>
 
 	<div class="form-group col-sm-6">
 		<label for="">Checked by</label>
-		<input type="text" name="checked_by" class="form-control" required>
+		<input type="text" name="checked_by" class="form-control" 
+		value="{{ $input['checked_by'] or null }}" required>
 	</div>
 
 	<div class="text-right col-sm-12">
