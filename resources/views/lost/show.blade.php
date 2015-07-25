@@ -48,7 +48,10 @@
 					<tbody>
 							@foreach($lostItems as $lostItem)
 								<tr>
-									<td>{{ $lostItem->product->name }}</td>
+									<td>
+										{{ $lostItem->product->name . 
+										' @ ' . $lostItem->box->size }}
+									</td>
 									<td>
 										{{ $lostItem->no_of_box . ' Box, ' . 
 										$lostItem->no_of_packs . ' Packs' }}
