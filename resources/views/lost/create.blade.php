@@ -199,7 +199,7 @@
 							"</a>" + 
 						"</td>";
 
-				str += "<input name='product[]' type='hidden' value='" + 
+				str += "<input name='product_id' type='hidden' value='" + 
 						product.id + "'>";
 
 				str += "<input name='boxes[]' type='hidden' value='" + 
