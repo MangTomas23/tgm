@@ -18,10 +18,19 @@
 				<tr>
 					<th>Date</th>
 					<th>Quantity</th>
+					<th>Checked by</th>
 					<th>Total Amount</th>
 					<th></th>
 				</tr>
 			</thead>
+			<tbody>
+				@foreach($losts as $lost)
+					<td>{{ $lost->id }}</td>
+					<td>{{ $lost->date }}</td>
+					<td>{{ $lost->checked_by }}</td>
+					<td>0.00</td>
+				@endforeach
+			</tbody>
 		</table>
 	</div>
 
