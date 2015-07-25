@@ -13,7 +13,7 @@
 
 		<hr>
 		
-		<div class="print-area">
+		<div id="print-area">
 
 			<div class="text-center">
 				<h2>Tradeal General Merchandise</h2>
