@@ -13,8 +13,6 @@
 
 		<hr>
 		
-		{!! Form::open(['url' => '/lost/item']) !!}
-
 		<div class="print-area">
 
 			<div class="text-center">
@@ -42,7 +40,7 @@
 							<th></th>
 						</tr>
 					</thead>
-					<tbody id="p-table">
+					<tbody>
 						
 					</tbody>
 				</table>
