@@ -8,6 +8,7 @@ use Input;
 use App\Lost;
 use App\LostItem;
 use App\Box;
+use DB;
 
 class LostItemController extends Controller {
 
@@ -118,6 +119,16 @@ class LostItemController extends Controller {
 	{
 		Lost::destroy($id);		
 		return Redirect('/lost/item');
+	}
+
+	public function getID() {
+		$result = DB::select(DB::raw('SHOW TABLE STATUS LIKE "orders"'));
+
+		if($result == null){
+			return 1;
+		}
+
+		return $result[0]->Auto_increment;
 	}
 
 }
