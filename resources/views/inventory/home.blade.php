@@ -161,13 +161,20 @@
 		
 		{!! Form::close() !!}
 		
+        <span class="clearfix"></span>
 
 <!------------------------------ Lost Items ---------------------------------->
 
     {!! Form::open(['url' => '/lost/item/create', 'method' => 'get']) !!}
 
     <div class="page-header">
-        <h3>Lost Items</h3>
+        <h3>
+            Lost Items
+            <a href="" class="btn btn-default pull-right">
+                <span class="glyphicon glyphicon-list-alt">
+                </span>
+            </a>
+        </h3>
     </div>
 
     <div class="form-group col-sm-6">
