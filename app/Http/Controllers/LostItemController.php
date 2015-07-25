@@ -114,7 +114,8 @@ class LostItemController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		Lost::destroy($id);		
+		return Redirect('/lost/item');
 	}
 
 }
