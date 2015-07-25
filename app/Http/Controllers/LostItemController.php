@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use Input;
+use App\Lost;
 
 class LostItemController extends Controller {
 
@@ -35,7 +36,20 @@ class LostItemController extends Controller {
 	 */
 	public function store()
 	{
-		return Input::all();
+		$input = Input::all();
+
+		$lost = new Lost;
+
+		$lost->date       = $input["date"];
+		$lost->checked_by = $input["checked_by"];
+
+		if($lost->save()) {
+			return "Success!";
+		}else {
+			return "Failed!";
+		}
+
+
 	}
 
 	/**
