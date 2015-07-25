@@ -125,10 +125,10 @@ class LostItemController extends Controller {
 		$result = DB::select(DB::raw('SHOW TABLE STATUS LIKE "orders"'));
 
 		if($result == null){
-			return 1;
+			return "0001";
 		}
 
-		return $result[0]->Auto_increment;
+		return str_pad($result[0]->Auto_increment, 4, 0, STR_PAD_LEFT);
 	}
 
 }

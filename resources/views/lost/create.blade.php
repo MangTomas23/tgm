@@ -251,6 +251,14 @@
 			$("#print-area").print();
 		});
 
+		$(this).on("change focusout", "input[name=date]", function() {
+			$("#p-date").text($(this).val());
+		});
+
+		$("input[name=checked_by]").keyup( function() {
+			$("#p-checked_by").text($(this).val());
+		});
+
 
 		var setAmount   = function(obj) {
 
@@ -269,6 +277,19 @@
 			sAmount.text(amount).digits();
 			sAmount.attr("data-amount", amount);
 		}
+
+		var getID = function() {
+			$.get("/lost/item/id",{
+
+			}, function(response) {
+				$("#p-no").text(response);
+				setTimeout(function() {
+					getID();
+				}, 5000);
+			});
+		}
+
+		getID();
 	});
 
 </script>
