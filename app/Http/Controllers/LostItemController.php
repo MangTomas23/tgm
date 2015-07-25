@@ -62,7 +62,7 @@ class LostItemController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		return view('lost.show', ["lost" => Lost::findOrFail($id)]);
 	}
 
 	/**
