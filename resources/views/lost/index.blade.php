@@ -25,7 +25,7 @@
 			</thead>
 			<tbody>
 				@foreach($losts as $lost)
-					<td>{{ $lost->id }}</td>
+					<td>{{ str_pad($lost->id, 4, 0, STR_PAD_LEFT) }}</td>
 					<td>{{ $lost->date }}</td>
 					<td>{{ $lost->checked_by }}</td>
 					<td>0.00</td>
