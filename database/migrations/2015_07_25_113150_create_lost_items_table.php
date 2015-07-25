@@ -17,8 +17,8 @@ class CreateLostItemsTable extends Migration {
 			$table->increments('id');
 			$table->timestamps();
 			$table->integer("lost_id")->unsigned();
-			$table->integer("num_of_box")->unsigned();
-			$table->integer("num_of_packs")->unsigned();
+			$table->integer("no_of_box")->unsigned();
+			$table->integer("no_of_packs")->unsigned();
 			$table->decimal("amount", 11, 2)->unsigned();
 
 			$table->foreign("lost_id")->references("id")->on("losts")
