@@ -26,7 +26,7 @@
 			<tbody>
 				@foreach($losts as $lost)
 					<td>
-						<a href="{{ action('LostItemController@show($lost)') }}">
+						<a href="{{ '/lost/item/' . $lost->id }}">
 							{{ str_pad($lost->id, 4, 0, STR_PAD_LEFT) }}</td>
 						</a>
 					<td>{{ $lost->date }}</td>
