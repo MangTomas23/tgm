@@ -23,13 +23,19 @@
 
 			<p>
 				<strong>Date: </strong>
-				<span id="p-date"></span>
+				<span>{{ $lost->date }}</span>
 
 				<span class="pull-right">
 					<strong>No: </strong>
-					<span id="p-no"></span>
+					<span>{{ str_pad($lost->id, 4, 0, STR_PAD_LEFT) }}</span>
 				</span>
 			</p>
+			
+			<p>
+				<strong>Checked by: </strong>
+				{{ $lost->checked_by }}
+			</p>
+
 			<div class="table-responsive" style="min-height: 360px">
 				<table class="table table-bordered">
 					<thead>
@@ -45,6 +51,12 @@
 					</tbody>
 				</table>
 			</div>
+
+			<hr>
+
+			<p class="text-right">
+				<strong>Total Amount: </strong>
+			</p>
 
 		</div>
 	</div>
