@@ -32,7 +32,10 @@
 							</a>
 						<td>{{ $lost->date }}</td>
 						<td>{{ $lost->checked_by }}</td>
-						<td>0.00</td>
+						<td>{{ $lost->lostItems->sum('amount') }}</td>
+						<td>
+							<a href="{{ '/lost/item/delete/' . $lost->id }}">Delete</a>
+						</td>
 					</tr>
 				@endforeach
 			</tbody>
