@@ -216,6 +216,8 @@ Route::get('/customer/{id}', 'CustomerController@show');
 
 Route::get('/lost/item/delete/{id}', 'LostItemController@delete');
 
+Route::get('/lost/item/id', 'LostItemController@getID');
+
 Route::resource('/lost/item', 'LostItemController');
 
 
