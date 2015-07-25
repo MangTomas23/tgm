@@ -170,7 +170,8 @@
     <div class="page-header">
         <h3>
             Lost Items
-            <a href="" class="btn btn-default pull-right">
+            <a href="{{ action('LostItemController@index') }}" 
+                class="btn btn-default pull-right">
                 <span class="glyphicon glyphicon-list-alt">
                 </span>
             </a>
