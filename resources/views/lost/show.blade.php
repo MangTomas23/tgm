@@ -66,6 +66,9 @@
 
 			<p class="text-right">
 				<strong>Total Amount: </strong>
+				<span class="currency">
+					{{ $lostItems->sum('amount') }}
+				</span>
 			</p>
 
 		</div>
@@ -77,7 +80,7 @@
 				$("#print-area").print();
 			});
 
-			$.each(".currency", function() {
+			$.each($(".currency"), function() {
 				$(this).digits();
 			});
 		});
