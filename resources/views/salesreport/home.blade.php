@@ -13,6 +13,28 @@
 	<p>Sample Data</p>
 	<canvas id="myChart"></canvas>
 
+	<div style="margin-top: 48px">
+		<div class="media">
+			<div class="pull-left">
+				<span class="media-object" style="background-color: #CCC; width: 25px; height: 25px;"></span>
+			</div>
+
+			<div class="media-body">
+				<strong>Sales</strong>
+			</div>
+		</div>
+
+		<div class="media">
+			<div class="pull-left">
+				<span class="media-object" style="background-color: #CCC; width: 25px; height: 25px;"></span>
+			</div>
+
+			<div class="media-body">
+				<strong>Actual Sales</strong>
+			</div>
+		</div>
+	</div>
+
 </div>
 <script>
 
@@ -47,7 +69,7 @@ $(document).ready( function() {
 						pointStrokeColor: "#fff",
 						pointHighlightFill: "#fff",
 						pointHighlightStroke: "rgba(220,220,220,1)",
-						data: [1000,220,4500,6000,3000,2200,1111,1444,233,322,4333]
+						data: [1000,220,4500,6000,3000,2200,1111,1444,233,322,4333, 5666]
 					},
 					{
 						label: "Sales",
@@ -111,6 +133,10 @@ $(document).ready( function() {
 
 			};
 		var myLineChart = new Chart( ctx ).Line( data, options );
+
+		$.each($(".media-object"), function(i) {
+			$(this).css("background-color", data.datasets[i].strokeColor);
+		});
 
 	});
 
