@@ -16,9 +16,18 @@ class SalesReportController extends Controller {
 
 	public function test() {
 
-		$orders = Order::today()->get();
+		$orders = Order::currentYear()->get();
 
-		return $orders;
+		$orderItems = array();
+
+		foreach ($orders as $order) {
+
+			 array_push($orderItems, json_decode($order->orderItems));
+		}
+
+		return $orderItems;
+
+		// return $orders;
 	}
 	
 }
