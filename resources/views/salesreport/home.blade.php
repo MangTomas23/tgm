@@ -10,7 +10,7 @@
 	<div class="page-header">
 		<h1>Sales Report - {{ date('Y') }}</h1>
 	</div>
-	<p>Sample Data</p>
+
 	<canvas id="myChart"></canvas>
 
 	<div style="margin-top: 48px">
@@ -20,7 +20,8 @@
 			</div>
 
 			<div class="media-body">
-				<strong>Sales</strong>
+				<h4 class="media-heading">Sales</h4>
+				<p>P <span class="currency">{{ $totalSales }}</span></p>
 			</div>
 		</div>
 
@@ -34,6 +35,14 @@
 			</div>
 		</div>
 	</div>
+
+
+	<div class="page-header">
+		<h1>Sales of the Month - {{ date('F') }}</h1>
+	</div>
+
+	<canvas id="salesOfTheMonth"></canvas>
+
 
 </div>
 <script>
@@ -62,16 +71,6 @@ $(document).ready( function() {
 			 			"Auguest", "September", "October", "November", "December"],
 			datasets: [
 					{
-						label: "Actual Sales",
-						fillColor: "rgba(206,0,47, 0.1)",
-						strokeColor: "rgba(206,0,47,1)",
-						pointColor: "#1C0006",
-						pointStrokeColor: "#fff",
-						pointHighlightFill: "#fff",
-						pointHighlightStroke: "rgba(220,220,220,1)",
-						data: [1000,220,4500,6000,3000,2200,1111,1444,233,322,4333, 5666]
-					},
-					{
 						label: "Sales",
 						fillColor: "rgba(71,108,155, 0.4)",
 						strokeColor: "#476C9B",
@@ -80,6 +79,16 @@ $(document).ready( function() {
 						pointHighlightFill: "#fff",
 						pointHighlightStroke: "rgba(220,220,220,1)",
 						data: sales
+					},
+					{
+						label: "Actual Sales",
+						fillColor: "rgba(206,0,47, 0.1)",
+						strokeColor: "rgba(206,0,47,1)",
+						pointColor: "#1C0006",
+						pointStrokeColor: "#fff",
+						pointHighlightFill: "#fff",
+						pointHighlightStroke: "rgba(220,220,220,1)",
+						data: [1000,220,4500,6000,3000,2200,1111,1444,233,322,4333, 5666]
 					}
 				]
 			};
@@ -132,12 +141,17 @@ $(document).ready( function() {
 				legendTemplate : "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
 
 			};
+			
 		var myLineChart = new Chart( ctx ).Line( data, options );
 
 		$.each($(".media-object"), function(i) {
 			$(this).css("background-color", data.datasets[i].strokeColor);
 		});
 
+	});
+
+	$.each($(".currency"), function() {
+		$(this).digits();
 	});
 
 });

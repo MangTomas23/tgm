@@ -198,7 +198,7 @@ Route::post('/bad/order/destroy', 'BadOrderController@destroy');
 
 
 
-Route::get('/developer/test', 'SalesReportController@test');
+Route::get('/developer/test', 'SalesReportController@getDailySales');
 
 Route::get('/developer/untested', 'AppController@untested');
 

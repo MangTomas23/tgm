@@ -12,7 +12,16 @@ class SalesReportController extends Controller {
 
 	public function index()
 	{
-		return view('salesreport.home');
+		$orders = Order::currentYear()->get();
+
+		$totalSales = 0;
+
+		foreach ($orders as $order) {
+			$totalSales += $order->orderItems->sum('amount');
+		}
+
+
+		return view('salesreport.home', ['totalSales' => $totalSales]);
 	}
 
 	public function getMonthlySales() {
@@ -33,6 +42,27 @@ class SalesReportController extends Controller {
 			}
 
 			array_push( $sales, $amount );
+		}
+
+		return $sales;
+	}
+
+	public function getDailySales() {
+
+		$noOfDays = cal_days_in_month(CAL_GREGORIAN, date('n'), date('Y'));
+
+		$sales = array();
+
+		for($x = 0; $x < $noOfDays; $x++) {
+			$orders = Order::currentYear()->currentMonth()->whereRaw('DAY(date) = ' . $x)->get();
+
+			$amount = 0;
+
+			foreach ($orders as $order) {
+				$amount += $order->orderItems->sum('amount');
+			}
+
+			array_push($sales, $amount);
 		}
 
 		return $sales;
