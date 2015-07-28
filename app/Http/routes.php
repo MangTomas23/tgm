@@ -149,6 +149,12 @@ Route::get('/test', 'ProductController@test');
 
 Route::get('/sales/report', 'SalesReportController@index');
 
+Route::get('/sales/report/getMonthlySales', 'SalesReportController@getMonthlySales');
+
+
+
+
+
 Route::get('/developer/advance/options', 'AppController@advance');
 
 Route::post('/developer/advance/options/pass', 'AppController@advancePass');

@@ -5,6 +5,7 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Order;
+use App\OrderItem;
 use DB;
 
 class SalesReportController extends Controller {
@@ -14,20 +15,27 @@ class SalesReportController extends Controller {
 		return view('salesreport.home');
 	}
 
-	public function test() {
+	public function getMonthlySales() {
 
-		$orders = Order::currentYear()->get();
+		$sales = array();
+		$months = array(
+				"January", "February", "March", "April", "May", "June",
+				"July", "August", "September", "October", "November", "December"
+			);
 
-		$orderItems = array();
+		for($x = 1; $x <= 12; $x++) {
+			$orders = Order::currentYear()->whereRaw('MONTH(date) = ' . $x)->get();
 
-		foreach ($orders as $order) {
+			$amount = 0;
 
-			 array_push($orderItems, json_decode($order->orderItems));
+			foreach($orders as $order){
+				$amount += $order->orderItems->sum('amount');
+			}
+
+			array_push( $sales, $amount );
 		}
 
-		return $orderItems;
-
-		// return $orders;
+		return $sales;
 	}
 	
 }
