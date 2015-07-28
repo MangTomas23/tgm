@@ -8,7 +8,7 @@
 
 <div class="container">
 	<div class="page-header">
-		<h1>Sales Report</h1>
+		<h1>Sales Report - {{ date('Y') }}</h1>
 	</div>
 	<p>Sample Data</p>
 	<canvas id="myChart"></canvas>
@@ -26,16 +26,34 @@ $(document).ready( function() {
 		$.each(response, function(i, obj) {
 			sales.push(obj);
 		});
+
+		console.log(sales);
+
+
+		
+
+
+		var ctx = $( "#myChart" ).get( 0 ).getContext( "2d" );
 		
 		var data = {
 			labels: ["January", "February", "March", "April", "May", "June", "July",
 			 			"Auguest", "September", "October", "November", "December"],
 			datasets: [
 					{
-						label: "Sales of the Day",
-						fillColor: "rgba(220,220,220,0.2)",
-						strokeColor: "rgba(220,220,220,1)",
-						pointColor: "rgba(220,220,220,1)",
+						label: "Actual Sales",
+						fillColor: "rgba(206,0,47, 0.1)",
+						strokeColor: "rgba(206,0,47,1)",
+						pointColor: "#1C0006",
+						pointStrokeColor: "#fff",
+						pointHighlightFill: "#fff",
+						pointHighlightStroke: "rgba(220,220,220,1)",
+						data: [1000,220,4500,6000,3000,2200,1111,1444,233,322,4333]
+					},
+					{
+						label: "Sales",
+						fillColor: "rgba(71,108,155, 0.4)",
+						strokeColor: "#476C9B",
+						pointColor: "#303B4C",
 						pointStrokeColor: "#fff",
 						pointHighlightFill: "#fff",
 						pointHighlightStroke: "rgba(220,220,220,1)",
