@@ -33,6 +33,6 @@ class Order extends Model {
 	}
 
 	public function scopeToday($query) {
-		return $this->whereRaw('date = NOW()');
+		return $this->whereRaw('date = DATE(NOW())');
 	}
 }
