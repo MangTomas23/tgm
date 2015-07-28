@@ -4,6 +4,8 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use App\Order;
+use DB;
 
 class SalesReportController extends Controller {
 
@@ -13,7 +15,10 @@ class SalesReportController extends Controller {
 	}
 
 	public function test() {
-		
+
+		$orders = Order::currentYear()->get();
+
+		return $orders;
 	}
 	
 }

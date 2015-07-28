@@ -23,4 +23,8 @@ class Order extends Model {
 	public function returns() {
 		return $this->hasMany( 'App\Ret' );
 	}
+
+	public function scopeCurrentYear($query) {
+		return $this->whereRaw('YEAR(date) = YEAR(NOW())');
+	}
 }
