@@ -11,5 +11,9 @@ class SalesReportController extends Controller {
 	{
 		return view('salesreport.home');
 	}
+
+	public function test() {
+		
+	}
 	
 }
