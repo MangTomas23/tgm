@@ -16,7 +16,7 @@ class SalesReportController extends Controller {
 
 	public function test() {
 
-		$orders = Order::currentYear()->currentMonth()->get();
+		$orders = Order::today()->get();
 
 		return $orders;
 	}

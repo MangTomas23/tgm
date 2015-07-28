@@ -31,4 +31,8 @@ class Order extends Model {
 	public function scopeCurrentMonth($query) {
 		return $this->whereRaw('MONTH(date) = MONTH(NOW())');
 	}
+
+	public function scopeToday($query) {
+		return $this->whereRaw('date = NOW()');
+	}
 }
