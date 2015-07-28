@@ -51,7 +51,8 @@ class SalesReportController extends Controller {
 
 		$noOfDays = cal_days_in_month(CAL_GREGORIAN, date('n'), date('Y'));
 
-		$sales = array();
+		$response = array();
+		$response['sales'] = array();
 
 		for($x = 0; $x < $noOfDays; $x++) {
 			$orders = Order::currentYear()->currentMonth()->whereRaw('DAY(date) = ' . $x)->get();
@@ -62,10 +63,12 @@ class SalesReportController extends Controller {
 				$amount += $order->orderItems->sum('amount');
 			}
 
-			array_push($sales, $amount);
+			array_push($response['sales'], $amount);
 		}
 
-		return $sales;
+		$response['no_of_days'] = $noOfDays;
+
+		return $response;
 	}
 	
 }

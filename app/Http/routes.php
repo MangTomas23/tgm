@@ -151,6 +151,8 @@ Route::get('/sales/report', 'SalesReportController@index');
 
 Route::get('/sales/report/getMonthlySales', 'SalesReportController@getMonthlySales');
 
+Route::get('/sales/report/getDailySales', 'SalesReportController@getDailySales');
+
 
 
 
@@ -194,7 +196,6 @@ Route::get('/bad/order/{id}', 'BadOrderController@show');
 Route::get('/bad/order/delete/{id}', 'BadOrderController@delete');
 
 Route::post('/bad/order/destroy', 'BadOrderController@destroy');
-
 
 
 
